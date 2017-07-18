@@ -21,7 +21,7 @@ class Profile extends React.Component  {
     {
         return  (
             <div>
-                <p>Profile</p>
+                <h2>Profile</h2>
             </div> 
         )
     }

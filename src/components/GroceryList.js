@@ -20,7 +20,7 @@ class GroceryList extends React.Component  {
     {
         return  (
             <div>
-                <p>Grocery List</p>
+                <h2>Grocery List</h2>
             </div> 
         )
     }

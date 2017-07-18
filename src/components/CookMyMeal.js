@@ -21,7 +21,7 @@ class CookMyMeal extends React.Component  {
     {
         return  (
             <div>
-                <p>Cook My Meal</p>
+                <h2>Cook My Meal</h2>
             </div> 
         )
     }
