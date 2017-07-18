@@ -15,7 +15,7 @@ const SearchInput = (props) => {
 //SearchButton
 const SearchResultList = (props) =>{
     console.log('H')
-    return(<h4 style={{ textAlign: "left" }}>list : {props.searchWord}</h4>)
+    return(<h4 style={{ textAlign: "left" }}> list : {props.searchWord}</h4>)
 }
 
 const ListChosenRecipes = (props) => {
@@ -36,6 +36,7 @@ class ChooseMyMeal extends React.Component {
         super(props);
         this.state = {
             searchWord: "",
+            listRecipe:"",
         }
     }
 
@@ -52,7 +53,7 @@ class ChooseMyMeal extends React.Component {
             <div className='row'>
                 <div className='col-md-6 col-xs-6'>
                     <SearchInput onChangeSearchInput={this.onChangeSearchInput}/>
-                    <SearchResultList searchWord={this.searchWord} />
+                    <SearchResultList searchWord={this.state.searchWord} />
                 </div>
                 <div className='col-md-6 col-xs-6'>
                     <ListChosenRecipes />
