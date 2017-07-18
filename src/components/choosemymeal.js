@@ -1,9 +1,9 @@
 import React from 'react';
-
+import testAPI from './testAPI';
 
 /*const SearchInput =  (props ) => {
     return  (
-            <input type='text' onChange={this.props.onChangeSearchInput} placeholder='Recipe Name'> </input>
+            <input type='text' onChange={this.props.onChangeSearchInput} placeholder='Recipe Name'/>
     )
 }*/
 
@@ -25,6 +25,7 @@ class ChooseMyMeal extends React.Component  {
     onChangeSearchInput   = (e)  => {
         this.setState({  searchWord : e.target.value });
         console.log (this.state.searchWord);
+        testAPI();
     }
 
     render()

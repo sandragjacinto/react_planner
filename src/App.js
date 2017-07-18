@@ -16,6 +16,9 @@ class App extends Component {
             <br /> <br />
             <ul style={{ textAlign: "left" }} className="nav nav-tabs">
               <li role="presentation"> <Link to='/choosemymeal' className="btn btn-lg"> choose my meal</Link> </li>
+              <li role="presentation"> <Link to='/cookmymeal' className="btn btn-lg"> cook my meal</Link> </li>
+              <li role="presentation"> <Link to='/profile' className="btn btn-lg"> profile</Link> </li>
+              <li role="presentation"> <Link to='/grocerylist' className="btn btn-lg"> grocery list</Link> </li>
               
             </ul>
 
