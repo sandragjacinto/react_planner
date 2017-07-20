@@ -1,5 +1,5 @@
 import React from 'react';
-import testAPI from './testAPI';
+import DataAPI from './DataAPI';
 
 const SearchInput = (props) => {
     return (
@@ -38,13 +38,18 @@ class ChooseMyMeal extends React.Component {
             searchWord: "",
             listRecipe:"",
         }
+        this.dataApi = new DataAPI();
     }
 
     onChangeSearchInput = (e) => {
         this.setState({ searchWord: e.target.value });
         console.log(this.state.searchWord);
-        testAPI();
+        this.dataApi.testAPI();
         SearchResultList(this.state.searchWord)
+    }
+
+    onChangeSearchButton = (e) => {
+
     }
 
     render() {
