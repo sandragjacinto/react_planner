@@ -1,18 +1,19 @@
 import React from 'react';
-import testAPI from './testAPI';
+import DataAPI from './DataAPI';
 
+//User enters keyword here
 const SearchInput = (props) => {
     return (
         <div className="input-group">
             <input type="text" className="form-control" placeholder="Enter Recipe Name" onChange={props.onChangeSearchInput} />
             <span className="input-group-btn">
-                <button className="btn btn-default" type="button">Select</button>
+                <button className="btn btn-default" type="button" onClick = {props.onClickSearchButton}>Search</button>
             </span>
         </div>
     )
 }
 
-//SearchButton
+//SearchButton - TODO: delete this?
 const SearchResultList = (props) =>{
     console.log('H')
     return(<h4 style={{ textAlign: "left" }}> list : {props.searchWord}</h4>)
@@ -28,9 +29,6 @@ const ListChosenRecipes = (props) => {
     )
 }
 
-//AcceptButton
-
-
 class ChooseMyMeal extends React.Component {
     constructor(props) {
         super(props);
@@ -38,13 +36,25 @@ class ChooseMyMeal extends React.Component {
             searchWord: "",
             listRecipe:"",
         }
+        this.dataApi = new DataAPI();
     }
 
     onChangeSearchInput = (e) => {
         this.setState({ searchWord: e.target.value });
         console.log(this.state.searchWord);
-        testAPI();
+        this.dataApi.testAPI();
         SearchResultList(this.state.searchWord)
+    }
+
+    //Once user clicks search button, keyword is passed to DataAPI class. onSearchResponse method is passed as parameter
+    //so api can pass the result
+    onClickSearchButton = () => {
+        this.dataApi.searchForRecipes(this.state.searchWord, this.onSearchResponse);
+    }
+
+    //api writes response here
+    onSearchResponse = (response) => {
+        console.log(response);
     }
 
     render() {
@@ -52,7 +62,7 @@ class ChooseMyMeal extends React.Component {
 
             <div className='row'>
                 <div className='col-md-6 col-xs-6'>
-                    <SearchInput onChangeSearchInput={this.onChangeSearchInput}/>
+                    <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton = {this.onClickSearchButton}/>
                     <SearchResultList searchWord={this.state.searchWord} />
                 </div>
                 <div className='col-md-6 col-xs-6'>
