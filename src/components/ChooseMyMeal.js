@@ -13,10 +13,18 @@ const SearchInput = (props) => {
     )
 }
 
-//SearchButton - TODO: delete this?
-const SearchResultList = (props) =>{
-    console.log('H')
-    return(<h4 style={{ textAlign: "left" }}> list : {props.searchWord}</h4>)
+//Visualize list of found recipes
+const RecipesFound = (props) =>{
+    return (    
+        <ul>
+            {props.recipesFound.map(function(element, index){
+                return(
+                    //TODO: find a proper key
+                    <li className = 'list-group-item' key = {index}>{element.recipe.label}</li>
+                )
+            })}
+        </ul>
+    )
 }
 
 const ListChosenRecipes = (props) => {
@@ -34,14 +42,13 @@ class ChooseMyMeal extends React.Component {
         super(props);
         this.state = {
             searchWord: "",
-            listRecipe:"",
+            recipesFound:[],
         }
     }
 
     onChangeSearchInput = (e) => {
         this.setState({ searchWord: e.target.value });
         console.log(this.state.searchWord);
-        SearchResultList(this.state.searchWord)
     }
 
     //Once user clicks search button, keyword is passed to DataAPI's searchForRecipes function.
@@ -56,18 +63,17 @@ class ChooseMyMeal extends React.Component {
             })
     }
 
-    //api writes response here
+    //api writes response here. Update state
     onSearchResponse = (response) => {
-        console.log(response);
+        this.setState({recipesFound : response});
     }
 
     render() {
         return (
-
             <div className='row'>
                 <div className='col-md-6 col-xs-6'>
                     <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton = {this.onClickSearchButton}/>
-                    <SearchResultList searchWord={this.state.searchWord} />
+                    <RecipesFound recipesFound={this.state.recipesFound} />
                 </div>
                 <div className='col-md-6 col-xs-6'>
                     <ListChosenRecipes />

@@ -15,8 +15,8 @@ export function searchForRecipes(keyword) {
             return response.json();
         })
         .then(function (data) {
-            recipesFound[keyword] = data;
-            return data;
+            recipesFound[keyword] = data.hits;
+            return recipesFound[keyword];
         })
 }
 
