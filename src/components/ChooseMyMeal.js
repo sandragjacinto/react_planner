@@ -1,5 +1,5 @@
 import React from 'react';
-import DataAPI from './DataAPI';
+import {searchForRecipes} from './DataAPI';
 
 //User enters keyword here
 const SearchInput = (props) => {
@@ -36,20 +36,24 @@ class ChooseMyMeal extends React.Component {
             searchWord: "",
             listRecipe:"",
         }
-        this.dataApi = new DataAPI();
     }
 
     onChangeSearchInput = (e) => {
         this.setState({ searchWord: e.target.value });
         console.log(this.state.searchWord);
-        this.dataApi.testAPI();
         SearchResultList(this.state.searchWord)
     }
 
-    //Once user clicks search button, keyword is passed to DataAPI class. onSearchResponse method is passed as parameter
-    //so api can pass the result
+    //Once user clicks search button, keyword is passed to DataAPI's searchForRecipes function.
     onClickSearchButton = () => {
-        this.dataApi.searchForRecipes(this.state.searchWord, this.onSearchResponse);
+        const scope = this;
+        searchForRecipes(this.state.searchWord)
+            .then((response) => {
+                 scope.onSearchResponse(response)
+            })
+            .catch((error) => {
+                console.error(error);
+            })
     }
 
     //api writes response here
