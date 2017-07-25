@@ -1,5 +1,5 @@
 import React from 'react';
-import DataAPI from './DataAPI';
+import {searchForRecipes} from './DataAPI';
 
 //User enters keyword here
 const SearchInput = (props) => {
@@ -13,10 +13,18 @@ const SearchInput = (props) => {
     )
 }
 
-//SearchButton - TODO: delete this?
-const SearchResultList = (props) =>{
-    console.log('H')
-    return(<h4 style={{ textAlign: "left" }}> list : {props.searchWord}</h4>)
+//Visualize list of found recipes
+const RecipesFound = (props) =>{
+    return (    
+        <ul>
+            {props.recipesFound.map(function(element, index){
+                return(
+                    //TODO: find a proper key
+                    <li className = 'list-group-item' key = {index}>{element.recipe.label}</li>
+                )
+            })}
+        </ul>
+    )
 }
 
 const ListChosenRecipes = (props) => {
@@ -34,39 +42,43 @@ class ChooseMyMeal extends React.Component {
         super(props);
         this.state = {
             searchWord: "",
-            listRecipe:"",
+            recipesFound:[],
         }
-        this.dataApi = new DataAPI();
     }
 
     onChangeSearchInput = (e) => {
         this.setState({ searchWord: e.target.value });
         console.log(this.state.searchWord);
-        this.dataApi.testAPI();
-        SearchResultList(this.state.searchWord)
     }
 
-    //Once user clicks search button, keyword is passed to DataAPI class. onSearchResponse method is passed as parameter
-    //so api can pass the result
+    //Once user clicks search button, keyword is passed to DataAPI's searchForRecipes function.
     onClickSearchButton = () => {
-        this.dataApi.searchForRecipes(this.state.searchWord, this.onSearchResponse);
+        const scope = this;
+        searchForRecipes(this.state.searchWord)
+            .then((response) => {
+                 scope.onSearchResponse(response)
+            })
+            .catch((error) => {
+                console.error(error);
+            })
     }
 
-    //api writes response here
+    //api writes response here. Update state
     onSearchResponse = (response) => {
-        console.log(response);
+        this.setState({recipesFound : response});
     }
 
     render() {
         return (
-
             <div className='row'>
                 <div className='col-md-6 col-xs-6'>
                     <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton = {this.onClickSearchButton}/>
-                    <SearchResultList searchWord={this.state.searchWord} />
+                    <RecipesFound recipesFound={this.state.recipesFound} />
                 </div>
                 <div className='col-md-6 col-xs-6'>
+                    <h2>Chosen Recipes </h2>
                     <ListChosenRecipes />
+                    <button> accept</button>
                 </div>
             </div>
         )
