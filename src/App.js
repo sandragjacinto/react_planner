@@ -13,8 +13,6 @@ class App extends Component {
     return (
       <div className="App " style={{ textAlign: "center" }}>
         <div className="row">
-
-
           <div className="col-md-2 col-xs-2" style={{ textAlign: "center", background:"#64A9CF"}}>
             <br /> <br />
             <ul style={{ paddingLeft: '30px', }} className="nav nav-pills nav-stacks">

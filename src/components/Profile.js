@@ -12,26 +12,26 @@ const UserName = (userinfo) => {
     return (
         <div>
             <div className='row'>
-                    <div className='col-md-3 col-xs-3' style={{textAlign:'right'}}>
+                    <div className='col-md-5 col-xs-5' style={{textAlign:'right'}}>
                         <p> User Name:</p>
                     </div>
-                    <div className='col-md-4 col-xs-4' style={{textAlign:'left'}}>
+                    <div className='col-md-7 col-xs-7' style={{textAlign:'left'}}>
                         <p>{userinfo.userinfo.userName}</p>
                     </div>
             </div>
             <div className='row'>
-                <div className='col-md-3 col-xs-3' style={{textAlign:'right'}}>
+                <div className='col-md-5 col-xs-5' style={{textAlign:'right'}}>
                     <p>  Email :</p>
                 </div>
-                <div className='col-md-4 col-xs-4' style={{textAlign:'left'}}>
+                <div className='col-md-7 col-xs-7' style={{textAlign:'left'}}>
                     <p>{userinfo.userinfo.userEmail}</p>
                 </div>
             </div>
             <div className='row'>
-                <div className='col-md-3 col-xs-3' style={{textAlign:'right'}}>
+                <div className='col-md-5 col-xs-5' style={{textAlign:'right'}}>
                     <p> Tutor Name :</p>
                 </div>
-                <div className='col-md-4 col-xs-4' style={{textAlign:'left'}}>
+                <div className='col-md-7 col-xs-7' style={{textAlign:'left'}}>
                     <p>{userinfo.userinfo.tutorName}</p>
                 </div>
             </div>
