@@ -76,7 +76,9 @@ class ChooseMyMeal extends React.Component {
                     <RecipesFound recipesFound={this.state.recipesFound} />
                 </div>
                 <div className='col-md-6 col-xs-6'>
+                    <h2>Chosen Recipes </h2>
                     <ListChosenRecipes />
+                    <button> accept</button>
                 </div>
             </div>
         )
