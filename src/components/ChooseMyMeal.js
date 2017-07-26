@@ -13,7 +13,7 @@ const SearchInput = (props) => {
     )
 }
 
-//Single recipe found component
+//Component for single recipe found
 const RecipeFound = (props) => {
     return(
         <li className = 'list-group-item' key = {props.index}>
@@ -28,7 +28,7 @@ const RecipeFound = (props) => {
 }
 
 
-//List of found recipes component
+//Component for list of found recipes
 const RecipesFound = (props) =>{
     return (    
         <ul>
@@ -39,6 +39,7 @@ const RecipesFound = (props) =>{
     )
 }
 
+//Component for single selected recipe
 const SelectedRecipe = props => {
     return(
         <li className = 'list-group-item' key = {props.index}>
@@ -47,8 +48,9 @@ const SelectedRecipe = props => {
     )
 }
 
+//Component for the selected recipes list
 const SelectedRecipes = (props) => {
-    //As props.recipesSelected is a map object, not an array, map method can not be used here. Instead, Object.keys() returns an array of the keys, which can then be used to map stuff  
+    //As props.recipesSelected is a map object and not an array, map method can not be used here directly. Instead, Object.keys() returns an array of the keys, which can then be used to map stuff  
     return (
         <ul className = 'list-group' style={{ textAlign: "left" }}>                
             {Object.keys(props.recipesSelected).map(function(key, index){
@@ -70,7 +72,6 @@ class ChooseMyMeal extends React.Component {
 
     onChangeSearchInput = (e) => {
         this.setState({ searchWord: e.target.value });
-        console.log(this.state.searchWord);
     }
 
     //Once user clicks search button, keyword is passed to DataAPI's searchForRecipes function.
@@ -90,20 +91,20 @@ class ChooseMyMeal extends React.Component {
         this.setState({recipesFound : response});
     }
 
+    //Once a recipe is selected, state will be updated
     onRecipeSelected = (index, recipeData) => {
-        console.log("recipe index:" + index)
+        //If recipesSelected does not contain anything, create the map
         if(Object.keys(this.state.recipesSelected).length === 0)
         {
-            console.log("init map");
             this.setState({recipesSelected : new Map()});
         }
 
+        //recipeData will be added to the map. Key will be the recipe name
         var recipesSelected = this.state.recipesSelected;
         if(!(recipeData.label in recipesSelected))
         {
             recipesSelected[recipeData.label] = recipeData;
             this.setState({recipesSelected :recipesSelected});
-            console.log("added entry to map");
         }
     }
 
