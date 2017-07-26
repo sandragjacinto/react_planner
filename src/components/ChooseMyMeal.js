@@ -13,15 +13,27 @@ const SearchInput = (props) => {
     )
 }
 
-//Visualize list of found recipes
+//Single recipe component
+const RecipeFound = (props) => {
+    return(
+        <li className = 'list-group-item' key = {props.index}>
+            {props.element.recipe.label}
+            <input 
+            type = "checkbox" 
+            className = "form-check-input" 
+            onClick = {function(){return props.onRecipeSelected(props.index)}}
+            />
+        </li>
+    )
+}
+
+
+//List of found recipes component
 const RecipesFound = (props) =>{
     return (    
         <ul>
             {props.recipesFound.map(function(element, index){
-                return(
-                    //TODO: find a proper key
-                    <li className = 'list-group-item' key = {index}>{element.recipe.label}</li>
-                )
+                {return (<RecipeFound element = {element} index = {index} key = {index} onRecipeSelected = {props.onRecipeSelected}/>)}
             })}
         </ul>
     )
@@ -68,12 +80,16 @@ class ChooseMyMeal extends React.Component {
         this.setState({recipesFound : response});
     }
 
+    onRecipeSelected = (index) => {
+        console.log("recipe index:" + index)
+    }
+
     render() {
         return (
             <div className='row'>
                 <div className='col-md-6 col-xs-6'>
                     <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton = {this.onClickSearchButton}/>
-                    <RecipesFound recipesFound={this.state.recipesFound} />
+                    <RecipesFound recipesFound={this.state.recipesFound} onRecipeSelected = {this.onRecipeSelected}/>
                 </div>
                 <div className='col-md-6 col-xs-6'>
                     <h2>Chosen Recipes </h2>
