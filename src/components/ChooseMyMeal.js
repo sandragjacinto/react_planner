@@ -13,26 +13,49 @@ const SearchInput = (props) => {
     )
 }
 
-//Visualize list of found recipes
+//Component for single recipe found
+const RecipeFound = (props) => {
+    return(
+        <li className = 'list-group-item' key = {props.index}>
+            {props.element.recipe.label}
+            <input 
+            type = "checkbox" 
+            className = "form-check-input" 
+            onChange = {function(){return props.onRecipeSelected(props.index, props.element.recipe)}}
+            />
+        </li>
+    )
+}
+
+
+//Component for list of found recipes
 const RecipesFound = (props) =>{
     return (    
         <ul>
             {props.recipesFound.map(function(element, index){
-                return(
-                    //TODO: find a proper key
-                    <li className = 'list-group-item' key = {index}>{element.recipe.label}</li>
-                )
+                {return (<RecipeFound element = {element} index = {index} key = {index} onRecipeSelected = {props.onRecipeSelected}/>)}
             })}
         </ul>
     )
 }
 
-const ListChosenRecipes = (props) => {
+//Component for single selected recipe
+const SelectedRecipe = props => {
+    return(
+        <li className = 'list-group-item' key = {props.index}>
+            {props.element.label}
+        </li>
+    )
+}
+
+//Component for the selected recipes list
+const SelectedRecipes = (props) => {
+    //As props.recipesSelected is a map object and not an array, map method can not be used here directly. Instead, Object.keys() returns an array of the keys, which can then be used to map stuff  
     return (
-        <ul className = 'list-group' style={{ textAlign: "left" }}>
-            <li className = 'list-group-item'>list</li>
-            <li className = 'list-group-item'>goes</li>
-            <li className = 'list-group-item'>here</li>
+        <ul className = 'list-group' style={{ textAlign: "left" }}>                
+            {Object.keys(props.recipesSelected).map(function(key, index){
+                return <SelectedRecipe element = {props.recipesSelected[key]} /> 
+            })}
         </ul>
     )
 }
@@ -43,12 +66,12 @@ class ChooseMyMeal extends React.Component {
         this.state = {
             searchWord: "",
             recipesFound:[],
+            recipesSelected:{}
         }
     }
 
     onChangeSearchInput = (e) => {
         this.setState({ searchWord: e.target.value });
-        console.log(this.state.searchWord);
     }
 
     //Once user clicks search button, keyword is passed to DataAPI's searchForRecipes function.
@@ -68,16 +91,33 @@ class ChooseMyMeal extends React.Component {
         this.setState({recipesFound : response});
     }
 
+    //Once a recipe is selected, state will be updated
+    onRecipeSelected = (index, recipeData) => {
+        //If recipesSelected does not contain anything, create the map
+        if(Object.keys(this.state.recipesSelected).length === 0)
+        {
+            this.setState({recipesSelected : new Map()});
+        }
+
+        //recipeData will be added to the map. Key will be the recipe name
+        var recipesSelected = this.state.recipesSelected;
+        if(!(recipeData.label in recipesSelected))
+        {
+            recipesSelected[recipeData.label] = recipeData;
+            this.setState({recipesSelected :recipesSelected});
+        }
+    }
+
     render() {
         return (
             <div className='row'>
                 <div className='col-md-6 col-xs-6'>
                     <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton = {this.onClickSearchButton}/>
-                    <RecipesFound recipesFound={this.state.recipesFound} />
+                    <RecipesFound recipesFound={this.state.recipesFound} onRecipeSelected = {this.onRecipeSelected}/>
                 </div>
                 <div className='col-md-6 col-xs-6'>
                     <h2>Chosen Recipes </h2>
-                    <ListChosenRecipes />
+                    <SelectedRecipes recipesSelected = {this.state.recipesSelected}/>
                     <button> accept</button>
                 </div>
             </div>
