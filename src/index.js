@@ -8,6 +8,7 @@ import CookMyMeal from './components/CookMyMeal';
 import Profile from './components/Profile';
 import GroceryList from './components/GroceryList';
 import HomePage from './components/HomePage';
+import MealPlanning from './components/MealPlanning';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -21,6 +22,7 @@ ReactDOM.render(
             <Route path="/cookmymeal" component={CookMyMeal} />
             <Route path="/profile" component={Profile} />
             <Route path="/grocerylist" component={GroceryList} />
+            <Route path="/mealplanning" component={MealPlanning} />
         </App>
     </Router>
     ,

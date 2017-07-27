@@ -23,6 +23,7 @@ class App extends Component {
               <a href={'/choosemymeal'} style={{ color:'white' }}><img className="img-responsive" src={CMMimage} alt="logo" />Choose My Meal</a>
               <a href={'/cookmymeal'} style={{ color:'white' }}><img className="img-responsive" src={cooking} alt="logo" />Cook My Meal</a>
               <a href={'/grocerylist'} style={{ color:'white' }}><img className="img-responsive" src={grocery} alt="logo" />Grocery List</a>
+              <a href={'/mealplanning'} style={{ color:'white' }}><img className="img-responsive" src={grocery} alt="logo" />Meal planning</a>
             </ul>
           </div>
           <div className="col-md-10" style={{ paddingTop: '30px', }}>
