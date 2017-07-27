@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 
 const profileIMG = 'http://en.cubadebate.cu/files/2012/10/chavez3.jpg';
@@ -7,7 +8,7 @@ const userID = {
     userEmail: 'yosoychavez2017@gmail.com',
     tutorName: 'Pedro Pena'
 }
-
+//gets user info and jsx
 const UserInfo = (userinfo) => {
     return (
         <div>
@@ -31,7 +32,7 @@ const UserInfo = (userinfo) => {
 
     )
 }
-
+//loads image for profile
 const LoadProfileIm = (profileIMG) => {
     return (
         <div>
@@ -39,7 +40,7 @@ const LoadProfileIm = (profileIMG) => {
         </div>
     )
 }
-
+//reassembles image and user info
 const PersonalInfo =({profileIMG, userinfo}) =>{
     return(
         <div className='container Personalcontainer'>
@@ -56,7 +57,7 @@ const PersonalInfo =({profileIMG, userinfo}) =>{
 
     )
 }
-
+//creates buttons for i dont like etc
 const CreateButtons = (props) => {
     return (
         <div className='row'>
