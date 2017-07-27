@@ -8,32 +8,23 @@ const userID = {
     tutorName: 'Pedro Pena'
 }
 
-const UserName = (userinfo) => {
+const UserInfo = (userinfo) => {
     return (
         <div>
-            <h3>Personal Info</h3>
-            <div className='row'>
-                <div className='col-md-4 col-xs-12' >
-                    <h4> User Name: </h4>
-                </div>
-                <div className='col-md-8 col-xs-12' >
-                    <h5>{userinfo.userinfo.userName}</h5>
+
+            <div className='row profileInfo'>
+                <div className='col-md-12 col-md-offset-0 col-xs-7 col-xs-offset-3' >
+                    <h3> User Name: {userinfo.userinfo.userName}</h3>
                 </div>
             </div>
-            <div className='row'>
-                <div className='col-md-4 col-xs-12' >
-                    <h4> Email:</h4>
-                </div>
-                <div className='col-md-8 col-xs-12' >
-                    <h5>{userinfo.userinfo.userEmail}</h5>
+            <div className='row profileInfo'>
+                <div className='col-md-12 col-md-offset-0 col-xs-7 col-xs-offset-3' >
+                    <h4> Email: {userinfo.userinfo.userEmail}</h4>
                 </div>
             </div>
-            <div className='row'>
-                <div className='col-md-4 col-xs-12' >
-                    <h4> Tutor: </h4>
-                </div>
-                <div className='col-md-8 col-xs-12' >
-                    <h5>{userinfo.userinfo.tutorName}</h5>
+            <div className='row profileInfo'>
+                <div className='col-md-12 col-md-offset-0 col-xs-7 col-xs-offset-3' >
+                    <h4> Tutor: {userinfo.userinfo.tutorName}</h4>
                 </div>
             </div>
         </div>
@@ -44,8 +35,48 @@ const UserName = (userinfo) => {
 const LoadProfileIm = (profileIMG) => {
     return (
         <div>
-            <img alt='profilepic' src={profileIMG.profileIMG} style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            <img className='img-thumbnail profilePic' alt='profilepic' src={profileIMG.profileIMG} />
         </div>
+    )
+}
+
+const PersonalInfo =({profileIMG, userinfo}) =>{
+    return(
+        <div className='container Personalcontainer'>
+                    <div className='row'>
+                        <div className='col-md-4 col-xs-12'>
+                            <LoadProfileIm profileIMG={profileIMG} />
+                        </div>
+                        <div className='col-md-6 col-xs-12'>
+                            <UserInfo userinfo={userID} />
+                        </div>
+                    </div>
+                </div>
+
+
+    )
+}
+
+const CreateButtons = (props) => {
+    return (
+        <div className='row'>
+            <div className='col-md-10 col-md-offset-1'>
+                <div className='jumbotron chooseIngredientsProfile'>
+                    <div className='row'>
+                        <div className='col-md-4 col-xs-4'>
+                            <button type='button' className='btn btn-danger btn-lg' onClick={props.handleIdontLik}>I don't like</button>
+                        </div>
+                        <div className='col-md-4 col-xs-4'>
+                            <button type='button' className="btn btn-warning btn-lg">I'm alergic</button>
+                        </div>
+                        <div className='col-md-4 col-xs-4'>
+                            <button type='button' className="btn btn-primary btn-lg">I can not eat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     )
 }
 
@@ -54,32 +85,11 @@ class Profile extends React.Component {
     render() {
         return (
             <div>
-                <div className='jumbotron'>
-                    <div className='row'>
-                        <div className='col-md-4 col-xs-12'>
-                            <LoadProfileIm profileIMG={profileIMG} />
-                        </div>
-                        <div className='col-md-6 col-xs-12'>
-                            <UserName userinfo={userID} />
-                        </div>
-                    </div>
-                </div>
+                <PersonalInfo profileIMG={profileIMG} userinfo={userID}/>
                 
-                    <div className='container'>
-                        <div className='row'>
-                            <div className='col-md-3 col-xs-4'>
-                                <button type='button' className='btn btn-danger btn-lg'>I don't like</button>
-                            </div>
-                            <div className='col-md-3 col-xs-4'>
-                                <button type='button' className="btn btn-warning btn-lg">I'm alergic</button>
-                            </div>
-                            <div className='col-md-4 col-xs-4'>
-                                <button type='button' className="btn btn-primary btn-lg">I can not eat</button>
-                            </div>
-                        </div>
-                    </div>
-                
-                <div className='jumbotron'>
+                <CreateButtons />
+
+                <div className='container'>
                     <h3> App Settings </h3>
                 </div>
             </div>
