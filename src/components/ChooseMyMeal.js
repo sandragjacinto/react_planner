@@ -21,7 +21,7 @@ const RecipeFound = (props) => {
             <input 
             type = "checkbox" 
             className = "form-check-input" 
-            onClick = {function(){return props.onRecipeSelected(props.index, props.element.recipe)}}
+            onChange = {function(){return props.onRecipeSelected(props.index, props.element.recipe)}}
             />
         </li>
     )
