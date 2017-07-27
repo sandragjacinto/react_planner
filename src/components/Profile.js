@@ -11,28 +11,29 @@ const userID = {
 const UserName = (userinfo) => {
     return (
         <div>
+            <h3>Personal Info</h3>
             <div className='row'>
-                    <div className='col-md-5 col-xs-5' style={{textAlign:'right'}}>
-                        <p> User Name:</p>
-                    </div>
-                    <div className='col-md-7 col-xs-7' style={{textAlign:'left'}}>
-                        <p>{userinfo.userinfo.userName}</p>
-                    </div>
-            </div>
-            <div className='row'>
-                <div className='col-md-5 col-xs-5' style={{textAlign:'right'}}>
-                    <p>  Email :</p>
+                <div className='col-md-4 col-xs-12' >
+                    <h4> User Name: </h4>
                 </div>
-                <div className='col-md-7 col-xs-7' style={{textAlign:'left'}}>
-                    <p>{userinfo.userinfo.userEmail}</p>
+                <div className='col-md-8 col-xs-12' >
+                    <h5>{userinfo.userinfo.userName}</h5>
                 </div>
             </div>
             <div className='row'>
-                <div className='col-md-5 col-xs-5' style={{textAlign:'right'}}>
-                    <p> Tutor Name :</p>
+                <div className='col-md-4 col-xs-12' >
+                    <h4> Email:</h4>
                 </div>
-                <div className='col-md-7 col-xs-7' style={{textAlign:'left'}}>
-                    <p>{userinfo.userinfo.tutorName}</p>
+                <div className='col-md-8 col-xs-12' >
+                    <h5>{userinfo.userinfo.userEmail}</h5>
+                </div>
+            </div>
+            <div className='row'>
+                <div className='col-md-4 col-xs-12' >
+                    <h4> Tutor: </h4>
+                </div>
+                <div className='col-md-8 col-xs-12' >
+                    <h5>{userinfo.userinfo.tutorName}</h5>
                 </div>
             </div>
         </div>
@@ -40,10 +41,13 @@ const UserName = (userinfo) => {
     )
 }
 
-const LoadProfileIm =(profileIMG) =>{
-return(
-<img alt='profilepic' src={profileIMG.profileIMG} style={{ maxWidth: '100%', maxHeight:'100%' }} />
-)}
+const LoadProfileIm = (profileIMG) => {
+    return (
+        <div>
+            <img alt='profilepic' src={profileIMG.profileIMG} style={{ maxWidth: '100%', maxHeight: '100%' }} />
+        </div>
+    )
+}
 
 class Profile extends React.Component {
 
@@ -52,34 +56,32 @@ class Profile extends React.Component {
             <div>
                 <div className='jumbotron'>
                     <div className='row'>
-                        <div className='col-md-5 col-xs-5'>
-                            <h2>Profile</h2>
+                        <div className='col-md-4 col-xs-12'>
                             <LoadProfileIm profileIMG={profileIMG} />
                         </div>
-                        <div className='col-md-7 col-xs-7'>
-                            <h3>Personal Info</h3>
+                        <div className='col-md-6 col-xs-12'>
                             <UserName userinfo={userID} />
                         </div>
                     </div>
                 </div>
-                <div className='card'>
-                    <div className='card-block'>
-                <div className='row'>
-                    <div className='col-md-4 col-xs-4'>
-                        <button type='button' className='btn btn-danger btn-lg'>I don't like</button>
+                
+                    <div className='container'>
+                        <div className='row'>
+                            <div className='col-md-3 col-xs-4'>
+                                <button type='button' className='btn btn-danger btn-lg'>I don't like</button>
+                            </div>
+                            <div className='col-md-3 col-xs-4'>
+                                <button type='button' className="btn btn-warning btn-lg">I'm alergic</button>
+                            </div>
+                            <div className='col-md-4 col-xs-4'>
+                                <button type='button' className="btn btn-primary btn-lg">I can not eat</button>
+                            </div>
                         </div>
-                        <div className='col-md-4 col-xs-4'>
-                        <button type='button' className="btn btn-warning btn-lg">I'm alergic</button>
-                        </div>
-                        <div className='col-md-4 col-xs-4'>
-                        <button type='button' className="btn btn-primary btn-lg">I can not eat</button>
-                        </div>
-                </div>
-                </div>
-                </div>
+                    </div>
+                
                 <div className='jumbotron'>
                     <h3> App Settings </h3>
-                    </div>
+                </div>
             </div>
         )
     }
