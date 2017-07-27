@@ -13,9 +13,7 @@ class App extends Component {
     return (
       <div className="App " style={{ textAlign: "center" }}>
         <div className="row">
-
-
-          <div className="col-md-2" style={{ textAlign: "center", background:"#64A9CF"}}>
+          <div className="col-md-1 col-xs-12" style={{ textAlign: "center", background:"#ECECEC"}}>
             <br /> <br />
             <ul style={{ paddingLeft: '30px', }} className="nav nav-pills nav-stacks">
               <a href={'/profile'} style={{ color:'white' }}><img className="img-responsive" src={profile} alt="logo" />Profile</a>
@@ -26,7 +24,7 @@ class App extends Component {
               <a href={'/mealplanning'} style={{ color:'white' }}><img className="img-responsive" src={grocery} alt="logo" />Meal planning</a>
             </ul>
           </div>
-          <div className="col-md-10" style={{ paddingTop: '30px', }}>
+          <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
 
         {this.props.children}
 
