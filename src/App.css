@@ -19,9 +19,30 @@
 }
 
 .img-responsive{
-  max-width: 50%;
-  padding-bottom: 15px;
+  padding: 15px;
+  display: inline-block;
+  max-height: 100px;
+  max-width: 100px;
 }
+
+.profileInfo{
+  text-align: left;
+}
+.profilebutton{
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.Personalcontainer{
+  padding-bottom: 50px;
+}
+
+.profilePic{
+  max-height: 200px;
+  max-width: 200px;
+}
+
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
