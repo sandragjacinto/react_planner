@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-
+import DontLikeIm from './../icons/dontlike.png';
+import LikeIm from './../icons/like.png';
+import AlergicIm from './../icons/alergic.png';
+import CanNotIm from './../icons/cannot.png';
 
 const profileIMG = 'http://en.cubadebate.cu/files/2012/10/chavez3.jpg';
 const userID = {
@@ -64,14 +67,17 @@ const CreateButtons = (props) => {
             <div className='col-md-10 col-md-offset-1'>
                 <div className='jumbotron chooseIngredientsProfile'>
                     <div className='row'>
-                        <div className='col-md-4 col-xs-4'>
-                            <button type='button' className='btn btn-danger btn-lg' onClick={props.handleIdontLik}>I don't like</button>
+                        <div className='col-md-3 col-xs-3'>
+                            <a href={'/dontlike'} style={{ color:'white' }}><img className='img-circle profilebutton' src={DontLikeIm} alt="logo"/></a>
                         </div>
-                        <div className='col-md-4 col-xs-4'>
-                            <button type='button' className="btn btn-warning btn-lg">I'm alergic</button>
+                        <div className='col-md-3 col-xs-3'>
+                            <a href={'/profile'} style={{ color:'white' }}><img className='img-circle profilebutton' src={LikeIm} alt="logo"/></a>
                         </div>
-                        <div className='col-md-4 col-xs-4'>
-                            <button type='button' className="btn btn-primary btn-lg">I can not eat</button>
+                        <div className='col-md-3 col-xs-3'>
+                            <a href={'/profile'} style={{ color:'white' }}><img className='img-circle profilebutton' src={AlergicIm} alt="logo"/></a>
+                        </div>
+                        <div className='col-md-3 col-xs-3'>
+                            <a href={'/profile'} style={{ color:'white' }}><img className='img-circle profilebutton' src={CanNotIm} alt="logo"/></a>
                         </div>
                     </div>
                 </div>

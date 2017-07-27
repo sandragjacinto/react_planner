@@ -28,6 +28,10 @@
 .profileInfo{
   text-align: left;
 }
+.profilebutton{
+  max-height: 100px;
+  max-width: 100px;
+}
 
 .Personalcontainer{
   padding-bottom: 50px;
