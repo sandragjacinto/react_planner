@@ -67,6 +67,7 @@ const CreateButtons = (props) => {
             <div className='col-md-10 col-md-offset-1'>
                 <div className='jumbotron chooseIngredientsProfile'>
                     <div className='row'>
+                        
                         <div className='col-md-3 col-xs-3'>
                             <a href={'/dontlike'} style={{ color:'white' }}><img className='img-circle profilebutton' src={DontLikeIm} alt="logo"/></a>
                         </div>
