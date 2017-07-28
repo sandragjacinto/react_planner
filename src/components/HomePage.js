@@ -1,17 +1,6 @@
 import React from 'react';
+import LateralMenu from './LateralMenu.js'
 
-
-/*const SearchInput =  (props ) => {
-    return  (
-            <input type='text' onChange={this.props.onChangeSearchInput} placeholder='Recipe Name'> </input>
-    )
-}*/
-
-//SearchButton
-
-//SearchResultList
-
-//AcceptButton
 
 
 class HomePage extends React.Component  {
@@ -20,9 +9,20 @@ class HomePage extends React.Component  {
     render()
     {
         return  (
-            <div>
-                <h2>Home Page</h2>
-            </div> 
+            <div style={{ textAlign: "center" }}>
+                <div className="row">
+                    <div className="col-md-1 col-xs-12" style={{ textAlign: "center", background: "#ECECEC" }}>
+                        <br /> <br />
+                        <LateralMenu />
+                    </div>
+                    <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
+
+                        <h2>Home Page</h2>
+
+                    </div>
+
+                </div>
+            </div>
         )
     }
 } 
