@@ -9,13 +9,17 @@ import cooking from './icons/cooking.png';
 import profile from './icons/profile.png';
 import grocery from './icons/cart.png';
 
+
+var FakeUser = {
+
+}
+
 class App extends Component {
   render() {
     return (
       <div className="App ">
 
-      <HomePage />
-
+dsfsdfsfsdfsdf
         {this.props.children}
 
           
@@ -25,3 +29,6 @@ class App extends Component {
 }
 
 export default App;
+//if login true
+//homepage
+//else
