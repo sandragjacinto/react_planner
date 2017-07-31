@@ -42,7 +42,13 @@
   max-width: 200px;
 }
 
+.inputIngredient{
+  padding-bottom: 50px;
+}
 
+.ingredientsList{
+  padding-bottom: 50px;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
