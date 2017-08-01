@@ -71,7 +71,7 @@ class ChooseMyMeal extends React.Component {
     }
 
     onChangeSearchInput = (e) => {
-        this.setState = ({ searchWord: e.target.value });
+        this.setState({ searchWord: e.target.value });
     }
 
     //Once user clicks search button, keyword is passed to DataAPI's searchForRecipes function.
@@ -88,6 +88,7 @@ class ChooseMyMeal extends React.Component {
 
     //api writes response here. Update state
     onSearchResponse = (response) => {
+        console.log(response);
         this.setState({recipesFound : response});
     }
 
