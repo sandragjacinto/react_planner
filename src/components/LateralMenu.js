@@ -7,14 +7,18 @@ import profile from './../icons/profile.png';
 import grocery from './../icons/cart.png';
 
 const LateralMenu = (props) => (
-    <ul style={{ paddingLeft: '30px', }} className="nav nav-pills nav-stacks">
-        <a href={'/profile'} style={{ color: 'white' }}><img className="img-responsive" src={profile} alt="logo" /></a>
-        <a href={'/homepage'} style={{ color: 'white' }}><img className="img-responsive" src={logo} alt="logo" /></a>
-        <a href={'/choosemymeal'} style={{ color: 'white' }}><img className="img-responsive" src={CMMimage} alt="logo" /></a>
-        <a href={'/cookmymeal'} style={{ color: 'white' }}><img className="img-responsive" src={cooking} alt="logo" /></a>
-        <a href={'/grocerylist'} style={{ color: 'white' }}><img className="img-responsive" src={grocery} alt="logo" /></a>
-        <a href={'/mealplanning'} style={{ color: 'white' }}><img className="img-responsive" src={grocery} alt="logo" /></a>
-    </ul>
+    <div className=' lateralMenu'>
+                       
+    <div className="col-md-2 col-xs-12 lateralmenudiv  btn-group-vertical">
+         <br /> <br />
+        <a href={'/profile'} className='btn btn-default btn-md menuButton'>PROFILE</a>
+        <a href={'/homepage'} className='btn btn-default btn-md menuButton'>HOME PAGE</a>
+        <a href={'/choosemymeal'} className='btn btn-default btn-md menuButton'>CHOOSE MY MEAL</a>
+        <a href={'/cookmymeal'} className='btn btn-default btn-md menuButton'>COOK MY MEAL</a>
+        <a href={'/grocerylist'} className='btn btn-default btn-md menuButton'>GROCERY LIST</a>
+        <a href={'/mealplanning'} className='btn btn-default btn-md menuButton'>MEAL PLANNING</a>
+    </div>
+    </div>
 
 )
 

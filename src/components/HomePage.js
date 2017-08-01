@@ -10,12 +10,11 @@ class HomePage extends React.Component  {
     {
         return  (
             <div style={{ textAlign: "center" }}>
-                <div className="row">
-                    <div className="col-md-1 col-xs-12" style={{ textAlign: "center", background: "#ECECEC" }}>
-                        <br /> <br />
+                 <div className="row">
+                    
                         <LateralMenu />
-                    </div>
-                    <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
+                    
+                    <div className="col-md-9 col-xs-12" style={{ paddingTop: '30px', }}>
 
                         <h2>Home Page</h2>
 
