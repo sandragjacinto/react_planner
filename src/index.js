@@ -23,6 +23,7 @@ import { Link, Route, IndexRoute, BrowserRouter as Router } from 'react-router-d
 const router=(
 
     <Router>
+    <App>
     <div style={{ textAlign: "center" }}>
         <ul style={{ paddingLeft: '30px', }} className="nav nav-pills nav-stacks">
         <Link to={'/profile'} style={{ color: 'white' }}><img className="img-responsive" src={profile} alt="logo" /></Link>
@@ -43,7 +44,9 @@ const router=(
               <Route path="/dontlike" component={DontLike}></Route>
             
         </div>
+        </App>
     </Router>
     )
     render(router, document.getElementById('root'));
+    registerServiceWorker();
 
