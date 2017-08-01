@@ -12,15 +12,8 @@ class CookMyMeal extends React.Component  {
 
                 <div style={{ textAlign: "center" }}>
                 <div className="row">
-<<<<<<< HEAD
-                    
-                        <LateralMenu />
-                    
-                    <div className="col-md-9 col-xs-12" style={{ paddingTop: '30px', }}>
-=======
                    
                     <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
->>>>>>> features
 
                          <h2>Cook My Meal</h2>
 

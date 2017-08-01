@@ -7,9 +7,7 @@ import profile from './../icons/profile.png';
 import grocery from './../icons/cart.png';
 
 const LateralMenu = (props) => (
-    <div className=' lateralMenu'>
-                       
-    <div className="col-md-2 col-xs-12 lateralmenudiv  btn-group-vertical">
+    <div className=' lateralMenu lateralmenudiv'>
          <br /> <br />
         <a href={'/profile'} className='btn btn-default btn-md menuButton'>PROFILE</a>
         <a href={'/homepage'} className='btn btn-default btn-md menuButton'>HOME PAGE</a>
@@ -17,7 +15,7 @@ const LateralMenu = (props) => (
         <a href={'/cookmymeal'} className='btn btn-default btn-md menuButton'>COOK MY MEAL</a>
         <a href={'/grocerylist'} className='btn btn-default btn-md menuButton'>GROCERY LIST</a>
         <a href={'/mealplanning'} className='btn btn-default btn-md menuButton'>MEAL PLANNING</a>
-    </div>
+    
     </div>
 
 )

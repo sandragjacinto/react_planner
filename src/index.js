@@ -24,16 +24,12 @@ const router=(
 
     <Router>
     <App>
-    <div style={{ textAlign: "center" }}>
-        <ul style={{ paddingLeft: '30px', }} className="nav nav-pills nav-stacks">
-        <Link to={'/profile'} style={{ color: 'white' }}><img className="img-responsive" src={profile} alt="logo" /></Link>
-        <Link to={'/homepage'} style={{ color: 'white' }}><img className="img-responsive" src={logo} alt="logo" /></Link>
-        <Link to={'/choosemymeal'} style={{ color: 'white' }}><img className="img-responsive" src={CMMimage} alt="logo" /></Link>
-        <Link to={'/cookmymeal'} style={{ color: 'white' }}><img className="img-responsive" src={cooking} alt="logo" /></Link>
-        <Link to={'/grocerylist'} style={{ color: 'white' }}><img className="img-responsive" src={grocery} alt="logo" /></Link>
-        <Link to={'/mealplanning'} style={{ color: 'white' }}><img className="img-responsive" src={grocery} alt="logo" /></Link>
-    </ul>
-            
+        <div>
+            <div className='row'>
+                <div className="col-md-2 col-xs-12 lateralmenudiv  btn-group-vertical">
+                    <LateralMenu />
+                    </div>
+            <div className="col-md-10 col-xs-12">
               <Route exact path="/" component={HomePage}></Route>
               <Route exact path="/homepage" component={HomePage}></Route>
               <Route path="/choosemymeal" component={ChooseMyMeal}></Route>
@@ -43,6 +39,8 @@ const router=(
               <Route path="/mealplanning" component={MealPlanning} ></Route>
               <Route path="/dontlike" component={DontLike}></Route>
             
+            </div>
+            </div>
         </div>
         </App>
     </Router>
