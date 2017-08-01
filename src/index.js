@@ -10,6 +10,7 @@ import GroceryList from './components/GroceryList';
 import MealPlanning from './components/MealPlanning';
 import HomePage from './components/HomePage';
 import DontLike from './components/DontLike';
+import LateralMenu from './components/LateralMenu.js'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -17,14 +18,19 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 ReactDOM.render(
 
     <Router>
+    <Route  path="/" component={App}>
+         <IndexRoute component={PhotoGrid}></IndexRoute>
+         <Route path="view/:postId" component={Single}></Route>
+       </Route>
         <App>
-            <Route path="/homepage" component={HomePage} />
-            <Route path="/choosemymeal" component={ChooseMyMeal} />
-            <Route path="/cookmymeal" component={CookMyMeal} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/grocerylist" component={GroceryList} />
-            <Route path="/mealplanning" component={MealPlanning} />
-            <Route path="/dontlike" component={DontLike} />
+            <Route path="/" component={HomePage} >
+              <Route path="/choosemymeal" component={ChooseMyMeal} />
+              <Route path="/cookmymeal" component={CookMyMeal} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/grocerylist" component={GroceryList} />
+              <Route path="/mealplanning" component={MealPlanning} />
+              <Route path="/dontlike" component={DontLike} />
+            </Route>
         </App>
     </Router>
     ,
