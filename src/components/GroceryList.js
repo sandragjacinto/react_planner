@@ -8,10 +8,7 @@ class GroceryList extends React.Component {
         return (
             <div style={{ textAlign: "center" }}>
                 <div className="row">
-                    <div className="col-md-1 col-xs-12" style={{ textAlign: "center", background: "#ECECEC" }}>
-                        <br /> <br />
-                        <LateralMenu />
-                    </div>
+
                     <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
 
                         <h2>Grocery List</h2>
