@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './Login';
 
 
 
@@ -10,7 +11,7 @@ class HomePage extends React.Component  {
     {
         return  (
     
-                        <h2>Home Page</h2>
+                        <Login/ >
 
                     
 
