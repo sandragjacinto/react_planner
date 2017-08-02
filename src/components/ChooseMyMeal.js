@@ -88,6 +88,7 @@ class ChooseMyMeal extends React.Component {
 
     //api writes response here. Update state
     onSearchResponse = (response) => {
+        console.log(response);
         this.setState({recipesFound : response});
     }
 
