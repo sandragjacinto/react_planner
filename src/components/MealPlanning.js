@@ -2,8 +2,6 @@ import React from 'react';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
-//const DropDownD
-
 class MealPlanning extends React.Component
 {
     constructor(props)
@@ -13,18 +11,37 @@ class MealPlanning extends React.Component
         this.state = {
             startDate : null,
             endDate : null,
-            focusedInput : null
+            focusedInput : null,
+            mealPlan : {}
         };
     }
 
     //Callback for DateRangePicker. TODO: can called also once component is loaded, getting start/end date from backend, if already setted
     onStartEndDateChange = (props) =>{
-        console.log(`${props.startDate} ${props.endDate}`);
-        var myDate = new Date(props.startDate);
-        console.log(`${myDate.toDateString()}`);
+        var startDate = props.startDate != null ? props.startDate : this.state.startDate;
+        var endDate = props.endDate != null ? props.endDate : this.state.endDate;
+        console.log(`startDate:${startDate} endDate:${startDate}`);
+        
         this.setState({ 
-            startDate : props.startDate, 
-            endDate : props.endDate 
+            startDate : startDate, 
+            endDate : endDate
+        });
+
+        if(startDate == null || endDate == null)
+        {
+            return;
+        }
+
+        //Looping between dates
+        var mealPlan = new Map();
+        for(var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1))
+        {
+            console.log(`Looping d:${d}, d string:${d.toDateString()}`);
+            mealPlan[d] = {dateString:d.toDateString()};
+        }
+
+        this.setState({
+            mealPlan : mealPlan 
         });
     }
 
@@ -32,14 +49,6 @@ class MealPlanning extends React.Component
     {
         return(<div>
             <h2>Meal Planning</h2>
-
-            {/*<DateRangePicker
-                startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-                endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-                onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
-                focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-            />*/}
 
             <DateRangePicker
                 startDate={this.state.startDate} // momentPropTypes.momentObj or null,
