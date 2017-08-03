@@ -5,33 +5,59 @@ import {getUserLoginData} from './DataUser';
 import {setUserData} from './DataUser';
 
 class Login extends React.Component{
-constructor() {
- super();
- this.renderLogin = this.renderLogin.bind(this);
- this.renderHomePage = this.renderHomePage.bind(this);
- this.authenticate = this.authenticate.bind(this);
- this.authHandler = this.authHandler.bind(this);
-  this.state ={
-   uid: null,
-   owner: null,
-   isUserLogged: false
- }
+  constructor(props) {
+  super(props);
+  this.renderLogin = this.renderLogin.bind(this);
+  this.renderHomePage = this.renderHomePage.bind(this);
+  this.authenticate = this.authenticate.bind(this);
+  this.authHandler = this.authHandler.bind(this);
+    this.state ={
+    uid: null,
+    owner: null,
+    isUserLogged: false
+  }
+
+  console.log("creating, constructor, isUserLogged:" + isUserLogged());
+  console.log("creating, constructor, getUserLoginData:" + getUserLoginData());
+
+  // if(isUserLogged())
+  // {
+  //   this.setState({
+  //     owner : getUserLoginData().displayName,
+  //     uid : getUserLoginData().uid,
+  //     isUserLogged : true
+  //   });
+  // }
+
+  
 }  
 
+componentWillMount()
+{
+  console.log("componentWillMount:" + isUserLogged());
+  if(isUserLogged())
+  {
+    this.setState({
+      owner : getUserLoginData().displayName,
+      uid : getUserLoginData().uid,
+      isUserLogged : true
+    });
+  }
+}
 
 authenticate(provider) {
-  console.log(`trying to log with ${provider}`);
+  //console.log(`trying to log with ${provider}`);
   base.authWithOAuthPopup(provider, this.authHandler);
 }
 
 logout() {
   base.unauth();
-  this.setState({ uid: null, owner: null })
+  this.setState({ uid: null, owner: null, isUserLogged: false })
   setUserData(null);
 }
 
 authHandler(err, authData) {
-  console.log(authData);
+  //console.log(authData);
   if(err) {
     console.error(err);
     return;
@@ -54,7 +80,8 @@ authHandler(err, authData) {
   
   this.setState({
     uid: authData.user.uid,
-    owner: data.owner || authData.user.displayName
+    owner: data.owner || authData.user.displayName,
+    isUserLogged: true
   })
   });
 }
@@ -81,17 +108,18 @@ renderHomePage() {
 }
 
 render(){
-console.log("display name:" + getUserLoginData().displayName);
+//console.log("display name:" + getUserLoginData().displayName);
 const logout = <button onClick={() =>  this.logout()}>Log Out!</button>;
 // Check if they are log in...
-if(!this.state.isUserLogged) {
+if(this.state.isUserLogged == false) {
 //if(!isUserLogged()) {
-  return <div>{this.renderLogin()}</div>
+  return <div>{this.renderLogin()} {this.state.isUserLogged}</div>
 }
+  console.log("render Hello element");
   return(
     <nav>
      {/*<p>Hello ... <h2>{this.state.owner}</h2></p>*/}
-     <div>Hello ... <h2>{getUserLoginData().displayName}</h2></div>
+     <div>Hello ... <h2>{this.state.owner} {this.state.isUserLogged}</h2></div>
      {logout }
     </nav>
   )
