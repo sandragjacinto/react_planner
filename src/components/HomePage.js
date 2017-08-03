@@ -1,4 +1,5 @@
 import React from 'react';
+import Login from './Login';
 import hp1 from './../icons/hp1.jpg';
 import hp2 from './../icons/hp2.jpg';
 import hp3 from './../icons/hp3.jpg';
@@ -14,6 +15,9 @@ class HomePage extends React.Component  {
     {
         return  (
             <div>
+    
+                <Login />
+  
                 <div className='row' style={{height:'40%'}}>
                     <br></br><br></br>
                     <div className='col-md-5 col-md-offset-1 col-xs-10 col-xs-offset-2 menuImgLeft'>
