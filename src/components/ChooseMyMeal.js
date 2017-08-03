@@ -1,5 +1,7 @@
 import React from 'react';
 import {searchForRecipes} from './DataAPI';
+import {isUserLogged} from './DataUser';
+import {getUserLoginData} from './DataUser';
 
 //User enters keyword here
 const SearchInput = (props) => {

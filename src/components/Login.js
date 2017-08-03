@@ -1,6 +1,8 @@
 import React from 'react';
 import base from '../base';
-
+import {isUserLogged} from './DataUser';
+import {getUserLoginData} from './DataUser';
+import {setUserData} from './DataUser';
 
 class Login extends React.Component{
 constructor() {
@@ -11,7 +13,8 @@ constructor() {
  this.authHandler = this.authHandler.bind(this);
   this.state ={
    uid: null,
-   owner: null
+   owner: null,
+   isUserLogged: false
  }
 }  
 
@@ -24,6 +27,7 @@ authenticate(provider) {
 logout() {
   base.unauth();
   this.setState({ uid: null, owner: null })
+  setUserData(null);
 }
 
 authHandler(err, authData) {
@@ -39,6 +43,8 @@ authHandler(err, authData) {
   storeRef.once('value',(snapshot) => {
     const data = snapshot.val() || {};
   
+    setUserData(authData.user);
+
     //Add some data to the user...
     if(!data.owner) {
       storeRef.set({
@@ -75,15 +81,17 @@ renderHomePage() {
 }
 
 render(){
-
+console.log("display name:" + getUserLoginData().displayName);
 const logout = <button onClick={() =>  this.logout()}>Log Out!</button>;
 // Check if they are log in...
-if(!this.state.uid) {
+if(!this.state.isUserLogged) {
+//if(!isUserLogged()) {
   return <div>{this.renderLogin()}</div>
 }
   return(
     <nav>
-     <p>Hello ... <h2>{this.state.owner}</h2></p>
+     {/*<p>Hello ... <h2>{this.state.owner}</h2></p>*/}
+     <div>Hello ... <h2>{getUserLoginData().displayName}</h2></div>
      {logout }
     </nav>
   )
