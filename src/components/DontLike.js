@@ -1,5 +1,13 @@
 import React from 'react';
 import Profile from './Profile.js'
+import base from '../base';
+import { getUserLoginData } from './DataUser';
+import { setUserData } from './DataUser';
+import { Link } from 'react-router-dom'
+
+
+
+
 
 const IngredientInput = (props) => {
     return (
@@ -37,7 +45,7 @@ const IgredientListComp = (props) => (
 const SaveButton = (props) => (
     <div className='row'>
         <div className="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1">
-            <a href={'/profile'} className="btn btn-danger">SAVE MY CHOICE</a>
+            <Link to={'/profile'} className="btn btn-danger">SAVE MY CHOICE</Link>
         </div>
     </div>
 )
@@ -50,6 +58,7 @@ class DontLike extends React.Component {
             listDontLike: [],
             ItemIndex: '',
             listDelDontLike: '',
+            dontlike: [],
         }
     }
 
@@ -64,6 +73,7 @@ class DontLike extends React.Component {
         this.setState({
             listDontLike: listDontLike
         });
+        this.newdontLikehandler();
         //      console.log(this.state.listDontLike)
     }
 
@@ -75,8 +85,36 @@ class DontLike extends React.Component {
         this.setState({
             listDontLike: lis
         })
+        this.newdontLikehandler();
         console.log(lis)
     }
+
+    newdontLikehandler() {
+        //grab the user  info 
+        const storeRef = base.database().ref(getUserLoginData().uid);
+        console.log('test ' + storeRef)
+        // query the firebase
+        storeRef.once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            //Add some data to the user...
+            storeRef.update({
+                dontlike: this.state.listDontLike
+            })
+
+        });
+    }
+componentWillMount()
+{
+        const storeRef = base.database().ref(getUserLoginData().uid);
+        storeRef.once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            if (data.dontlike) {
+                this.setState({
+                   listDontLike : data.dontlike
+                })
+            }
+        });
+}
 
     render() {
         return (
