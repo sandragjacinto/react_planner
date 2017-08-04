@@ -75,7 +75,6 @@ authHandler(err, authData) {
     if(!data.owner) {
       storeRef.set({
         owner: authData.user.displayName,
-        dontlike:[],
       });
     }
   
