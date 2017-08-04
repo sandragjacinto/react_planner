@@ -2,27 +2,32 @@ import React from 'react';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
-//Flow when selecting a day:
-//a.map mealplan into buttons
-//b.id of buttons will be key of map
-//c.onClick of dropdown options will then access mapPlan and fill daily-recipe-list
-const DropDownDays = (props) =>
+//Flow:
+//a.User selects start date
+//b.A button will be generated for each day, from start date, covering 2 weeks
+//c.Button is green if recipes are already selected for that day. Also will show how many of them are for that day
+//d.Clicking on a day button will open a popup, containing favorite recipes, and controls to add or delete recipes for taht day
+
+const ButtonsDays = ({mealPlan, onClickDayButton})=>
 {
     return(
-    <div className="dropdown">
-      <select onChange={props.onDropDownChange} name="severity" id="dropdownMenuButton" className="form-control">
-            {Object.keys(props.mealPlan).map(function(mapKey){
-                var day = props.mealPlan[mapKey];
+        <div>
+            {Object.keys(mealPlan).map(function(mapKey){
+                var day = mealPlan[mapKey];
                 console.log(`dateString:${day.dateString} key:${day.id}`);
                 return (
-                    <option value={day.dateString} key={day.id}>{day.dateString}</option>
+                    <button 
+                        key={day.id} 
+                        id={day.id} 
+                        onClick={
+                            onClickDayButton(day.id, 4)
+                        }>
+                        {day.dateString}
+                    </button>
                 );
             })}
-      </select>
-
-    </div>
+        </div>
     );
-
 }
 
 class MealPlanning extends React.Component
@@ -69,8 +74,8 @@ class MealPlanning extends React.Component
         });
     }
 
-    onDropDownChange = (e) => {
-
+    onClickDayButton = (id, test) => {
+        console.log(`onClickDayButton: ${id}, ${test}`);
     }
 
     render()
@@ -86,9 +91,9 @@ class MealPlanning extends React.Component
                 onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
             />
 
-            <DropDownDays
+            <ButtonsDays
                 mealPlan = {this.state.mealPlan}
-                onDropDownChange = {this.onDropDownChange}
+                onClickDayButton = {this.onClickDayButton}
             />       
 
         </div>)
