@@ -23,7 +23,7 @@ const IngredientInput = (props) => {
 const IgredientListComp = (props) => (
     <div className='row'>
         <div className="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2 ingredientsList">
-            {props.listDontLike.map((ing, index) => {
+            {props.listCantEat.map((ing, index) => {
                 return (
                     <div className='row list-group-item '>
                         <div className='col-md-9 col-xs-9'>
@@ -50,46 +50,46 @@ const SaveButton = (props) => (
     </div>
 )
 
-class DontLike extends React.Component {
+class CantEat extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newIngredientDontLike: '',
-            listDontLike: [],
+            newIngredientCantEat: '',
+            listCantEat: [],
             ItemIndex: '',
-            listDelDontLike: '',
-            dontlike: [],
+            listDelCantEat: '',
+            canteat: [],
         }
     }
 
     onChangIngrdientInput = (e) => {
-        this.setState({ newIngredientDontLike: e.target.value });
-        //    console.log(this.state.newIngredientDontLike);
+        this.setState({ newIngredientCantEat: e.target.value });
+        //    console.log(this.state.newIngredientCantEat);
     }
 
     onClickAddIngredient = () => {
 
-        var listDontLike = this.state.listDontLike.concat(this.state.newIngredientDontLike)
+        var listCantEat = this.state.listCantEat.concat(this.state.newIngredientCantEat)
         this.setState({
-            listDontLike: listDontLike
+            listCantEat: listCantEat
         });
-        this.newdontLikehandler();
-        //      console.log(this.state.listDontLike)
+        this.newcanteathandler();
+        //      console.log(this.state.listCantEat)
     }
 
     onClickDelIngredient = (reactKey) => {
-        var lis = this.state.listDontLike;
-        lis = this.state.listDontLike.filter((it, indexitem) => {
+        var lis = this.state.listCantEat;
+        lis = this.state.listCantEat.filter((it, indexitem) => {
             return indexitem !== Number(reactKey.target.value);
         });
         this.setState({
-            listDontLike: lis
+            listCantEat: lis
         })
-        this.newdontLikehandler();
+        this.newcanteathandler();
         console.log(lis)
     }
 
-    newdontLikehandler() {
+    newcanteathandler() {
         //grab the user  info 
         const storeRef = base.database().ref(getUserLoginData().uid);
         console.log('test ' + storeRef)
@@ -98,7 +98,7 @@ class DontLike extends React.Component {
             const data = snapshot.val() || {};
             //Add some data to the user...
             storeRef.child('restricitons').update({
-                dontlike: this.state.listDontLike
+                canteat: this.state.listCantEat
             })
 
         });
@@ -108,9 +108,9 @@ componentWillMount()
         const storeRef = base.database().ref(getUserLoginData().uid);
         storeRef.child('restricitons').once('value', (snapshot) => {
             const data = snapshot.val() || {};
-            if (data.dontlike) {
+            if (data.canteat) {
                 this.setState({
-                   listDontLike : data.dontlike
+                   listCantEat : data.canteat
                 })
             }
         });
@@ -120,9 +120,9 @@ componentWillMount()
         return (
             <div className='card'>
                 <div className='card-block'>
-                    <h1 className="card-title">I Don't Like</h1>
+                    <h1 className="card-title">I Can Not Eat</h1>
                     <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
-                    <IgredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
+                    <IgredientListComp listCantEat={this.state.listCantEat} onClickDelIngredient={this.onClickDelIngredient} />
                     <SaveButton />
                 </div>
             </div>
@@ -130,4 +130,4 @@ componentWillMount()
     }
 }
 
-export default DontLike;
+export default CantEat;
