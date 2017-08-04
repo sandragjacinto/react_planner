@@ -7,8 +7,8 @@ import {getUserLoginData} from './DataUser';
 const SearchInput = (props) => {
     return (
         <div className="input-group">
-            <input type="text" className="form-control" placeholder="Enter Recipe Name" onChange={props.onChangeSearchInput} />
-            <span className="input-group-btn">
+{/*                        props.onClickSearchButton} onChange={props.onChangeSearchInput} />
+         */}   <span className="input-group-btn">
                 <button className="btn btn-default" type="button" onClick = {props.onClickSearchButton}>Search</button>
             </span>
         </div>
@@ -115,6 +115,7 @@ class ChooseMyMeal extends React.Component {
         return (
             <div className='row'>
                 <div className='col-md-6 col-xs-6'>
+                    <h2>Select your recipes </h2>
                     <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton = {this.onClickSearchButton}/>
                     <RecipesFound recipesFound={this.state.recipesFound} onRecipeSelected = {this.onRecipeSelected}/>
                 </div>
