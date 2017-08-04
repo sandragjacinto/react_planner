@@ -91,7 +91,7 @@ class DontLike extends React.Component {
 
     newdontLikehandler() {
         //grab the user  info 
-        const storeRef = base.database().ref(getUserLoginData().uid.dontlike);
+        const storeRef = base.database().ref(getUserLoginData().uid);
         console.log('test ' + storeRef)
         // query the firebase
         storeRef.once('value', (snapshot) => {
@@ -105,7 +105,7 @@ class DontLike extends React.Component {
     }
 componentWillMount()
 {
-        const storeRef = base.database().ref(getUserLoginData().uid.dontlike);
+        const storeRef = base.database().ref(getUserLoginData().uid);
         storeRef.once('value', (snapshot) => {
             const data = snapshot.val() || {};
             if (data.dontlike) {
