@@ -74,7 +74,8 @@ authHandler(err, authData) {
     //Add some data to the user...
     if(!data.owner) {
       storeRef.set({
-        owner: authData.user.displayName
+        owner: authData.user.displayName,
+        dontlike:[],
       });
     }
   
