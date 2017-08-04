@@ -1,4 +1,5 @@
 import React from 'react';
+import base from '../base';
 import {searchForRecipes} from './DataAPI';
 import {isUserLogged} from './DataUser';
 import {getUserLoginData} from './DataUser';
@@ -90,7 +91,7 @@ class ChooseMyMeal extends React.Component {
 
     //api writes response here. Update state
     onSearchResponse = (response) => {
-        console.log(response);
+        //console.log(response);
         this.setState({recipesFound : response});
     }
 
@@ -101,15 +102,44 @@ class ChooseMyMeal extends React.Component {
         {
             this.setState({recipesSelected : new Map()});
         }
-
+        
         //recipeData will be added to the map. Key will be the recipe name
         var recipesSelected = this.state.recipesSelected;
+         //console.log(this.state.recipesSelected)
         if(!(recipeData.label in recipesSelected))
         {
             recipesSelected[recipeData.label] = recipeData;
-            this.setState({recipesSelected :recipesSelected});
+            this.setState({recipesSelected:recipesSelected});
+            console.log(this.state.recipesSelected)
+            this.info2databasehandler();
         }
     }
+
+    info2databasehandler(){
+        const storeRef = base.database().ref(getUserLoginData().uid);
+        console.log('test ' + storeRef)
+        // query the firebase
+        storeRef.once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            //Add some data to the user...
+            storeRef.child('recipesInfo').update({
+                recipesSelected : this.state.recipesSelected,
+                })
+        });
+    }
+
+    componentWillMount(){
+        const storeRef = base.database().ref(getUserLoginData().uid);
+        storeRef.child('recipesInfo').once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            if (data.recipesSelected) {
+                this.setState({
+                   recipesSelected : data.recipesSelected
+                })
+            }
+        });
+}
+
 
     render() {
         return (

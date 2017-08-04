@@ -103,6 +103,7 @@ class DontLike extends React.Component {
 
         });
     }
+    
 componentWillMount()
 {
         const storeRef = base.database().ref(getUserLoginData().uid);
