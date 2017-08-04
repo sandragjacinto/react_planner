@@ -33,17 +33,19 @@ class GroceryList extends React.Component {
             tempgrocerieList: [],
             grocerieList: [],
         }
-        this.handleChangeinList();
+        
     }
 
-    handleChangeinList() {
+    componentWillMount() {
         const storeRef = base.database().ref(getUserLoginData().uid);
         storeRef.child('recipesInfo').child('recipesSelected').once('value', (snapshot) => {
             const data = snapshot.val() || {};
             //console.log(data)
+            if (data) {
             for (var i in data) {
                 var grocerieList = this.state.grocerieList.concat(data[i].ingredientLines)
                 //console.log(data[i].ingredientLines);
+            }
             }
             this.setState({
                 grocerieList: grocerieList,
