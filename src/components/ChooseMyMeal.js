@@ -3,12 +3,14 @@ import base from '../base';
 import {searchForRecipes} from './DataAPI';
 import {isUserLogged} from './DataUser';
 import {getUserLoginData} from './DataUser';
+import { Link } from 'react-router-dom'
+import {Tabs, Tab} from 'react-bootstrap'
 
 //User enters keyword here
 const SearchInput = (props) => {
     return (
         <div className="input-group">
-            <input type="text" className="form-control" placeholder="Enter Recipe Name" onChange={props.onChangeSearchInput} />
+            <input type="text" className="form-control" placeholder="Enter Recipe Name"  onKeyDown={props.onChangeSearchInput} />
             <span className="input-group-btn">
                 <button className="btn btn-default" type="button" onClick = {props.onClickSearchButton}>Search</button>
             </span>
@@ -47,7 +49,13 @@ const SelectedRecipe = props => {
     return(
         <li className = 'list-group-item' key = {props.index}>
             {props.element.label}
+           <input 
+            type = "checkbox" 
+            className = "form-check-input" 
+            onChange = {function(){return props.onRecipeDeselected(props.index, props.element.recipe)}}
+            />
         </li>
+
     )
 }
 
@@ -57,7 +65,7 @@ const SelectedRecipes = (props) => {
     return (
         <ul className = 'list-group' style={{ textAlign: "left" }}>                
             {Object.keys(props.recipesSelected).map(function(key, index){
-                return <SelectedRecipe element = {props.recipesSelected[key]} /> 
+                return <SelectedRecipe element = {props.recipesSelected[key]}  index = {index} key = {index} onRecipeDeselected = {props.onRecipeDeselected} /> 
             })}
         </ul>
     )
@@ -74,6 +82,12 @@ class ChooseMyMeal extends React.Component {
     }
 
     onChangeSearchInput = (e) => {
+        console.log(e.keyCode);
+        if(e.keyCode == 13){
+            this.setState({ searchWord: e.target.value });
+            this.onClickSearchButton()
+            console.log(`After serching the onClickSearchButton: ${(e.keyCode)}`);
+        }
         this.setState({ searchWord: e.target.value });
     }
 
@@ -140,20 +154,65 @@ class ChooseMyMeal extends React.Component {
         });
 }
 
+        //Once a recipe is selected, state will be updated
+    onRecipeDeselected = (index) => {
+        //If recipesSelected does not contain anything, create the map
+        var lis = Object.keys(this.state.recipesSelected);
+        var maplist = new Map();
+        maplist = this.state.recipesSelected;
+        console.log(`maplist: ${maplist}`);
+        console.log(`index: ${index}`);
+        delete maplist[(lis[index])];
+        
+        
+
+         if(lis.length !== 0)
+        {
+            
+            this.setState({recipesSelected : maplist });
+        }
+        this.info2databasehandler();
+/*        {
+            this.setState({recipesSelected : new Map()});
+        }
+
+        //recipeData will be added to the map. Key will be the recipe name
+        var recipesSelected = this.state.recipesSelected;
+        if(!(recipeData.label in recipesSelected))
+        {
+            recipesSelected[recipeData.label] = recipeData;
+            this.setState({recipesSelected :recipesSelected});
+        }*/
+    }
 
     render() {
         return (
-            <div className='row'>
+            <div>
+ <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+    <Tab eventKey={1} title="Select your recipes">
+       <div className='row'>
                 <div className='col-md-6 col-xs-6'>
+                    <h2>Select your recipes </h2>
                     <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton = {this.onClickSearchButton}/>
                     <RecipesFound recipesFound={this.state.recipesFound} onRecipeSelected = {this.onRecipeSelected}/>
                 </div>
+    </div>
+    </Tab>
+    <Tab eventKey={2} title="Choosen recieps">
+     <div className='row'>
                 <div className='col-md-6 col-xs-6'>
                     <h2>Chosen Recipes </h2>
-                    <SelectedRecipes recipesSelected = {this.state.recipesSelected}/>
+                    <SelectedRecipes recipesSelected = {this.state.recipesSelected} onRecipeDeselected = {this.onRecipeDeselected}/>
                     <button> accept</button>
                 </div>
             </div>
+    </Tab>
+      </Tabs>
+
+        
+
+           
+    </div>
         )
     }
 }
