@@ -18,20 +18,21 @@ const UserInfo = (userinfo) => {
         <div>
 
             <div className='row profileInfo'>
-                <div className='col-md-12 col-md-offset-0 col-xs-7 col-xs-offset-3' >
+                <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
                     <h3> User Name: {userinfo.userinfo.userName}</h3>
                 </div>
             </div>
             <div className='row profileInfo'>
-                <div className='col-md-12 col-md-offset-0 col-xs-7 col-xs-offset-3' >
+                <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
                     <h4> Email: {userinfo.userinfo.userEmail}</h4>
                 </div>
             </div>
             <div className='row profileInfo'>
-                <div className='col-md-12 col-md-offset-0 col-xs-7 col-xs-offset-3' >
+                <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
                     <h4> Tutor: {userinfo.userinfo.tutorName}</h4>
                 </div>
             </div>
+            
         </div>
 
     )
@@ -40,20 +41,23 @@ const UserInfo = (userinfo) => {
 const LoadProfileIm = (profileIMG) => {
     return (
         <div>
-            <img className='img-thumbnail profilePic' alt='profilepic' src={profileIMG.profileIMG} />
+            <img className=' profilePic' alt='profilepic' src={profileIMG.profileIMG} />
         </div>
     )
 }
 //reassembles image and user info
 const PersonalInfo = ({ profileIMG, userinfo }) => {
     return (
-        <div className='container Personalcontainer'>
+        <div className='container userPhoto'>
             <div className='row'>
-                <div className='col-md-4 col-xs-12'>
+                <div className='col-md-2 col-xs-12'>
                     <LoadProfileIm profileIMG={profileIMG} />
                 </div>
-                <div className='col-md-6 col-xs-12'>
+                <div className='col-md-5 col-xs-12 personalcontainer'>
                     <UserInfo userinfo={userID} />
+                </div>
+                <div className='col-md-1 col-xs-12'>
+                    <img className=' mapPic' alt='mapPic' src={'http://www.mq.edu.au/__data/assets/image/0010/183556/Campus-Map.png'} />
                 </div>
             </div>
         </div>
@@ -65,21 +69,21 @@ const PersonalInfo = ({ profileIMG, userinfo }) => {
 const CreateButtons = (props) => {
     return (
         <div className='row'>
-            <div className='col-md-10 col-md-offset-1'>
+            <div className='col-md-11 col-md-offset-1'>
                 <div className='jumbotron chooseIngredientsProfile'>
                     <div className='row'>
 
                         <div className='col-md-3 col-xs-3'>
-                            <a href={'/dontlike'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={DontLikeIm} alt="logo" /></a>
+                            <Link to={'/dontlike'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={DontLikeIm} alt="logo" /></Link>
                         </div>
                         <div className='col-md-3 col-xs-3'>
-                            <a href={'/profile'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={LikeIm} alt="logo" /></a>
+                            <Link to={'/profile'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={LikeIm} alt="logo" /></Link>
                         </div>
                         <div className='col-md-3 col-xs-3'>
-                            <a href={'/profile'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={AlergicIm} alt="logo" /></a>
+                            <Link to={'/profile'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={AlergicIm} alt="logo" /></Link>
                         </div>
                         <div className='col-md-3 col-xs-3'>
-                            <a href={'/profile'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={CanNotIm} alt="logo" /></a>
+                            <Link to={'/profile'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={CanNotIm} alt="logo" /></Link>
                         </div>
                     </div>
                 </div>
