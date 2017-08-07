@@ -77,13 +77,13 @@ const CreateButtons = (props) => {
                             <Link to={'/dontlike'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={DontLikeIm} alt="logo" /></Link>
                         </div>
                         <div className='col-md-3 col-xs-3'>
-                            <Link to={'/profile'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={LikeIm} alt="logo" /></Link>
+                            <Link to={'/favmeals'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={LikeIm} alt="logo" /></Link>
                         </div>
                         <div className='col-md-3 col-xs-3'>
-                            <Link to={'/profile'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={AlergicIm} alt="logo" /></Link>
+                            <Link to={'/allergic'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={AlergicIm} alt="logo" /></Link>
                         </div>
                         <div className='col-md-3 col-xs-3'>
-                            <Link to={'/profile'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={CanNotIm} alt="logo" /></Link>
+                            <Link to={'/canteat'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={CanNotIm} alt="logo" /></Link>
                         </div>
                     </div>
                 </div>

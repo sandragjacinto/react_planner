@@ -10,6 +10,9 @@ import GroceryList from './components/GroceryList';
 import MealPlanning from './components/MealPlanning';
 import HomePage from './components/HomePage';
 import DontLike from './components/DontLike';
+import Allergic from './components/Allergic';
+import CantEat from './components/CantEat';
+import FavouriteMeals from './components/FavouriteMeals';
 import LateralMenu from './components/LateralMenu.js';
 import logo from './icons/home.png';
 import CMMimage from './icons/chosemymeal.png';
@@ -38,6 +41,9 @@ const router = (
                         <Route path="/grocerylist" component={GroceryList} ></Route>
                         <Route path="/mealplanning" component={MealPlanning} ></Route>
                         <Route path="/dontlike" component={DontLike}></Route>
+                        <Route path="/allergic" component={Allergic}></Route>
+                        <Route path="/canteat" component={CantEat}></Route>
+                        <Route path="/favmeals" component={FavouriteMeals}></Route>
 
                     </div>
                 </div>
