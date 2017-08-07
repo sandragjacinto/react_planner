@@ -17,6 +17,7 @@ export function searchForRecipes(keyword) {
         .then(function (data) {
             recipesFound[keyword] = data.hits;
             return recipesFound[keyword];
+            console.log (data.hits)
         })
 }
 

@@ -103,8 +103,8 @@ class CantEat extends React.Component {
 
         });
     }
-componentWillMount()
-{
+
+componentWillMount(){
         const storeRef = base.database().ref(getUserLoginData().uid);
         storeRef.child('restricitons').once('value', (snapshot) => {
             const data = snapshot.val() || {};
