@@ -9,36 +9,48 @@ import {Tabs, Tab} from 'react-bootstrap'
 //User enters keyword here
 const SearchInput = (props) => {
     return (
-        <div className="input-group">
+         <div className="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 input-group inputIngredient">
             <input type="text" className="form-control" placeholder="Enter Recipe Name"  onKeyDown={props.onChangeSearchInput} />
             <span className="input-group-btn">
-                <button className="btn btn-default" type="button" onClick = {props.onClickSearchButton}>Search</button>
+                <button className="btn btn-success" type="button" onClick = {props.onClickSearchButton}>Search</button>
             </span>
         </div>
     )
 }
-
+ 
 //Component for single recipe found
 const RecipeFound = (props) => {
+  console.log(`props.bgColor: ${props.bgColor}`);
+   var btnStyle = {
+        backgroundColor: `${props.bgColor}
+    `};
     return(
-        <li className = 'list-group-item' key = {props.index}>
-            {props.element.recipe.label}
-            <input 
-            type = "checkbox" 
-            className = "form-check-input" 
-            onChange = {function(){return props.onRecipeSelected(props.index, props.element.recipe)}}
-            />
-        </li>
+       <li className="menu-recipe">
+        <img src={props.element.recipe.image} alt= {props.element.recipe.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'')} />
+        <h3 className="recipe-name">
+             {props.element.recipe.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'')}
+            
+        </h3>
+        
+        <button style={btnStyle} key={props.index} value={props.index} onClick={function(){return props.onRecipeSelected(props.index, props.element.recipe)}} >Select ...</button>
+      </li>
+
+
+
+
+
+ 
     )
 }
 
 
 //Component for list of found recipes
 const RecipesFound = (props) =>{
+    console.log(`RecipesFound props.bgColor: ${props.bgColor}`)
     return (    
         <ul>
             {props.recipesFound.map(function(element, index){
-                {return (<RecipeFound element = {element} index = {index} key = {index} onRecipeSelected = {props.onRecipeSelected}/>)}
+                {return (<RecipeFound element = {element} index = {index} key = {index} onRecipeSelected = {props.onRecipeSelected} bgColor = {props.bgColor} />)}
             })}
         </ul>
     )
@@ -47,14 +59,14 @@ const RecipesFound = (props) =>{
 //Component for single selected recipe
 const SelectedRecipe = props => {
     return(
-        <li className = 'list-group-item' key = {props.index}>
-            {props.element.label}
-           <input 
-            type = "checkbox" 
-            className = "form-check-input" 
-            onChange = {function(){return props.onRecipeDeselected(props.index, props.element.recipe)}}
-            />
-        </li>
+        <li className = "menu-recipe" >
+        <img src={props.element.image} alt= {props.element.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'')} />
+        <h3 className="recipe-name">
+             {props.element.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'')}
+         </h3>
+           
+            <button key={props.index} value={props.index} onClick={function(){return props.onRecipeDeselected(props.index, props.element.recipe)}} >Remove ...</button>
+           </li>
 
     )
 }
@@ -63,7 +75,7 @@ const SelectedRecipe = props => {
 const SelectedRecipes = (props) => {
     //As props.recipesSelected is a map object and not an array, map method can not be used here directly. Instead, Object.keys() returns an array of the keys, which can then be used to map stuff  
     return (
-        <ul className = 'list-group' style={{ textAlign: "left" }}>                
+        <ul >                
             {Object.keys(props.recipesSelected).map(function(key, index){
                 return <SelectedRecipe element = {props.recipesSelected[key]}  index = {index} key = {index} onRecipeDeselected = {props.onRecipeDeselected} /> 
             })}
@@ -77,7 +89,9 @@ class ChooseMyMeal extends React.Component {
         this.state = {
             searchWord: "",
             recipesFound:[],
-            recipesSelected:{}
+            recipesSelected:{},
+            color_black: true,
+            bgColor: "green"
         }
     }
 
@@ -112,6 +126,7 @@ class ChooseMyMeal extends React.Component {
     //Once a recipe is selected, state will be updated
     onRecipeSelected = (index, recipeData) => {
         //If recipesSelected does not contain anything, create the map
+       console.log(this);
         if(Object.keys(this.state.recipesSelected).length === 0)
         {
             this.setState({recipesSelected : new Map()});
@@ -122,6 +137,7 @@ class ChooseMyMeal extends React.Component {
          //console.log(this.state.recipesSelected)
         if(!(recipeData.label in recipesSelected))
         {
+            recipeData.label = recipeData.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'');
             recipesSelected[recipeData.label] = recipeData;
             this.setState({recipesSelected:recipesSelected});
             console.log(this.state.recipesSelected)
@@ -190,20 +206,23 @@ class ChooseMyMeal extends React.Component {
             <div>
  <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
     <Tab eventKey={1} title="Select your recipes">
-       <div className='row'>
-                <div className='col-md-6 col-xs-6'>
-                    <h2>Select your recipes </h2>
+            <div className='card'>
+                <div className='card-block'>
+                    <h1 className="card-title">Select your recipes</h1>
                     <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton = {this.onClickSearchButton}/>
-                    <RecipesFound recipesFound={this.state.recipesFound} onRecipeSelected = {this.onRecipeSelected}/>
+                    <RecipesFound bgColor={this.state.bgColor} recipesFound={this.state.recipesFound} onRecipeSelected = {this.onRecipeSelected}/>
+                    
                 </div>
-    </div>
+            </div>
+
+
     </Tab>
     <Tab eventKey={2} title="Choosen recieps">
-     <div className='row'>
-                <div className='col-md-6 col-xs-6'>
-                    <h2>Chosen Recipes </h2>
-                    <SelectedRecipes recipesSelected = {this.state.recipesSelected} onRecipeDeselected = {this.onRecipeDeselected}/>
-                    <button> accept</button>
+     <div className='card'>
+                <div className='card-block'>
+                    <h1 className="card-title">Chosen Recipes </h1>
+                    <SelectedRecipes aling="right" recipesSelected = {this.state.recipesSelected} onRecipeDeselected = {this.onRecipeDeselected}/>
+                   
                 </div>
             </div>
     </Tab>

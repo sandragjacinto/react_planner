@@ -87,6 +87,9 @@ a.menuButton:hover{
   opacity: 0.5;
 }
 
+.button-clicked {
+  background: red;
+}
 
 .profileInfo{
   text-align: left;
@@ -133,4 +136,56 @@ a.menuButton:hover{
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.menu-recipe {
+  border-bottom: 2px solid #000;
+  border-top: 1px solid #000;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+  margin-bottom: 5px;
+  clear: both;
+  overflow: hidden;
+}
+.menu-recipe p {
+  margin: 0;
+  font-size: 1.8rem;
+}
+.menu-recipe .recipe-name {
+  margin: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.menu-recipe .price {
+  font-size: 1.4rem;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.menu-recipe img {
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin-right: 1rem;
+}
+
+button,
+input[type=submit] {
+  text-transform: uppercase;
+  background: none;
+  border: 1px solid #000;
+  font-weight: 600;
+  font-size: 1.5rem;
+  font-family: 'Open Sans';
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  position: relative;
+  z-index: 2;
 }
