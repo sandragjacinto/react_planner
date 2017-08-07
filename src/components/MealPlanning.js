@@ -1,6 +1,7 @@
 import React from 'react';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
+import {PlanOneDay} from './PlanOneDay.js';
 
 //Flow:
 //a.User selects start date
@@ -20,7 +21,7 @@ const ButtonsDays = ({mealPlan, onClickDayButton})=>
                         key={day.id} 
                         id={day.id} 
                         onClick={
-                            onClickDayButton(day.id, 4)
+                            () => {onClickDayButton(day.id, 4);}
                         }>
                         {day.dateString}
                     </button>
@@ -40,8 +41,16 @@ class MealPlanning extends React.Component
             startDate : null,
             endDate : null,
             focusedInput : null,
-            mealPlan : {}
+            mealPlan : {},
+            modalPlanOneDayIsShown : false
         };
+    }
+
+    componentWillMount()
+    {
+        this.setState (
+            {modalPlanOneDayIsShown : false}
+        );
     }
 
     //Callback for DateRangePicker component. Will loop between start/end date. Will fill a map with dates as key, and content will be recipes for the day
@@ -63,7 +72,7 @@ class MealPlanning extends React.Component
         var mealPlan = new Map();
         for(var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1))
         {
-            console.log(`Looping d:${d}, d string:${d.toDateString()}}`);
+            //console.log(`Looping d:${d}, d string:${d.toDateString()}}`);
             mealPlan[d] = {dateString:d.toDateString(),
                             id: new Date(d)
                         };
@@ -75,7 +84,17 @@ class MealPlanning extends React.Component
     }
 
     onClickDayButton = (id, test) => {
-        console.log(`onClickDayButton: ${id}, ${test}`);
+        //console.log(`onClickDayButton: ${id}, ${test}`);
+        this.setState({
+            modalPlanOneDayIsShown : true
+        });
+    }
+
+    onModalPlanOneDayClose = () => {
+        //console.log("onModalPlanOneDayClose");
+        this.setState({
+            modalPlanOneDayIsShown : false
+        });
     }
 
     render()
@@ -94,7 +113,12 @@ class MealPlanning extends React.Component
             <ButtonsDays
                 mealPlan = {this.state.mealPlan}
                 onClickDayButton = {this.onClickDayButton}
-            />       
+            />
+
+            <PlanOneDay 
+                isShown = {this.state.modalPlanOneDayIsShown}
+                onClose = {this.onModalPlanOneDayClose}
+            />
 
         </div>)
     }
