@@ -2,6 +2,7 @@ import React from 'react';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import {PlanOneDay} from './PlanOneDay.js';
+import {getFromDatabase} from './Database';
 
 //Flow:
 //a.User selects start date
@@ -51,6 +52,14 @@ class MealPlanning extends React.Component
         this.setState (
             {modalPlanOneDayIsShown : false}
         );
+    }
+
+    componentDidMount()
+    {
+        getFromDatabase("recipesInfo", "recipesSelected", (response) => {
+            this.recipesSelected = response;
+            console.log(`MealPlanning database response: ${response}`);
+        });
     }
 
     //Callback for DateRangePicker component. Will loop between start/end date. Will fill a map with dates as key, and content will be recipes for the day
