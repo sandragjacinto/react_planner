@@ -16,7 +16,7 @@ const ButtonsDays = ({mealPlan, onClickDayButton})=>
         <div>
             {Object.keys(mealPlan).map(function(mapKey){
                 var day = mealPlan[mapKey];
-                console.log(`dateString:${day.dateString} key:${day.id}`);
+                //console.log(`dateString:${day.dateString} key:${day.id}`);
                 return (
                     <button 
                         key={day.id} 
@@ -57,8 +57,11 @@ class MealPlanning extends React.Component
     componentDidMount()
     {
         getFromDatabase("recipesInfo", "recipesSelected", (response) => {
-            this.recipesSelected = response;
-            console.log(`MealPlanning database response: ${response}`);
+            this.recipesAvailableForSchedule = response;
+            for(var i in this.recipesAvailableForSchedule)
+            {
+                console.log(`MealPlanning database response: ${this.recipesAvailableForSchedule[i]}`);
+            }
         });
     }
 
@@ -127,6 +130,7 @@ class MealPlanning extends React.Component
             <PlanOneDay 
                 isShown = {this.state.modalPlanOneDayIsShown}
                 onClose = {this.onModalPlanOneDayClose}
+                recipesAvailableForSchedule = {this.recipesAvailableForSchedule}
             />
 
         </div>)

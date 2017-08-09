@@ -11,21 +11,37 @@ export const PlanOneDay = (props) => {
           </Modal.Header>
           <Modal.Body>
             <h4>Choose recipes to be scheduled this day</h4>
-            <p>bla bla.</p>
+              <RecipesToSchedule recipes = {props.recipesAvailableForSchedule}/>
 
             <hr />
           </Modal.Body>
           <Modal.Footer>
             {<button onClick={() => 
                 {
-                    //console.log("trying to close popup");
                     props.onClose();
                 }
-                }>Close</button>}
-            {<button onClick={() => {console.log("close test")}}>whatever</button>}
+                }>Close</button>}           
           </Modal.Footer>
         </Modal>
 
   </div>
+);
+}
+
+const RecipeToSchedule = (props) => {
+return(
+  <li>
+      <h3>{props.element.label}</h3>
+  </li>
+);
+}
+
+const RecipesToSchedule = (props) => {
+return(
+  <ul>
+    {Object.keys(props.recipes).map(function(recipe){
+      return <RecipeToSchedule element = {props.recipes[recipe]}/>;
+    })}
+  </ul>
 );
 }
