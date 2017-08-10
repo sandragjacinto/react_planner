@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import LateralMenu from './LateralMenu.js'
 import DontLikeIm from './../icons/dontlike.png';
 import LikeIm from './../icons/like.png';
 import AlergicIm from './../icons/alergic.png';
