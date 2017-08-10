@@ -6,9 +6,7 @@ const recipesFound = {};
 
 export function searchForRecipes(keyword) {
     //If keyword is already there, return data as a promise
-    if (recipesFound[keyword]) {
-        return Promise.resolve(recipesFound[keyword]);
-    }
+    
     var urlSearch = baseUrlSearch + keyword;
     return fetch(urlSearch)
         .then(function (response) {
