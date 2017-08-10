@@ -27,6 +27,7 @@ const GroceryListItems = (props) => {
 }
 
 class GroceryList extends React.Component {
+    /*
     constructor(props) {
         super(props);
         this.state = {
@@ -63,6 +64,20 @@ class GroceryList extends React.Component {
                 <div className="row">
                     <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
                         <GroceryListItems grocerieList={this.state.grocerieList} />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+*/
+
+    render() {
+        
+        return (
+            <div style={{ textAlign: "center" }}>
+                <div className="row">
+                    <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
+                        <h2>Working in progress...</h2>
                     </div>
                 </div>
             </div>
