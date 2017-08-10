@@ -53,27 +53,10 @@ a.menuButton:hover{
   background: #C5EFE4;
 }
 
-.homepageButton{
-  width:400px;
-  height:250px;
-  border:5px solid white;
-  border-top: 0px;
-}
+
 .homepageButton:hover{
   background: burlywood;
   opacity: 0.5;
-}
-.homepageButton1{
-  background: #D6BAD9;
-}
-.homepageButton2{
-  background: #D5DDF2;
-}
-.homepageButton3{
-  background: #C8E6DD;
-}
-.homepageButton4{
-  background: #F9E7B3;
 }
 
 .menuImgRight{
