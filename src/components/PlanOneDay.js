@@ -40,13 +40,19 @@ return(
 }
 
 const RecipesToSchedule = (props) => {
-return(
-  <ul>
-    {Object.keys(props.recipes).map(function(recipe, index){
-      return <RecipeToSchedule element = {props.recipes[recipe]}  key = {index} onRecipeScheduled = {(recipeName) => {onRecipeScheduled(recipeName)}}/>;
-    })}
-  </ul>
-);
+
+  if(props.recipes != undefined)
+  {
+    return(
+      <ul>
+
+          {Object.keys(props.recipes).map(function(recipe, index){
+            return <RecipeToSchedule element = {props.recipes[recipe]}  key = {index} onRecipeScheduled = {(recipeName) => {onRecipeScheduled(recipeName)}}/>;
+          })}
+      </ul>
+    );
+  }
+
 }
 
 const ScheduledRecipes = ({recipes}) => {

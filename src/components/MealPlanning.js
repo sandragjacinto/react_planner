@@ -2,7 +2,7 @@ import React from 'react';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import {PlanOneDay} from './PlanOneDay.js';
-import {getFromDatabase} from './Database';
+import {getFromDatabase, getFromDatabaseNew} from './Database';
 
 //Flow:
 //a.User selects start date
@@ -56,7 +56,17 @@ class MealPlanning extends React.Component
 
     componentDidMount()
     {
-        getFromDatabase("recipesInfo", "recipesSelected", (response) => {
+        // getFromDatabase("recipesInfo", "recipesSelected", (response) => {
+        //     this.recipesAvailableForSchedule = response;
+        //     for(var i in this.recipesAvailableForSchedule)
+        //     {
+        //         console.log(`MealPlanning database response: ${this.recipesAvailableForSchedule[i]}`);
+        //     }
+        // });
+        console.log("MealPlanning componentDidMount");
+        const dbPath = ["recipesInfo", "recipesSelected"];
+        getFromDatabaseNew(dbPath, (response) => {
+            console.log("getFromDatabaseNew");
             this.recipesAvailableForSchedule = response;
             for(var i in this.recipesAvailableForSchedule)
             {
