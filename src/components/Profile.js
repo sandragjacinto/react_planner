@@ -60,7 +60,7 @@ const PersonalInfo = ({ profileIMG, username, userEmail }) => {
                 <div className='col-md-5 col-xs-12 personalcontainer'>
                     <UserInfo username={username} userEmail={userEmail}/>
                 </div>
-                <div className='col-md-1 col-xs-12'>
+                <div className='col-md-1 col-xs-12' style={{textAlign:'center'}}>
                     <img className=' mapPic' alt='mapPic' src={'http://www.mq.edu.au/__data/assets/image/0010/183556/Campus-Map.png'} />
                 </div>
             </div>

@@ -27,62 +27,54 @@ const GroceryListItems = (props) => {
 }
 
 class GroceryList extends React.Component {
-    /*
     constructor(props) {
         super(props);
         this.state = {
             tempgrocerieList: [],
             grocerieList: [],
+            newtemp : [],
         }
-        
-    }
 
-    componentWillMount() {
         const storeRef = base.database().ref(getUserLoginData().uid);
         storeRef.child('recipesInfo').child('recipesSelected').once('value', (snapshot) => {
             const data = snapshot.val() || {};
-            //console.log(data)
             if (data) {
-            for (var i in data) {
-                var grocerieList = this.state.grocerieList.concat(data[i].ingredientLines)
-                //console.log(data[i].ingredientLines);
+                for (var i in data) {
+                    var grocerieLists = this.state.tempgrocerieList.concat(data[i].ingredientLines)
+                    
+                    //console.log(grocerieLists)
+                }
             }
-            }
-            this.setState({
-                grocerieList: grocerieList,
-            })
+           this.setState({
+                grocerieList: grocerieLists,
+            }) 
+
+            for (var i in (this.state.grocerieList)) {
+                    console.log('test :' + this.state.grocerieList[i])
+                }
+
+                
+
+           // console.log(this.state.grocerieList)
         });
+
     }
-    thi
 
-
-
-    render() {
-        console.log(this.state.grocerieList)
-        return (
-            <div style={{ textAlign: "center" }}>
-                <div className="row">
-                    <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
-                        <GroceryListItems grocerieList={this.state.grocerieList} />
+    
+        render() {
+            
+            return (
+                <div style={{ textAlign: "center" }}>
+                    <div className="row">
+                        <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
+                            <h2>Working in progress...</h2>
+                            <p>{this.state.grocerieList[0]}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
-    }
-*/
-
-    render() {
+            )
+        }
         
-        return (
-            <div style={{ textAlign: "center" }}>
-                <div className="row">
-                    <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
-                        <h2>Working in progress...</h2>
-                    </div>
-                </div>
-            </div>
-        )
-    }
 }
 
 export default GroceryList;
