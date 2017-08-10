@@ -40,7 +40,7 @@ componentWillMount()
     this.setState({
       owner : getUserLoginData().displayName,
       uid : getUserLoginData().uid,
-      isUserLogged : true
+      isUserLogged : true,
     });
   }
 }
@@ -70,11 +70,13 @@ authHandler(err, authData) {
     const data = snapshot.val() || {};
   
     setUserData(authData.user);
-
+    console.log(authData)
     //Add some data to the user...
     if(!data.owner) {
       storeRef.set({
         owner: authData.user.displayName,
+        picture: authData.user.providerData[0].uid,
+        email: authData.user.email,
       });
     }
   
