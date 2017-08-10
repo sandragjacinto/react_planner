@@ -20,9 +20,12 @@ const SearchInput = (props) => {
  
 //Component for single recipe found
 const RecipeFound = (props) => {
-  console.log(`props.bgColor: ${props.bgColor}`);
+  console.log(`props.recipeStatus: ${props.element.recipe.image}`);
+   var text = (props.element.recipe.status !== "selected") ? "Select..." : "Seleted";
+   var isSelected = props.element.recipe.status === "selected";
+   var style = (props.element.recipe.status !== "selected") ? "green" : "red";
    var btnStyle = {
-        backgroundColor: `${props.bgColor}
+        backgroundColor: `${style}
     `};
     return(
        <li className="menu-recipe">
@@ -32,7 +35,7 @@ const RecipeFound = (props) => {
             
         </h3>
         
-        <button style={btnStyle} key={props.index} value={props.index} onClick={function(){return props.onRecipeSelected(props.index, props.element.recipe)}} >Select ...</button>
+        <button style={btnStyle} key={props.index} disabled={isSelected} value={props.index} onClick={function(){return props.onRecipeSelected(props.index, props.element.recipe)}} >{text}</button>
       </li>
 
 
@@ -46,11 +49,27 @@ const RecipeFound = (props) => {
 
 //Component for list of found recipes
 const RecipesFound = (props) =>{
-    console.log(`RecipesFound props.bgColor: ${props.bgColor}`)
+    console.log(`RecipesFound props.recipeStatus: ${props.recipeStatus}`)
     return (    
         <ul>
-            {props.recipesFound.map(function(element, index){
-                {return (<RecipeFound element = {element} index = {index} key = {index} onRecipeSelected = {props.onRecipeSelected} bgColor = {props.bgColor} />)}
+            { 
+                
+                props.recipesFound.map(function(element, index){
+               
+
+
+                //find in selected recipes i f there's any reicpe named like this
+                Object.keys(props.recipesSelected).forEach(function(recipeIndex){
+                    
+                if(props.recipesSelected[recipeIndex].label === element.recipe.label)
+                    {
+                       
+                       element.recipe.status = "selected";
+                       console.log(element);
+                    }
+               });
+ 
+                {return (<RecipeFound  isSelected= {props.recipesFound} recipesSelected = {props.recipesSelected} element = {element} index = {index} key = {index} onRecipeSelected = {props.onRecipeSelected}  />)}
             })}
         </ul>
     )
@@ -90,8 +109,8 @@ class ChooseMyMeal extends React.Component {
             searchWord: "",
             recipesFound:[],
             recipesSelected:{},
-            color_black: true,
-            bgColor: "green"
+            
+            
         }
     }
 
@@ -120,6 +139,8 @@ class ChooseMyMeal extends React.Component {
     //api writes response here. Update state
     onSearchResponse = (response) => {
         //console.log(response);
+
+
         this.setState({recipesFound : response});
     }
 
@@ -134,12 +155,16 @@ class ChooseMyMeal extends React.Component {
         
         //recipeData will be added to the map. Key will be the recipe name
         var recipesSelected = this.state.recipesSelected;
+        var recipesFound = this.state.recipesFound;
          //console.log(this.state.recipesSelected)
         if(!(recipeData.label in recipesSelected))
         {
             recipeData.label = recipeData.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'');
+            recipeData.status = "selected";
             recipesSelected[recipeData.label] = recipeData;
+            recipesFound[recipeData.label] = recipeData;
             this.setState({recipesSelected:recipesSelected});
+            this.setState({recipesFound:recipesFound});
             console.log(this.state.recipesSelected)
             this.info2databasehandler();
         }
@@ -174,10 +199,15 @@ class ChooseMyMeal extends React.Component {
     onRecipeDeselected = (index) => {
         //If recipesSelected does not contain anything, create the map
         var lis = Object.keys(this.state.recipesSelected);
-        var maplist = new Map();
+        var maplist, maplist1 = new Map();
         maplist = this.state.recipesSelected;
+        maplist1 = this.state.recipesFound;
         console.log(`maplist: ${maplist}`);
         console.log(`index: ${index}`);
+        if(maplist1[(lis[index])] != undefined){
+           maplist1[(lis[index])].status = "unselected"; 
+           console.log("changing the nstateeeeeeeeeeeeeeeeeeeeeeeee");
+        };
         delete maplist[(lis[index])];
         
         
@@ -186,6 +216,7 @@ class ChooseMyMeal extends React.Component {
         {
             
             this.setState({recipesSelected : maplist });
+            this.setState({recipesFound : maplist1 });
         }
         this.info2databasehandler();
 /*        {
@@ -210,7 +241,7 @@ class ChooseMyMeal extends React.Component {
                 <div className='card-block'>
                     <h1 className="card-title">Select your recipes</h1>
                     <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton = {this.onClickSearchButton}/>
-                    <RecipesFound bgColor={this.state.bgColor} recipesFound={this.state.recipesFound} onRecipeSelected = {this.onRecipeSelected}/>
+                    <RecipesFound  recipesFound={this.state.recipesFound} recipesSelected = {this.state.recipesSelected} onRecipeSelected = {this.onRecipeSelected}/>
                     
                 </div>
             </div>
