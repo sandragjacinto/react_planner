@@ -10,13 +10,21 @@ export function searchForRecipes(keyword) {
     var urlSearch = baseUrlSearch + keyword;
     return fetch(urlSearch)
         .then(function (response) {
-            return response.json();
+            if(response.ok)
+            {
+                return response.json();
+            }
+            throw new Error("Network response was not ok");
         })
         .then(function (data) {
             recipesFound[keyword] = data.hits;
-            return recipesFound[keyword];
             console.log (data.hits)
+            return recipesFound[keyword];
         })
+        .catch(function(error){
+            console.log(`There has been a problem with the http request: ${error}`);
+        });
+        
 }
 
 

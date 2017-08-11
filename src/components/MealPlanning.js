@@ -1,6 +1,8 @@
 import React from 'react';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
+import {PlanOneDay} from './PlanOneDay.js';
+import {getFromDatabase, getFromDatabaseNew} from './Database';
 
 //Flow:
 //a.User selects start date
@@ -14,13 +16,13 @@ const ButtonsDays = ({mealPlan, onClickDayButton})=>
         <div>
             {Object.keys(mealPlan).map(function(mapKey){
                 var day = mealPlan[mapKey];
-                console.log(`dateString:${day.dateString} key:${day.id}`);
+                //console.log(`dateString:${day.dateString} key:${day.id}`);
                 return (
                     <button 
                         key={day.id} 
                         id={day.id} 
                         onClick={
-                            onClickDayButton(day.id, 4)
+                            () => {onClickDayButton(day.id, 4);}
                         }>
                         {day.dateString}
                     </button>
@@ -40,8 +42,37 @@ class MealPlanning extends React.Component
             startDate : null,
             endDate : null,
             focusedInput : null,
-            mealPlan : {}
+            mealPlan : {},
+            modalPlanOneDayIsShown : false
         };
+    }
+
+    componentWillMount()
+    {
+        this.setState (
+            {modalPlanOneDayIsShown : false}
+        );
+    }
+
+    componentDidMount()
+    {
+        // getFromDatabase("recipesInfo", "recipesSelected", (response) => {
+        //     this.recipesAvailableForSchedule = response;
+        //     for(var i in this.recipesAvailableForSchedule)
+        //     {
+        //         console.log(`MealPlanning database response: ${this.recipesAvailableForSchedule[i]}`);
+        //     }
+        // });
+        console.log("MealPlanning componentDidMount");
+        const dbPath = ["recipesInfo", "recipesSelected"];
+        getFromDatabaseNew(dbPath, (response) => {
+            console.log("getFromDatabaseNew");
+            this.recipesAvailableForSchedule = response;
+            for(var i in this.recipesAvailableForSchedule)
+            {
+                console.log(`MealPlanning database response: ${this.recipesAvailableForSchedule[i]}`);
+            }
+        });
     }
 
     //Callback for DateRangePicker component. Will loop between start/end date. Will fill a map with dates as key, and content will be recipes for the day
@@ -63,7 +94,7 @@ class MealPlanning extends React.Component
         var mealPlan = new Map();
         for(var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1))
         {
-            console.log(`Looping d:${d}, d string:${d.toDateString()}}`);
+            //console.log(`Looping d:${d}, d string:${d.toDateString()}}`);
             mealPlan[d] = {dateString:d.toDateString(),
                             id: new Date(d)
                         };
@@ -75,7 +106,17 @@ class MealPlanning extends React.Component
     }
 
     onClickDayButton = (id, test) => {
-        console.log(`onClickDayButton: ${id}, ${test}`);
+        //console.log(`onClickDayButton: ${id}, ${test}`);
+        this.setState({
+            modalPlanOneDayIsShown : true
+        });
+    }
+
+    onModalPlanOneDayClose = () => {
+        //console.log("onModalPlanOneDayClose");
+        this.setState({
+            modalPlanOneDayIsShown : false
+        });
     }
 
     render()
@@ -94,7 +135,13 @@ class MealPlanning extends React.Component
             <ButtonsDays
                 mealPlan = {this.state.mealPlan}
                 onClickDayButton = {this.onClickDayButton}
-            />       
+            />
+
+            <PlanOneDay 
+                isShown = {this.state.modalPlanOneDayIsShown}
+                onClose = {this.onModalPlanOneDayClose}
+                recipesAvailableForSchedule = {this.recipesAvailableForSchedule}
+            />
 
         </div>)
     }
