@@ -20,7 +20,7 @@ const SearchInput = (props) => {
  
 //Component for single recipe found
 const RecipeFound = (props) => {
-  console.log(`props.recipeStatus: ${props.element.recipe.image}`);
+  
    var text = (props.element.recipe.status !== "selected") ? "Select..." : "Seleted";
    var isSelected = props.element.recipe.status === "selected";
    var style = (props.element.recipe.status !== "selected") ? "green" : "red";
@@ -49,7 +49,7 @@ const RecipeFound = (props) => {
 
 //Component for list of found recipes
 const RecipesFound = (props) =>{
-    console.log(`RecipesFound props.recipeStatus: ${props.recipeStatus}`)
+    
     return (    
         <ul>
             { 
@@ -65,7 +65,7 @@ const RecipesFound = (props) =>{
                     {
                        
                        element.recipe.status = "selected";
-                       console.log(element);
+                       
                     }
                });
  
@@ -115,11 +115,12 @@ class ChooseMyMeal extends React.Component {
     }
 
     onChangeSearchInput = (e) => {
-        console.log(e.keyCode);
+        
         if(e.keyCode == 13){
             this.setState({ searchWord: e.target.value });
+            this.setState({ recipesFound: []});
             this.onClickSearchButton()
-            console.log(`After serching the onClickSearchButton: ${(e.keyCode)}`);
+            
         }
         this.setState({ searchWord: e.target.value });
     }
@@ -127,6 +128,7 @@ class ChooseMyMeal extends React.Component {
     //Once user clicks search button, keyword is passed to DataAPI's searchForRecipes function.
     onClickSearchButton = () => {
         const scope = this;
+        this.setState({ recipesFound: []});
         searchForRecipes(this.state.searchWord)
             .then((response) => {
                  scope.onSearchResponse(response)
@@ -147,7 +149,7 @@ class ChooseMyMeal extends React.Component {
     //Once a recipe is selected, state will be updated
     onRecipeSelected = (index, recipeData) => {
         //If recipesSelected does not contain anything, create the map
-       console.log(this);
+       
         if(Object.keys(this.state.recipesSelected).length === 0)
         {
             this.setState({recipesSelected : new Map()});
@@ -165,14 +167,14 @@ class ChooseMyMeal extends React.Component {
             recipesFound[recipeData.label] = recipeData;
             this.setState({recipesSelected:recipesSelected});
             this.setState({recipesFound:recipesFound});
-            console.log(this.state.recipesSelected)
+            
             this.info2databasehandler();
         }
     }
 
     info2databasehandler(){
         const storeRef = base.database().ref(getUserLoginData().uid);
-        console.log('test ' + storeRef)
+        
         // query the firebase
         storeRef.once('value', (snapshot) => {
             const data = snapshot.val() || {};
@@ -202,8 +204,7 @@ class ChooseMyMeal extends React.Component {
         var maplist, maplist1 = new Map();
         maplist = this.state.recipesSelected;
         maplist1 = this.state.recipesFound;
-        console.log(`maplist: ${maplist}`);
-        console.log(`index: ${index}`);
+        
         if(maplist1[(lis[index])] != undefined){
            maplist1[(lis[index])].status = "unselected"; 
            console.log("changing the nstateeeeeeeeeeeeeeeeeeeeeeeee");
