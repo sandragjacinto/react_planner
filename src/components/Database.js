@@ -1,44 +1,7 @@
 import base from '../base';
 import {getUserLoginData} from './DataUser';
 
-export function getFromDatabase(childName, keyName, onResponse)
-{
-    const storeRef = base.database().ref(getUserLoginData().uid);
-    storeRef.child(childName).once('value', (snapshot) => {
-        const data = snapshot.val() || {};
-        if (data[keyName]) {
-            onResponse(data[keyName]);
-        }
-        else
-        {
-            console.error(`Error in database response for ${childName}, ${keyName}`);
-        }
-    });
-}
-
-// var userId = firebase.auth().currentUser.uid;
-// return firebase.database().ref('/users/' + userId).once('value').
-// then(function(snapshot) {
-//   var username = snapshot.val().username;
-//   // ...
-// });
-
-// export function getFromDatabaseNew(dbPath, onResponse)
-// {
-//     const storeRef = base.database().ref(getUserLoginData().uid);
-//     storeRef.once('value', (snapshot) => {
-//         const data = snapshot.val() || {};
-//         if (data[dbPath]) {
-//             onResponse(data[dbPath]);
-//         }
-//         else
-//         {
-//             console.error(`Error in database response for ${dbPath}`);
-//         }
-//     });
-// }
-
-export function getFromDatabaseNew(dbPath, onResponse)
+export function getFromDatabase(dbPath, onResponse)
 {
     const onError = function(dbPath){console.error(`Error in database response for ${dbPath}`)};
     const storeRef = base.database().ref(getUserLoginData().uid);
