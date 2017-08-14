@@ -2,7 +2,7 @@ import React from 'react';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import {PlanOneDay} from './PlanOneDay.js';
-import {getFromDatabase} from './Database';
+import {getFromDatabase, writeDB} from './Database';
 
 //Flow:
 //a.User selects start date
@@ -39,11 +39,13 @@ class MealPlanning extends React.Component
         super(props);
 
         this.state = {
+            showDatePicker : false,
             startDate : null,
             endDate : null,
             focusedInput : null,
             mealPlan : {},
-            modalPlanOneDayIsShown : false
+            modalPlanOneDayIsShown : false,
+            currentDateToPlan : null
         };
     }
 
@@ -56,10 +58,30 @@ class MealPlanning extends React.Component
 
     componentDidMount()
     {
-        const dbPath = ["recipesInfo", "recipesSelected"];
-        getFromDatabase(dbPath, (response) => {
-            this.recipesAvailableForSchedule = response;
-        });
+        {
+            let dbPath = ["recipesInfo", "recipesSelected"];
+            getFromDatabase(dbPath, (response) => {
+                this.recipesAvailableForSchedule = response;
+            });
+        }
+
+        {
+            let dbPath = ["mealPlan"];
+            getFromDatabase(dbPath, (response) => {
+                if(response != undefined && Object.keys(response).length > 0) 
+                {
+                    console.log("mealplanning , mealPlan data exists");
+                    this.mealPlan = response;
+                }
+                else
+                {
+                    console.log("mealplanning , mealPlan data doesnt exist");
+                    this.setState({showDatePicker : true}); 
+                }
+
+            });
+        }
+
     }
 
     //Callback for DateRangePicker component. Will loop between start/end date. Will fill a map with dates as key, and content will be recipes for the day
@@ -90,6 +112,9 @@ class MealPlanning extends React.Component
         this.setState({
             mealPlan : mealPlan 
         });
+
+        var dbPath = ["mealPlan"];
+        writeDB(dbPath, mealPlan);
     }
 
     onClickDayButton = (id, test) => {
@@ -111,13 +136,18 @@ class MealPlanning extends React.Component
         return(<div>
             <h2>Meal Planning</h2>
 
-            <DateRangePicker
-                startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-                endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-                onDatesChange={this.onStartEndDateChange} // PropTypes.func.isRequired,
-                focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-                onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-            />
+            {
+                this.state.showDatePicker ?
+                    <DateRangePicker
+                        startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                        endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                        onDatesChange={this.onStartEndDateChange} // PropTypes.func.isRequired,
+                        focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                        onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+                    />
+                    :
+                    null
+            }
 
             <ButtonsDays
                 mealPlan = {this.state.mealPlan}
@@ -127,6 +157,7 @@ class MealPlanning extends React.Component
             <PlanOneDay 
                 isShown = {this.state.modalPlanOneDayIsShown}
                 onClose = {this.onModalPlanOneDayClose}
+                dateToPlan = {this.state.currentDateToPlan}
                 recipesAvailableForSchedule = {this.recipesAvailableForSchedule}
             />
 

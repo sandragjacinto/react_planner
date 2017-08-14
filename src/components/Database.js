@@ -1,9 +1,34 @@
 import base from '../base';
 import {getUserLoginData} from './DataUser';
 
+export function writeDB(dbPath, value)
+{    
+    const storeRef = base.database().ref(getUserLoginData().uid);
+
+    if(dbPath.length == 1)
+    {
+        storeRef.once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            storeRef.update({
+                [dbPath[0]] : value,
+                })
+        });
+    }
+    else if(dbPath.length == 2)
+    {
+        storeRef.once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            storeRef.child(dbPath[0]).update({
+                [dbPath[1]] : value,
+                })
+        });
+    }
+        
+}
+
 export function getFromDatabase(dbPath, onResponse)
 {
-    const onError = function(dbPath){console.error(`Error in database response for ${dbPath}`)};
+    const onError = function(dbPath){console.error(`Error in database response, or data doesn't exist, for key ${dbPath}`)};
     const storeRef = base.database().ref(getUserLoginData().uid);
 
     if(dbPath.length == 1)
@@ -15,6 +40,7 @@ export function getFromDatabase(dbPath, onResponse)
         }
         else
         {
+            onResponse(data);
             onError(dbPath);
         }
         });
@@ -28,6 +54,7 @@ export function getFromDatabase(dbPath, onResponse)
         }
         else
         {
+            onResponse(data[dbPath[1]]);
             onError(dbPath);
         }
         });
