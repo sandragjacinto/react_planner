@@ -1,33 +1,53 @@
 import React from 'react';
 import {Modal} from 'react-bootstrap'; //Can import individual features also from 3rd party libs
 
+/////////////////////////////////////////
 ////COMPONENTS
+/////////////////////////////////////////
 //Popup to schedule a day with delicious recipes :)
-export const PlanOneDay = ({isShown, onClose, dateToPlan, recipesAvailableForSchedule}) => {
-    return(
-  <div className="static-modal">
+class PlanOneDayClass extends React.Component
+{
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      mealPlanSingleDay : {}
+    };
+  }
 
-        <Modal show={isShown} onHide={onClose}>
+  onRecipeScheduled(recipeName)
+  {
+
+  }
+
+  render()
+  {
+    console.log("planoneday render " + this.props.mealPlan + this.props.dateToPlan);
+    return(
+        <div className="static-modal">
+
+        <Modal show={this.props.isShown} onHide={this.props.onClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Schedule</Modal.Title>
+            <Modal.Title>Schedule for {this.props.dateToPlan}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Choose recipes to be scheduled on {dateToPlan}</h4>
-              <RecipesToSchedule recipes = {recipesAvailableForSchedule}/>
-
+            <h4>Choose recipes to be scheduled: </h4>
+              <RecipesToSchedule recipes = {this.props.recipesAvailableForSchedule} mealPlanSingleDay = {this.props.mealPlan[this.props.dateToPlan]} onRecipeScheduled = {this.onRecipeScheduled} />
+              <ScheduledRecipes mealPlanSingleDay = {this.props.mealPlan[this.props.dateToPlan]}/>
             <hr />
           </Modal.Body>
           <Modal.Footer>
             {<button onClick={() => 
                 {
-                    onClose();
+                    this.props.onClose();
                 }
                 }>Close</button>}           
           </Modal.Footer>
         </Modal>
 
   </div>
-);
+    );
+  }
 }
 
 const RecipeToSchedule = (props) => {
@@ -55,13 +75,19 @@ const RecipesToSchedule = (props) => {
 
 }
 
-const ScheduledRecipes = ({recipes}) => {
+const ScheduledRecipes = ({mealPlanSingleDay}) => {
+  var keyRecipes = "recipes";
   return (
-    <ul>
-      {recipes.map(function(recipe, index){
-        return <ScheduledRecipe recipe = {recipe} key = {index} onRecipeUnscheduled = {(recipeName) => {onRecipeUnscheduled(recipeName);} }/>;
-      })}
-    </ul>
+    <div>
+        {
+          keyRecipes in mealPlanSingleDay ?
+          mealPlanSingleDay["recipes"].map(function(recipe, index){
+            return <ScheduledRecipe recipe = {recipe} key = {index} onRecipeUnscheduled = {(recipeName) => {onRecipeUnscheduled(recipeName);} }/>;
+          })
+          :
+          <div>No recipes scheduled yet</div>
+        }
+    </div>
   );
 }
 
@@ -74,11 +100,16 @@ const ScheduledRecipe = (props) => {
   );
 }
 
+/////////////////////////////////////////
 ////FUNCTIONS
+/////////////////////////////////////////
 const onRecipeScheduled = (recipeName) => {
   console.log(`onRecipeScheduled: ${recipeName}`);
+
 }
 
 const onRecipeUnscheduled = (recipeName) => {
   console.log(`onRecipeUnscheduled: ${recipeName}`);
 }
+
+export default PlanOneDayClass;

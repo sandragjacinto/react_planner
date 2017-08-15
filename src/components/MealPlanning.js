@@ -1,7 +1,8 @@
 import React from 'react';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
-import {PlanOneDay} from './PlanOneDay.js';
+//import {PlanOneDay} from './PlanOneDay.js';
+import PlanOneDayClass from './PlanOneDay.js';
 import {getFromDatabase, writeDB} from './Database';
 
 //Flow:
@@ -17,7 +18,7 @@ const ButtonsDays = ({mealPlan, onClickDayButton})=>
         <div>
             {Object.keys(mealPlan).map(function(mapKey){
                 var day = mealPlan[mapKey];
-                console.log(`dateString:${day.dateString}`);
+                //console.log(`dateString:${day.dateString}`);
                 return (
                     <button 
                         key={day.dateString} 
@@ -119,10 +120,16 @@ class MealPlanning extends React.Component
     }
 
     onClickDayButton = (date) => {
+
+        console.log("onClickDayButton date:" + date);
+        console.log("onClickDayButton meal plan for date:" + this.state.mealPlan[[date]].dateString);
+
         this.setState({
             modalPlanOneDayIsShown : true,
             currentDateToPlan : date
         });
+
+        this.mealPlanSingleDay = this.state.mealPlan[[date]];
     }
 
     onModalPlanOneDayClose = () => {
@@ -154,15 +161,18 @@ class MealPlanning extends React.Component
                 onClickDayButton = {this.onClickDayButton}
             />
 
-            <PlanOneDay 
+            <PlanOneDayClass 
                 isShown = {this.state.modalPlanOneDayIsShown}
                 onClose = {this.onModalPlanOneDayClose}
                 dateToPlan = {this.state.currentDateToPlan}
                 recipesAvailableForSchedule = {this.recipesAvailableForSchedule}
+                mealPlan = {this.state.mealPlan}
             />
 
         </div>)
     }
 }
+
+//mealPlanSingleDay = {this.state.mealPlan[[this.state.currentDateToPlan]]}
 
 export default MealPlanning;
