@@ -3,7 +3,7 @@ import {Modal} from 'react-bootstrap'; //Can import individual features also fro
 
 ////COMPONENTS
 //Popup to schedule a day with delicious recipes :)
-export const PlanOneDay = ({isShown, onClose, recipesAvailableForSchedule}) => {
+export const PlanOneDay = ({isShown, onClose, dateToPlan, recipesAvailableForSchedule}) => {
     return(
   <div className="static-modal">
 
@@ -12,7 +12,7 @@ export const PlanOneDay = ({isShown, onClose, recipesAvailableForSchedule}) => {
             <Modal.Title>Schedule</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4>Choose recipes to be scheduled this day</h4>
+            <h4>Choose recipes to be scheduled on {dateToPlan}</h4>
               <RecipesToSchedule recipes = {recipesAvailableForSchedule}/>
 
             <hr />

@@ -12,17 +12,18 @@ import {getFromDatabase, writeDB} from './Database';
 
 const ButtonsDays = ({mealPlan, onClickDayButton})=>
 {
+    console.log("ButtonsDays mealPlan:" + mealPlan + " mealPlan keys:" + Object.keys(mealPlan));
     return(
         <div>
             {Object.keys(mealPlan).map(function(mapKey){
                 var day = mealPlan[mapKey];
-                //console.log(`dateString:${day.dateString} key:${day.id}`);
+                console.log(`dateString:${day.dateString}`);
                 return (
                     <button 
-                        key={day.id} 
-                        id={day.id} 
+                        key={day.dateString} 
+                        id={day.dateString} 
                         onClick={
-                            () => {onClickDayButton(day.id, 4);}
+                            () => {onClickDayButton(day.dateString);}
                         }>
                         {day.dateString}
                     </button>
@@ -70,12 +71,12 @@ class MealPlanning extends React.Component
             getFromDatabase(dbPath, (response) => {
                 if(response != undefined && Object.keys(response).length > 0) 
                 {
-                    console.log("mealplanning , mealPlan data exists");
-                    this.mealPlan = response;
+                    console.log("mealPlan response:" + response);
+                    this.setState({mealPlan : response});
                 }
                 else
                 {
-                    console.log("mealplanning , mealPlan data doesnt exist");
+                    console.log("mealPlan response: undefined or empty:" + response);
                     this.setState({showDatePicker : true}); 
                 }
 
@@ -104,8 +105,8 @@ class MealPlanning extends React.Component
         for(var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1))
         {
             //console.log(`Looping d:${d}, d string:${d.toDateString()}}`);
-            mealPlan[d] = {dateString:d.toDateString(),
-                            id: new Date(d)
+            mealPlan[d.toDateString()] = {dateString:d.toDateString(),
+                            recipes: []
                         };
         }
 
@@ -117,15 +118,14 @@ class MealPlanning extends React.Component
         writeDB(dbPath, mealPlan);
     }
 
-    onClickDayButton = (id, test) => {
-        //console.log(`onClickDayButton: ${id}, ${test}`);
+    onClickDayButton = (date) => {
         this.setState({
-            modalPlanOneDayIsShown : true
+            modalPlanOneDayIsShown : true,
+            currentDateToPlan : date
         });
     }
 
     onModalPlanOneDayClose = () => {
-        //console.log("onModalPlanOneDayClose");
         this.setState({
             modalPlanOneDayIsShown : false
         });
