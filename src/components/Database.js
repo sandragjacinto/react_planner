@@ -40,21 +40,22 @@ export function getFromDatabase(dbPath, onResponse)
         }
         else
         {
-            onResponse(data);
+            onResponse(undefined);
             onError(dbPath);
         }
         });
     }
     else if(dbPath.length == 2)
     {
+        console.log("dbPath[0]:" + dbPath[0] + " dbPath[1]:" + dbPath[1]);
         storeRef.child(dbPath[0]).once('value', (snapshot) => {
         const data = snapshot.val();
-        if (data[dbPath[1]]) {
+        if (data && dbPath[1] in data) {
             onResponse(data[dbPath[1]]);
         }
         else
         {
-            onResponse(data[dbPath[1]]);
+            onResponse(undefined);
             onError(dbPath);
         }
         });

@@ -128,8 +128,6 @@ class MealPlanning extends React.Component
             modalPlanOneDayIsShown : true,
             currentDateToPlan : date
         });
-
-        this.mealPlanSingleDay = this.state.mealPlan[[date]];
     }
 
     onModalPlanOneDayClose = () => {
@@ -166,7 +164,7 @@ class MealPlanning extends React.Component
                 onClose = {this.onModalPlanOneDayClose}
                 dateToPlan = {this.state.currentDateToPlan}
                 recipesAvailableForSchedule = {this.recipesAvailableForSchedule}
-                mealPlan = {this.state.mealPlan}
+                mealPlanSingleDay = {this.state.mealPlan[this.state.currentDateToPlan]}
             />
 
         </div>)
