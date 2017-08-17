@@ -17,9 +17,13 @@ const ButtonsDays = ({mealPlan, onClickDayButton})=>
         <div>
             {Object.keys(mealPlan).map(function(mapKey){
                 var day = mealPlan[mapKey];
+                var somethingScheduled = "recipes" in mealPlan[mapKey];
+                var colorStyle = somethingScheduled ? "blue" : "white";
+                var btnStyle = { backgroundColor : `${colorStyle}` };
                 //console.log(`dateString:${day.dateString}`);
                 return (
-                    <button 
+                    <button
+                        style={btnStyle} 
                         key={day.dateString} 
                         id={day.dateString} 
                         onClick={
@@ -59,6 +63,7 @@ class MealPlanning extends React.Component
 
     componentDidMount()
     {
+        console.log("componentDidMount mealplan");
         {
             let dbPath = ["recipesInfo", "recipesSelected"];
             getFromDatabase(dbPath, (response) => {
@@ -123,9 +128,9 @@ class MealPlanning extends React.Component
     }
 
     onModalPlanOneDayClose = () => {
-        this.setState({
-            modalPlanOneDayIsShown : false
-        });
+            this.setState({
+                modalPlanOneDayIsShown : false
+            });
     }
 
     render()

@@ -59,10 +59,11 @@ class PlanOneDayClass extends React.Component
   render()
   {
     //console.log("planoneday render " + this.props.mealPlanSingleDay + this.props.dateToPlan);
+    var scope = this;
     return(
         <div className="static-modal">
 
-        <Modal show={this.props.isShown} onHide={this.props.onClose}>
+        <Modal show={this.props.isShown} onHide={function(){scope.props.onClose()}}>
           <Modal.Header closeButton>
             <Modal.Title>Schedule for {this.props.dateToPlan}</Modal.Title>
           </Modal.Header>
