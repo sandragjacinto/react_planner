@@ -77,6 +77,7 @@ authHandler(err, authData) {
         owner: authData.user.displayName,
         picture: authData.user.providerData[0].uid,
         email: authData.user.email,
+        mealPlan : {}
       });
     }
   
