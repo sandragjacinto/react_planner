@@ -27,9 +27,8 @@
 .lateralmenudiv{
   background: #CEF2E8;
     margin-left: 0px;
-    height: -webkit-calc(100vh);
-  height: -moz-calc(100vh);
-  height: calc(100vh);
+    overflow:scroll;
+   
 }
 .lateralMenu{
   text-align: center;

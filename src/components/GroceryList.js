@@ -1,8 +1,10 @@
 import React from 'react';
+//import { View } from 'react-nlp';
 import base from '../base';
-import LateralMenu from './LateralMenu.js';
+import WordNet from 'node-wordnet';
 import ChooseMyMeal from './ChooseMyMeal.js';
 import { getUserLoginData } from './DataUser';
+
 
 const GroceryListItems = (props) => {
     <div className='row'>
@@ -16,7 +18,7 @@ const GroceryListItems = (props) => {
                             </h4>
                         </div>
                         <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
-                            <button key={index} className="btn btn-danger" value={index} type="button" >x</button>
+                            <button key={index} className="btn btn-danger" value={index} type="button" onClick={props.onClickDelIngredient}>x</button>
                         </div>
                     </div>
                 )
@@ -34,7 +36,7 @@ class GroceryList extends React.Component {
             grocerieList: [],
             newtemp: [],
         }
-
+       
         const storeRef = base.database().ref(getUserLoginData().uid);
         storeRef.child('recipesInfo').child('recipesSelected').once('value', (snapshot) => {
             const data = snapshot.val() || {};
@@ -42,7 +44,7 @@ class GroceryList extends React.Component {
                 for (var i in data) {
                     var tempList = data[i].ingredientLines;
                     var ll = tempList.length
-                    console.log(tempList.length)
+                    //console.log(tempList.length)
                     for (var ing in tempList) {
                         var grocerieLists = this.state.tempgrocerieList.push(tempList[ing])
 
@@ -54,11 +56,65 @@ class GroceryList extends React.Component {
             this.setState({
                 grocerieList: this.state.tempgrocerieList,
             })
-            // console.log(this.state.grocerieList)
+            const storeRef = base.database().ref(getUserLoginData().uid);
+            // query the firebase
+            storeRef.once('value', (snapshot) => {
+                const data = snapshot.val() || {};
+                //Add some data to the user...
+                storeRef.update({
+                    grocerieList: this.state.grocerieList
+                })
+    
+            });
+            
         });
 
     }
 
+    onClickDelIngredient = (reactKey) => {
+        var lis = this.state.grocerieList;
+        lis = this.state.grocerieList.filter((it, indexitem) => {
+            return indexitem !== Number(reactKey.target.value);
+        });
+        this.setState({
+            grocerieList: lis
+        })
+        this.newIngredientListhandler();
+        console.log(lis)
+    }
+
+    newIngredientListhandler() {
+        //grab the user  info 
+        const storeRef = base.database().ref(getUserLoginData().uid);
+        // query the firebase
+        storeRef.once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            //Add some data to the user...
+            storeRef.update({
+                grocerieList: this.state.grocerieList
+            })
+
+        });
+    }
+    
+    /*componentDidMount(){
+        console.log('component did mount')
+
+        const wordnet = require ('node-wordnet')
+        
+       wordnet.lookup('node', function(results) {
+           results.forEach(function(result) {
+               console.log('------------------------------------');
+               console.log(result.synsetOffset);
+               console.log(result.pos);
+               console.log(result.lemma);
+               console.log(result.synonyms);
+               console.log(result.pos);
+               console.log(result.gloss);
+           });
+       });
+
+    }*/
 
     render() {
 
@@ -76,7 +132,7 @@ class GroceryList extends React.Component {
                                         </h4>
                                     </div>
                                     <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
-                                        <button key={index} className="btn btn-danger" value={index} type="button" >x</button>
+                                    <button key={index} className="btn btn-danger" value={index} type="button" onClick={this.onClickDelIngredient}>x</button>
                                     </div>
                                 </div>
                             )
