@@ -19,16 +19,21 @@ class PlanOneDayClass extends React.Component
     var mealPlanSingleDay = this.props.mealPlanSingleDay;
     var keyRecipes = "recipes", keyQuantity = "quantity", keyMealPlan = "mealPlan";
 
-
     if(!(keyRecipes in mealPlanSingleDay))
     {
       mealPlanSingleDay[keyRecipes] = [];
       mealPlanSingleDay[keyQuantity] = {};
     }
 
-    //TODO: for now, only 1 as quantity
-    mealPlanSingleDay[keyRecipes].push(recipeName);
-    mealPlanSingleDay[keyQuantity][recipeName] = 1;
+    if(!mealPlanSingleDay[keyRecipes].includes(recipeName))
+    {
+      mealPlanSingleDay[keyRecipes].push(recipeName);
+      mealPlanSingleDay[keyQuantity][recipeName] = 1;
+    }
+    else
+    {
+      mealPlanSingleDay[keyQuantity][recipeName]++;
+    }
     var dbPath = [keyMealPlan, this.props.dateToPlan];
     writeDB(dbPath, mealPlanSingleDay);
     this.setState({mealPlanSingleDay : mealPlanSingleDay});
@@ -112,7 +117,7 @@ const RecipesToSchedule = (props) => {
 }
 
 const ScheduledRecipes = ({mealPlanSingleDay, onRecipeUnscheduled}) => {
-  var keyRecipes = "recipes";
+  var keyRecipes = "recipes", keyQuantity = "quantity";
   return (
     <ul>
         {
@@ -121,7 +126,7 @@ const ScheduledRecipes = ({mealPlanSingleDay, onRecipeUnscheduled}) => {
             <div>
                 <h4>Scheduled recipes: </h4>
                 {mealPlanSingleDay[keyRecipes].map(function(recipeName, index){
-                  return <ScheduledRecipe recipeName = {recipeName} key = {index} onRecipeUnscheduled = {(recipeName) => {onRecipeUnscheduled(recipeName);} }/>;
+                  return <ScheduledRecipe recipeName = {recipeName} quantity = {mealPlanSingleDay[keyQuantity][recipeName]} key = {index} onRecipeUnscheduled = {(recipeName) => {onRecipeUnscheduled(recipeName);} }/>;
                 })}
             </div>
           )
@@ -132,10 +137,10 @@ const ScheduledRecipes = ({mealPlanSingleDay, onRecipeUnscheduled}) => {
   );
 }
 
-const ScheduledRecipe = ({onRecipeUnscheduled, recipeName}) => {
+const ScheduledRecipe = ({onRecipeUnscheduled, recipeName, quantity}) => {
   return (
     <li>
-      <p>{recipeName}</p>
+      <p>{recipeName} quantity:{quantity}</p>
       <button onClick={function(){return onRecipeUnscheduled(recipeName)}} >Remove</button>
     </li>
   );
