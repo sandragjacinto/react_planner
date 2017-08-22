@@ -12,24 +12,23 @@ import {getFromDatabase, writeDB} from './Database';
 
 const ButtonsDays = ({mealPlan, onClickDayButton})=>
 {
-    console.log("ButtonsDays mealPlan:" + mealPlan + " mealPlan keys:" + Object.keys(mealPlan));
+    //console.log("ButtonsDays mealPlan:" + mealPlan + " mealPlan keys:" + Object.keys(mealPlan));
     return(
         <div>
             {Object.keys(mealPlan).map(function(mapKey){
-                var day = mealPlan[mapKey];
-                var somethingScheduled = "recipes" in mealPlan[mapKey];
-                var colorStyle = somethingScheduled ? "blue" : "white";
+                var mealPlanSingleDay = mealPlan[mapKey];
+                var isSomethingScheduled = "recipes" in mealPlanSingleDay && mealPlanSingleDay["recipes"].length > 0;
+                var colorStyle = isSomethingScheduled ? "blue" : "white";
                 var btnStyle = { backgroundColor : `${colorStyle}` };
-                //console.log(`dateString:${day.dateString}`);
                 return (
                     <button
                         style={btnStyle} 
-                        key={day.dateString} 
-                        id={day.dateString} 
+                        key={mealPlanSingleDay.dateString} 
+                        id={mealPlanSingleDay.dateString} 
                         onClick={
-                            () => {onClickDayButton(day.dateString);}
+                            () => {onClickDayButton(mealPlanSingleDay.dateString);}
                         }>
-                        {day.dateString}
+                        {mealPlanSingleDay.dateString}
                     </button>
                 );
             })}
@@ -63,6 +62,8 @@ class MealPlanning extends React.Component
 
     componentDidMount()
     {
+        //TODO: this can be done in one call!!!
+
         console.log("componentDidMount mealplan");
         {
             let dbPath = ["recipesInfo", "recipesSelected"];

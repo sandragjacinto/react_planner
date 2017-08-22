@@ -121,7 +121,7 @@ const ScheduledRecipes = ({mealPlanSingleDay, onRecipeUnscheduled}) => {
   return (
     <ul>
         {
-          keyRecipes in mealPlanSingleDay ?
+          (keyRecipes in mealPlanSingleDay) && (mealPlanSingleDay[keyRecipes].length > 0) ?
           (
             <div>
                 <h4>Scheduled recipes: </h4>
