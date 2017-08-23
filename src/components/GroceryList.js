@@ -1,10 +1,12 @@
 import React from 'react';
 //import { View } from 'react-nlp';
 import base from '../base';
-import WordNet from 'node-wordnet';
+//import Wordpos from 'wordpos';
+//import fs from 'fs';
 import ChooseMyMeal from './ChooseMyMeal.js';
 import { getUserLoginData } from './DataUser';
 
+//const wordpos = new Wordpos();
 
 const GroceryListItems = (props) => {
     <div className='row'>
@@ -46,6 +48,7 @@ class GroceryList extends React.Component {
                     var ll = tempList.length
                     //console.log(tempList.length)
                     for (var ing in tempList) {
+                      //  var tempNouns = wordpos.getNouns(tempList[ing]);
                         var grocerieLists = this.state.tempgrocerieList.push(tempList[ing])
 
                     }//
@@ -97,24 +100,10 @@ class GroceryList extends React.Component {
         });
     }
     
-    /*componentDidMount(){
-        console.log('component did mount')
+    componentDidMount(){
+      
 
-        const wordnet = require ('node-wordnet')
-        
-       wordnet.lookup('node', function(results) {
-           results.forEach(function(result) {
-               console.log('------------------------------------');
-               console.log(result.synsetOffset);
-               console.log(result.pos);
-               console.log(result.lemma);
-               console.log(result.synonyms);
-               console.log(result.pos);
-               console.log(result.gloss);
-           });
-       });
-
-    }*/
+    }
 
     render() {
 
