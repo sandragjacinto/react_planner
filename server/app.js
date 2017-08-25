@@ -1,7 +1,16 @@
 const express = require('express')
 const app = express()
 const WordPOS = require('wordpos')
+const base = require ('re-base')
 var fs = require('fs')
+
+const rebase = base.createClass({
+    apiKey: "AIzaSyBkMy_KH0GVV_PHPWvjCz1axpLcI88xopU",
+    authDomain: "meal-planner-10fa6.firebaseapp.com",
+    databaseURL: "https://meal-planner-10fa6.firebaseio.com",
+  });
+  
+
 //var grocerylist = require ('GroceryList')
 wordpos = new WordPOS();
 
@@ -20,15 +29,12 @@ app.get('/grocerylist', function (req, res) {
             console.log(food)
         })
     });
-    
+   
 })
 
-app.post('/', function (req, res) {
-    res.send('Got a POST request')
-  })
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(9000, function () {
+  console.log('Example app listening on port 9000!')
 })
 
 
