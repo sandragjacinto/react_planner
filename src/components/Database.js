@@ -29,7 +29,18 @@ export function writeDB(dbPath, value)
 export function getFromDatabase(dbPath, onResponse)
 {
     const onError = function(dbPath){console.error(`Error in database response, or data doesn't exist, for key ${dbPath}`)};
+    // var storeRef = {};
+    // try
+    // {
+    //     storeRef = base.database().ref(getUserLoginData().uid);
+    // }
+    // catch(e)
+    // {
+    //     console.error("Login error", e);
+    // }
+    
     const storeRef = base.database().ref(getUserLoginData().uid);
+    console.log("Database login:", getUserLoginData().uid);
 
     if(dbPath.length == 1)
     {

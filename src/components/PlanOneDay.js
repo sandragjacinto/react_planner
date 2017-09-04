@@ -65,29 +65,30 @@ class PlanOneDayClass extends React.Component
   {
     //console.log("planoneday render " + this.props.mealPlanSingleDay + this.props.dateToPlan);
     var scope = this;
+    var dateToPlan = new Date(this.props.dateToPlan);
     return(
         <div className="static-modal">
 
-        <Modal show={this.props.isShown} onHide={function(){scope.props.onClose()}}>
-          <Modal.Header closeButton>
-            <Modal.Title>Schedule for {this.props.dateToPlan}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h4>Choose recipes to be scheduled: </h4>
-              <RecipesToSchedule recipes = {this.props.recipesAvailableForSchedule} mealPlanSingleDay = {this.props.mealPlanSingleDay} onRecipeScheduled = {this.onRecipeScheduled} />
-              <ScheduledRecipes mealPlanSingleDay = {this.props.mealPlanSingleDay} onRecipeUnscheduled = {this.onRecipeUnscheduled}/>
-            <hr />
-          </Modal.Body>
-          <Modal.Footer>
-            {<button onClick={() => 
-                {
-                    this.props.onClose();
-                }
-                }>Close</button>}           
-          </Modal.Footer>
-        </Modal>
+          <Modal show={this.props.isShown} onHide={function(){scope.props.onClose()}}>
+            <Modal.Header closeButton>
+              <Modal.Title>Schedule for {dateToPlan.toDateString()}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <h4>Choose recipes to be scheduled: </h4>
+                <RecipesToSchedule recipes = {this.props.recipesAvailableForSchedule} mealPlanSingleDay = {this.props.mealPlanSingleDay} onRecipeScheduled = {this.onRecipeScheduled} />
+                <ScheduledRecipes mealPlanSingleDay = {this.props.mealPlanSingleDay} onRecipeUnscheduled = {this.onRecipeUnscheduled}/>
+              <hr />
+            </Modal.Body>
+            <Modal.Footer>
+              {<button onClick={() => 
+                  {
+                      this.props.onClose();
+                  }
+                  }>Close</button>}           
+            </Modal.Footer>
+          </Modal>
 
-  </div>
+        </div>
     );
   }
 }
