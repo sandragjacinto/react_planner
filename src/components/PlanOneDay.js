@@ -94,7 +94,7 @@ const RecipeToSchedule = (props) => {
 return(
   <li>
       <p>{props.element.label}</p>
-      <button value={props.index} onClick={function(){return props.onRecipeScheduled(props.recipeUid)}} >Select</button>
+      <button onClick={function(){return props.onRecipeScheduled(props.recipeUid)}} >Select</button>
   </li>
 );
 }
@@ -124,7 +124,7 @@ const ScheduledRecipes = ({mealPlanSingleDay, onRecipeUnscheduled, recipesAvaila
           (
             <div>
                 <h4>Scheduled recipes: </h4>
-                {mealPlanSingleDay[keyRecipes].map(function(recipeUid, index){
+                {mealPlanSingleDay[keyRecipes].map(function(recipeUid){
                   return <ScheduledRecipe recipeName = {recipesAvailableForSchedule[recipeUid].label} quantity = {mealPlanSingleDay[keyQuantity][recipeUid]} key = {recipeUid} recipeUid = {recipeUid} onRecipeUnscheduled = {(recipeName) => {onRecipeUnscheduled(recipeName);} }/>;
                 })}
             </div>
