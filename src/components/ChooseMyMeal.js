@@ -61,7 +61,7 @@ const RecipesFound = (props) =>{
                 //find in selected recipes i f there's any reicpe named like this
                 Object.keys(props.recipesSelected).forEach(function(recipeIndex){
                     
-                if(props.recipesSelected[recipeIndex].label === element.recipe.label)
+                if(props.recipesSelected[recipeIndex].uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'') === element.recipe.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,''))
                     {
                        
                        element.recipe.status = "selected";
@@ -159,12 +159,12 @@ class ChooseMyMeal extends React.Component {
         var recipesSelected = this.state.recipesSelected;
         var recipesFound = this.state.recipesFound;
          //console.log(this.state.recipesSelected)
-        if(!(recipeData.label in recipesSelected))
+        if(!(recipeData.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'') in recipesSelected))
         {
             recipeData.label = recipeData.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'');
             recipeData.status = "selected";
-            recipesSelected[recipeData.label] = recipeData;
-            recipesFound[recipeData.label] = recipeData;
+            recipesSelected[recipeData.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'')] = recipeData;
+            recipesFound[recipeData.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'')] = recipeData;
             this.setState({recipesSelected:recipesSelected});
             this.setState({recipesFound:recipesFound});
             
