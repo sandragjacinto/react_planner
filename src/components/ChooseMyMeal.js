@@ -59,9 +59,9 @@ const RecipesFound = (props) =>{
 
 
                 //find in selected recipes i f there's any reicpe named like this
-                Object.keys(props.recipesSelected).forEach(function(recipeIndex){
+                Object.keys(props.recipesSelected).forEach(function(recipeUid){
                     
-                if(props.recipesSelected[recipeIndex].uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'') === element.recipe.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,''))
+                if(recipeUid=== element.recipe.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,''))
                     {
                        
                        element.recipe.status = "selected";
@@ -158,13 +158,14 @@ class ChooseMyMeal extends React.Component {
         //recipeData will be added to the map. Key will be the recipe name
         var recipesSelected = this.state.recipesSelected;
         var recipesFound = this.state.recipesFound;
+        var recipeUid = recipeData.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'');
          //console.log(this.state.recipesSelected)
-        if(!(recipeData.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'') in recipesSelected))
+        if(!(recipeUid in recipesSelected))
         {
             recipeData.label = recipeData.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'');
             recipeData.status = "selected";
-            recipesSelected[recipeData.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'')] = recipeData;
-            recipesFound[recipeData.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'')] = recipeData;
+            recipesSelected[recipeUid] = recipeData;
+            recipesFound[recipeUid] = recipeData;
             this.setState({recipesSelected:recipesSelected});
             this.setState({recipesFound:recipesFound});
             
