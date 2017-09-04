@@ -15,7 +15,6 @@ class PlanOneDayClass extends React.Component
 
   onRecipeScheduled = (recipeUid) =>
   {
-    //console.log("PlanOneDayClass.onRecipeScheduled: " + recipeUid);
     var mealPlanSingleDay = this.props.mealPlanSingleDay;
     var keyRecipes = "recipes", keyQuantity = "quantity", keyMealPlan = "mealPlan";
 
@@ -40,8 +39,6 @@ class PlanOneDayClass extends React.Component
   }
 
   onRecipeUnscheduled = (recipeUid) => {
-    console.log("onRecipeUnscheduled:" + recipeUid);
-    
     //Unscheduled from state
     var keyRecipes = "recipes", keyQuantity = "quantity", keyMealPlan = "mealPlan";
     var mealPlanSingleDay = this.props.mealPlanSingleDay;
@@ -109,7 +106,7 @@ const RecipesToSchedule = (props) => {
     return(
       <ul>
           {Object.keys(props.recipes).map(function(recipeUid){            
-              return <RecipeToSchedule element = {props.recipes[recipeUid]}  key = {recipeUid} uId = {recipeUid} onRecipeScheduled = {props.onRecipeScheduled}/>;
+              return <RecipeToSchedule element = {props.recipes[recipeUid]}  key = {recipeUid} recipeUid = {recipeUid} onRecipeScheduled = {props.onRecipeScheduled}/>;
           })}
       </ul>
     );
@@ -119,6 +116,7 @@ const RecipesToSchedule = (props) => {
 
 const ScheduledRecipes = ({mealPlanSingleDay, onRecipeUnscheduled, recipesAvailableForSchedule}) => {
   var keyRecipes = "recipes", keyQuantity = "quantity";
+
   return (
     <ul>
         {
