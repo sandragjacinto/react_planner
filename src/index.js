@@ -29,10 +29,10 @@ const router = (
         <App>
             <div>
                 <div className='row'>
-                    <div className="lateralmenudiv  ">
+                    <div >
                         <LateralMenu />
                     </div>
-                    <div className="col-md-10 col-md-offset-1 col-xs-12">
+                    <div className="appBody col-md-12 col-xs-12">
                         <Route exact path="/" component={HomePage}></Route>
                         <Route exact path="/homepage" component={HomePage}></Route>
                         <Route path="/choosemymeal" component={ChooseMyMeal}></Route>

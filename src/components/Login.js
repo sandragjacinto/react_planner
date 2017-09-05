@@ -98,11 +98,15 @@ renderLogin() {
       <br></br>
       <br></br>
       <br></br>
-      <div className="jumbotron">  
+      <div >  
     <h2>LOGIN TO START YOUR ADVENTURE</h2>
     <button className='btn btn-danger'
       onClick={() => this.authenticate('facebook')}>LogIn </button>
+      
       </div>
+      <br></br>
+      <br></br>
+      <br></br>
     </div>
   )
 }
@@ -139,7 +143,7 @@ if(this.state.isUserLogged == false) {
      <br></br>
       <br></br>
       <br></br>
-     <div className="jumbotron">
+     <div >
        <h1> Welcome</h1>
         <h2>{this.getFirstName()} </h2>
         {logout }
