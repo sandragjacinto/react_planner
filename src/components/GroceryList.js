@@ -1,12 +1,10 @@
+// feature that allows for presenting (print) the grocery list
+// get the filtered list from express node
+
 import React from 'react';
-//import { View } from 'react-nlp';
 import base from '../base';
-//import Wordpos from 'wordpos';
-//import fs from 'fs';
 import ChooseMyMeal from './ChooseMyMeal.js';
 import { getUserLoginData } from './DataUser';
-
-//const wordpos = new Wordpos();
 
 const GroceryListItems = (props) => {
     <div className='row'>
@@ -72,6 +70,8 @@ class GroceryList extends React.Component {
             
         });
 
+        
+
     }
 
     onClickDelIngredient = (reactKey) => {
@@ -100,10 +100,25 @@ class GroceryList extends React.Component {
         });
     }
     
-    componentDidMount(){
-      
-
-    }
+    componentDidMount() {
+        console.log('fetch0')
+        return fetch('http://localhost:3000/grocerylist')
+        console.log('fetch1')
+          .then((response) => response.json())
+          .then((responseJson) => {
+              console.log('fetch')
+           // let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+            //this.setState({
+             // isLoading: false,
+              //dataSource: ds.cloneWithRows(responseJson.movies),
+            //}, function() {
+              // do something with new state
+           // });
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
 
     render() {
 
