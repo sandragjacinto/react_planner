@@ -45,7 +45,7 @@ class GroceryList extends React.Component {
             if (data) {
                 for (var i in data) {
                     var tempList = data[i].ingredientLines;
-                    var ll = tempList.length
+                    //var ll = tempList.length
                     //console.log(tempList.length)
                     for (var ing in tempList) {
                       //  var tempNouns = wordpos.getNouns(tempList[ing]);
