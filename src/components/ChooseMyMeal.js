@@ -109,6 +109,7 @@ class ChooseMyMeal extends React.Component {
             searchWord: "",
             recipesFound:[],
             recipesSelected:{},
+            dontLike:[],
             
             
         }
@@ -140,10 +141,28 @@ class ChooseMyMeal extends React.Component {
 
     //api writes response here. Update state
     onSearchResponse = (response) => {
-        //console.log(response);
+        console.log(response);
+       var ingredients = response.map(function(recipe) {
+          return recipe.recipe.ingredients;
+       })
+       var dontlike = this.state.dontLike;
+      console.log(dontlike); 
+     
+var ingredientsf = response.map(function(recipe) {
+          return recipe.recipe.ingredients.map(function(ingredientes){
+             console.log(ingredientes.text);
+             return ingredientes.text.indexOf(dontlike.map(function(dontlike){
+               console.log(dontlike);
+               return dontlike;
 
+          }));
+          })
+       })
+
+       console.log(ingredientsf);
 
         this.setState({recipesFound : response});
+
     }
 
     //Once a recipe is selected, state will be updated
@@ -158,6 +177,7 @@ class ChooseMyMeal extends React.Component {
         //recipeData will be added to the map. Key will be the recipe name
         var recipesSelected = this.state.recipesSelected;
         var recipesFound = this.state.recipesFound;
+
         var recipeUid = recipeData.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g,'');
          //console.log(this.state.recipesSelected)
         if(!(recipeUid in recipesSelected))
@@ -192,7 +212,18 @@ class ChooseMyMeal extends React.Component {
             const data = snapshot.val() || {};
             if (data.recipesSelected) {
                 this.setState({
-                   recipesSelected : data.recipesSelected
+                   recipesSelected : data.recipesSelected,
+                   })
+            }
+        
+        });
+
+        storeRef.child('restricitons').once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            
+            if (data.dontlike) {
+                this.setState({
+                   dontLike: data.dontlike,
                 })
             }
         });
