@@ -20,7 +20,7 @@ class PlanOneDayClass extends React.Component
 
     if(!(keyRecipes in mealPlanSingleDay) || !(keyQuantity in mealPlanSingleDay))
     {
-      console.log("onRecipeScheduled creating fields. mealPlanSingleDay:", mealPlanSingleDay);
+      //console.log("onRecipeScheduled creating fields. mealPlanSingleDay:", mealPlanSingleDay);
       mealPlanSingleDay[keyRecipes] = [];
       mealPlanSingleDay[keyQuantity] = {};
     }
