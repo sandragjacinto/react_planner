@@ -3,6 +3,7 @@ import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'rea
 import 'react-dates/lib/css/_datepicker.css';
 import PlanOneDayClass from './PlanOneDay.js';
 import {getFromDatabase, writeDB} from './Database';
+import DialogMessage from './DialogMessage';
 
 //Flow:
 //a.componentDidMount loads "mealPlan" and "recipesSelected" from db into state
@@ -12,24 +13,35 @@ import {getFromDatabase, writeDB} from './Database';
 
 const ButtonsDays = ({mealPlan, onClickDayButton})=>
 {
-    console.log("ButtonsDays mealPlan:" + mealPlan + " mealPlan keys:" + Object.keys(mealPlan));
+    //console.log("ButtonsDays mealPlan:" + mealPlan + " mealPlan keys:" + Object.keys(mealPlan));
+    var mealPlanDates = Object.keys(mealPlan);
+    // var today = new Date();
+    // var isOldSchedule = today > mealPlanDates[mealPlanDates.length - 1];
+    // if( mealPlanDates.length > 0 && isOldSchedule)
+    // {
+    //     //TODO - reset schedule if it's already passed
+    //     //return null;
+    // }
+
+    //console.log("Today:", today.toDateString());
     return(
         <div>
-            {Object.keys(mealPlan).map(function(mapKey){
-                var day = mealPlan[mapKey];
-                var somethingScheduled = "recipes" in mealPlan[mapKey];
-                var colorStyle = somethingScheduled ? "blue" : "white";
-                var btnStyle = { backgroundColor : `${colorStyle}` };
-                //console.log(`dateString:${day.dateString}`);
+            {mealPlanDates.map(function(date){
+                //console.log("DATE KEY:", mapKey, "DATE", mealPlan[mapKey].toDateString());
+                var mealPlanSingleDay = mealPlan[date];
+                var isSomethingScheduled = "recipes" in mealPlanSingleDay && mealPlanSingleDay["recipes"].length > 0;
+                var colorStyle = isSomethingScheduled ? "blue" : "white";
+                var btnStyle = { backgroundColor : `${colorStyle}`,
+                class : 'btn btn-primary' };
                 return (
                     <button
                         style={btnStyle} 
-                        key={day.dateString} 
-                        id={day.dateString} 
+                        key={date} 
+                        id={date} 
                         onClick={
-                            () => {onClickDayButton(day.dateString);}
+                            () => {onClickDayButton(date);}
                         }>
-                        {day.dateString}
+                        {mealPlanSingleDay.dateString}
                     </button>
                 );
             })}
@@ -50,7 +62,11 @@ class MealPlanning extends React.Component
             focusedInput : null,
             mealPlan : {},
             modalPlanOneDayIsShown : false,
-            currentDateToPlan : null
+            currentDateToPlan : null,
+            messagePopupIsShown : false,
+            messagePopupContent : "",
+            messagePopupStyle : {},
+            contentCanBeDisplayed : false
         };
     }
 
@@ -63,11 +79,24 @@ class MealPlanning extends React.Component
 
     componentDidMount()
     {
-        console.log("componentDidMount mealplan");
+        //TODO: this can be done in one call!!!
         {
             let dbPath = ["recipesInfo", "recipesSelected"];
             getFromDatabase(dbPath, (response) => {
-                this.recipesAvailableForSchedule = response;
+                if(response)
+                {
+                    this.recipesAvailableForSchedule = response;
+                    this.messagePopupIsShown = false;
+                    this.messagePopupContent = "";
+                    this.contentCanBeDisplayed = true;
+                }
+                else
+                {
+                    console.log("componentDidMount response undefined");
+                    this.messagePopupIsShown = true;
+                    this.messagePopupContent = "First select favorite recipes";
+                    this.contentCanBeDisplayed = false;
+                }
             });
         }
 
@@ -107,9 +136,9 @@ class MealPlanning extends React.Component
         for(var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1))
         {
             //console.log(`Looping d:${d}, d string:${d.toDateString()}}`);
-            mealPlan[d.toDateString()] = {dateString:d.toDateString(),
-                            recipes: []
-                        };
+            mealPlan[Number(d)] = {dateString:d.toDateString(),
+                recipes: []
+            };
         }
 
         this.setState({
@@ -164,6 +193,11 @@ class MealPlanning extends React.Component
                 mealPlanSingleDay = {this.state.mealPlan[this.state.currentDateToPlan]}
             />
 
+            <DialogMessage
+                isShown = {this.state.messagePopupIsShown}
+                content = {this.state.messagePopupContent}
+                style = {this.state.messagePopupStyle}
+            />
         </div>)
     }
 }
