@@ -8,7 +8,7 @@ import grocery from './../icons/cart.png';
 
 const LateralMenu = (props) => (
     <div className=' lateralMenu lateralmenudiv'>
-         <br /> <br />
+         
         <Link to = '/homepage' className='btn btn-default btn-md menuButton'>HOME PAGE</Link>
         <Link to= '/profile' className='btn btn-default btn-md menuButton'>PROFILE</Link>
         <Link to= '/choosemymeal' className='btn btn-default btn-md menuButton'>CHOOSE MY MEAL</Link>

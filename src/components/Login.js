@@ -1,3 +1,6 @@
+// Manage Log In
+// shows a button and introduction for Log In
+
 import React from 'react';
 import base from '../base';
 import {isUserLogged} from './DataUser';
@@ -91,12 +94,22 @@ authHandler(err, authData) {
 
 renderLogin() {
   return(
-    <nav >
-    <h2>Sing in to manage your recipes</h2>
-    <button 
-      onClick={() => this.authenticate('facebook')}>Log in with Facebook</button>
-    </nav>
+    <div >
+      <br></br>
+      <br></br>
+      <br></br>
+      <div className="jumbotron">  
+    <h2>LOGIN TO START YOUR ADVENTURE</h2>
+    <button className='btn btn-danger'
+      onClick={() => this.authenticate('facebook')}>LogIn </button>
+      </div>
+    </div>
   )
+}
+
+getFirstName(){
+  var nameString = this.state.owner;
+  return nameString.split(" ")[0];
 }
 
 renderHomePage() {
@@ -112,19 +125,28 @@ renderHomePage() {
 
 render(){
 //console.log("display name:" + getUserLoginData().displayName);
-const logout = <button onClick={() =>  this.logout()}>Log Out!</button>;
+const logout = <button className='btn btn-danger' onClick={() =>  this.logout()}>Log Out!</button>;
 // Check if they are log in...
 if(this.state.isUserLogged == false) {
 //if(!isUserLogged()) {
-  return <div>{this.renderLogin()} {this.state.isUserLogged}</div>
+  return <div>
+    {this.renderLogin()}
+  </div>
 }
-  console.log("render Hello element");
+
   return(
-    <nav>
-     {/*<p>Hello ... <h2>{this.state.owner}</h2></p>*/}
-     <div>Hello ... <h2>{this.state.owner} {this.state.isUserLogged}</h2></div>
-     {logout }
-    </nav>
+    <div>
+     <br></br>
+      <br></br>
+      <br></br>
+     <div className="jumbotron">
+       <h1> Welcome</h1>
+        <h2>{this.getFirstName()} </h2>
+        {logout }
+        </div>
+     <h2> You can start planning by clicking on Choose My Meal </h2>
+
+    </div>
   )
 }
 }
