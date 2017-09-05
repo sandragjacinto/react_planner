@@ -1,34 +1,35 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
+import base from '../base';
+import {isUserLogged} from './DataUser';
+import {getUserLoginData} from './DataUser';
+import {setUserData} from './DataUser';
 import DontLikeIm from './../icons/dontlike.png';
 import LikeIm from './../icons/like.png';
 import AlergicIm from './../icons/alergic.png';
 import CanNotIm from './../icons/cannot.png';
 
-const profileIMG = 'http://en.cubadebate.cu/files/2012/10/chavez3.jpg';
-const userID = {
-    userName: 'Chavez2017',
-    userEmail: 'yosoychavez2017@gmail.com',
-    tutorName: 'Pedro Pena'
-}
+
+
 //gets user info and jsx
-const UserInfo = (userinfo) => {
+const UserInfo = (props) => {
+    console.log('name :'+props.owner)
     return (
         <div>
 
             <div className='row profileInfo'>
                 <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h3> User Name: {userinfo.userinfo.userName}</h3>
+                    <h3> User Name: {props.username}</h3>
                 </div>
             </div>
             <div className='row profileInfo'>
                 <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h4> Email: {userinfo.userinfo.userEmail}</h4>
+                    <h4> Email: {props.userEmail}</h4>
                 </div>
             </div>
             <div className='row profileInfo'>
                 <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h4> Tutor: {userinfo.userinfo.tutorName}</h4>
+                    <h4> Tutor: {props.tutorName}</h4>
                 </div>
             </div>
             
@@ -37,25 +38,29 @@ const UserInfo = (userinfo) => {
     )
 }
 //loads image for profile
-const LoadProfileIm = (profileIMG) => {
+const LoadProfileIm = (props) => {
+    var startLink = "https://graph.facebook.com/";
+    var dim = "/picture?height=166"
+    var IimUID = props.profileIMG;
+    var imLink = startLink + IimUID +dim;
     return (
         <div>
-            <img className=' profilePic' alt='profilepic' src={profileIMG.profileIMG} />
+            <img className=' profilePic' alt='profilepic' src={imLink} />
         </div>
     )
 }
 //reassembles image and user info
-const PersonalInfo = ({ profileIMG, userinfo }) => {
+const PersonalInfo = ({ profileIMG, username, userEmail }) => {
     return (
         <div className='container userPhoto'>
             <div className='row'>
-                <div className='col-md-2 col-xs-12'>
+                <div className='col-md-3 col-md-offset-1 col-xs-12'>
                     <LoadProfileIm profileIMG={profileIMG} />
                 </div>
                 <div className='col-md-5 col-xs-12 personalcontainer'>
-                    <UserInfo userinfo={userID} />
+                    <UserInfo username={username} userEmail={userEmail}/>
                 </div>
-                <div className='col-md-1 col-xs-12'>
+                <div className='col-md-1 col-xs-12' style={{textAlign:'center'}}>
                     <img className=' mapPic' alt='mapPic' src={'http://www.mq.edu.au/__data/assets/image/0010/183556/Campus-Map.png'} />
                 </div>
             </div>
@@ -93,6 +98,33 @@ const CreateButtons = (props) => {
 }
 
 class Profile extends React.Component {
+     constructor(props) {
+        super(props);
+        this.state = {
+            owner: '',
+            picture: '',
+            userEmail: '',
+            tutorName: 'Pedro Pena'
+        }
+        
+    }
+
+    componentWillMount()
+  {
+      const storeRef = base.database().ref(getUserLoginData().uid);
+       storeRef.once('value',(snapshot) => {
+            const data = snapshot.val() || {};
+            if (data) {
+                this.setState({
+                    owner:  data.owner,
+                   picture : data.picture,
+                   userEmail : data.email
+                })
+            }
+            console.log(this.state.picture)
+        });
+  }
+
 
     render() {
         return (
@@ -101,7 +133,7 @@ class Profile extends React.Component {
                
                     <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
 
-                        <PersonalInfo profileIMG={profileIMG} userinfo={userID} />
+                        <PersonalInfo profileIMG={this.state.picture} username={this.state.owner} userEmail={this.state.userEmail} />
 
                         <CreateButtons />
 
