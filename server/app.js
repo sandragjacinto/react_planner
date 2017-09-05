@@ -1,7 +1,7 @@
 // get the list of all ingredients from the chosen meals
 // filter what is food from what is not food
 // return final just food list
-
+/*
 const express = require('express');
 const app = express();
 const WordPOS = require('wordpos');
@@ -45,3 +45,4 @@ app.listen(9000, function () {
 
 
 module.exports = app;
+*/
