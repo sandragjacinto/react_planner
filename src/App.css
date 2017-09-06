@@ -203,7 +203,8 @@ a.menuButton:hover{
 }
 
 .menu-recipe {
-  margin-bottom: 5px;
+  padding: 0 !important;
+  margin: 0 !important;
   clear: both;
   overflow: hidden;
   background-size: 100%;

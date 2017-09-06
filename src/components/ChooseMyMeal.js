@@ -30,7 +30,7 @@ const RecipeFound = (props) => {
     `};
     return (
 
-        <div className="col-md-3 col-xs-12">
+        <div className="col-md-4 col-xs-12">
             <ul className="menu-recipe" style={{ backgroundImage: `url(${props.element.recipe.image})` }}>
                 <button className='btn btn-primary menu-recipe-button' style={btnStyle} key={props.index} disabled={isSelected} value={props.index} onClick={function () { return props.onRecipeSelected(props.index, props.element.recipe) }} >{text}</button>
                 <br></br>
@@ -85,7 +85,7 @@ const RecipesFound = (props) => {
 //Component for single selected recipe
 const SelectedRecipe = props => {
     return (
-        <div className="col-md-3 col-xs-12">
+        <div className="col-md-4 col-xs-12">
             <ul className="menu-recipe" style={{ backgroundImage: `url(${props.element.image})` }}>
                 <button className="btn btn-danger menu-recipe-button" key={props.index} value={props.index} onClick={function () { return props.onRecipeDeselected(props.index, props.element.recipe) }} ><img style={{ width: '30px' }} src={garbage} /></button>
                 <br></br>
