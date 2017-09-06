@@ -126,7 +126,11 @@ class Login extends React.Component {
         
         </section>
         <section className='explainApp'>
-        <img className='arrowIm' alt='loginIm' src={arrow} /> <h1 className='explainApph1'>THE MEAL PLANNER</h1>
+        <Link to={'#explainAppbodysection'} >
+                             <img className='arrowIm' alt='loginIm' src={arrow} /> <h1 className='explainApph1'>THE MEAL PLANNER</h1>
+
+                        </Link>
+       
           <div className='row explainAppbodysection'>
             <div className='col-md-5 col-md-offset-1 explainAppbody'>
               <h2>CHOOSE YOUR MEALS</h2>
