@@ -5,6 +5,7 @@ import { isUserLogged } from './DataUser';
 import { getUserLoginData } from './DataUser';
 import { Link } from 'react-router-dom'
 import { Tabs, Tab } from 'react-bootstrap'
+import garbage from './../icons/whiteTrash.png'
 
 //User enters keyword here
 const SearchInput = (props) => {
@@ -77,15 +78,18 @@ const RecipesFound = (props) => {
 //Component for single selected recipe
 const SelectedRecipe = props => {
     return (
-        <li className="menu-recipe" >
-            <img src={props.element.image} alt={props.element.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')} />
-            <h3 className="recipe-name">
-                {props.element.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')}
-            </h3>
-
-            <button key={props.index} value={props.index} onClick={function () { return props.onRecipeDeselected(props.index, props.element.recipe) }} >Remove ...</button>
-        </li>
-
+        <div className = "col-md-3 col-xs-12">
+            <li className="menu-recipe" style={{backgroundImage:`url(${props.element.image})`}}>
+                <button className = "btn btn-danger menu-recipe-button" key={props.index} value={props.index} onClick={function () { return props.onRecipeDeselected(props.index, props.element.recipe) }} ><img style = {{width:'30px'}} src = {garbage}/></button>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <h5 className="recipe-name bodyText">
+                    {props.element.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')}
+                </h5>
+            </li>
+        </div>
     )
 }
 
@@ -93,11 +97,13 @@ const SelectedRecipe = props => {
 const SelectedRecipes = (props) => {
     //As props.recipesSelected is a map object and not an array, map method can not be used here directly. Instead, Object.keys() returns an array of the keys, which can then be used to map stuff  
     return (
-        <ul >
-            {Object.keys(props.recipesSelected).map(function (key, index) {
-                return <SelectedRecipe element={props.recipesSelected[key]} index={index} key={index} onRecipeDeselected={props.onRecipeDeselected} />
-            })}
-        </ul>
+        <div className = "row">
+            <ul >
+                {Object.keys(props.recipesSelected).map(function (key, index) {
+                    return <SelectedRecipe element={props.recipesSelected[key]} index={index} key={index} onRecipeDeselected={props.onRecipeDeselected} />
+                })}
+            </ul>
+        </div>
     )
 }
 

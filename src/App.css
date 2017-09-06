@@ -210,6 +210,7 @@ a.menuButton:hover{
   margin-bottom: 5px;
   clear: both;
   overflow: hidden;
+  background-size: 100%;
 }
 .menu-recipe p {
   margin: 0;
@@ -234,12 +235,16 @@ a.menuButton:hover{
           justify-content: flex-end;
 }
 .menu-recipe img {
-  float: left;
-  width: 80px;
-  height: 80px;
-  margin-right: 1rem;
+  width: 100%;
 }
-
+.menu-recipe-button
+{
+  margin:0px;
+  padding:0px;
+  top:0;
+  right:15px;
+  position:absolute;
+}
 button,
 input[type=submit] {
   text-transform: uppercase;
