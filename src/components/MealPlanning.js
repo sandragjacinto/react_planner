@@ -30,12 +30,13 @@ const ButtonsDays = ({mealPlan, onClickDayButton})=>
                 //console.log("DATE KEY:", mapKey, "DATE", mealPlan[mapKey].toDateString());
                 var mealPlanSingleDay = mealPlan[date];
                 var isSomethingScheduled = "recipes" in mealPlanSingleDay && mealPlanSingleDay["recipes"].length > 0;
-                var colorStyle = isSomethingScheduled ? "blue" : "white";
+                var colorStyle = isSomethingScheduled ? "#F18830" : "#B1EAF1";
                 var btnStyle = { backgroundColor : `${colorStyle}`,
-                class : 'btn btn-primary' };
+                class : 'btn btn-primary' ,
+                fontFamily :'Oswald'};
                 return (
                     <button
-                        style={btnStyle} 
+                        style={{btnStyle}} 
                         key={date} 
                         id={date} 
                         onClick={
@@ -166,8 +167,8 @@ class MealPlanning extends React.Component
     {
         return(
         <div className='firstElement'>
-            <h2>Meal Planning</h2>
-
+            <h1 className='titleH1'>Meal Planning</h1>
+            <div className='boddyText'>
             {
                 this.state.showDatePicker ?
                     <DateRangePicker
@@ -199,6 +200,7 @@ class MealPlanning extends React.Component
                 content = {this.state.messagePopupContent}
                 style = {this.state.messagePopupStyle}
             />
+        </div>
         </div>)
     }
 }
