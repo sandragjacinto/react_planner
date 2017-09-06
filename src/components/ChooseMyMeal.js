@@ -107,7 +107,7 @@ const SelectedRecipe = props => {
 const SelectedRecipes = (props) => {
     //As props.recipesSelected is a map object and not an array, map method can not be used here directly. Instead, Object.keys() returns an array of the keys, which can then be used to map stuff  
     return (
-        <div className="row">
+        <div className="row row-no-padding">
             <ul >
                 {Object.keys(props.recipesSelected).map(function (key, index) {
                     return <SelectedRecipe element={props.recipesSelected[key]} index={index} key={index} onRecipeDeselected={props.onRecipeDeselected} />
