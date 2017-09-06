@@ -3,6 +3,7 @@
 
 import React from 'react';
 import base from '../base';
+import { Link } from 'react-router-dom';
 import { isUserLogged } from './DataUser';
 import { getUserLoginData } from './DataUser';
 import { setUserData } from './DataUser';
@@ -123,14 +124,14 @@ class Login extends React.Component {
               <br></br>
             </div>
           </div>
-        
+
         </section>
         <section className='explainApp'>
-        <Link to={'#explainAppbodysection'} >
-                             <img className='arrowIm' alt='loginIm' src={arrow} /> <h1 className='explainApph1'>THE MEAL PLANNER</h1>
-
-                        </Link>
-       
+         <a href='#explainSection'>
+            <img className='arrowIm' alt='loginIm' src={arrow} />
+        </a>
+         
+          <h1 className='explainApph1' id='explainSection'>THE MEAL PLANNER</h1>
           <div className='row explainAppbodysection'>
             <div className='col-md-5 col-md-offset-1 explainAppbody'>
               <h2>CHOOSE YOUR MEALS</h2>
@@ -215,7 +216,7 @@ class Login extends React.Component {
               <br></br>
               <br></br>
               <div >
-                <h2> WELCOME {this.getFirstName()}</h2>
+                <h2> WELCOME {this.getFirstName()} !</h2>
                 {logout}
 
               </div>
