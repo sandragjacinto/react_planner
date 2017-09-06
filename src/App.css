@@ -203,10 +203,6 @@ a.menuButton:hover{
 }
 
 .menu-recipe {
-  border-bottom: 2px solid #000;
-  border-top: 1px solid #000;
-  padding-bottom: 2rem;
-  padding-top: 2rem;
   margin-bottom: 5px;
   clear: both;
   overflow: hidden;
@@ -245,6 +241,14 @@ a.menuButton:hover{
   right:15px;
   position:absolute;
 }
+.recipe-name-gradient{
+  height:50px;
+  vertical-align: text-bottom;
+  background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient( rgba(0,0,0,0), rgba(0,0,0,1)); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient( rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
+  background: linear-gradient( rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
+}
 button,
 input[type=submit] {
   text-transform: uppercase;
@@ -257,4 +261,9 @@ input[type=submit] {
   transition: all 0.2s;
   position: relative;
   z-index: 2;
+}
+.recipe-name {
+  font-family: "Oswald";
+  color:white;
+
 }

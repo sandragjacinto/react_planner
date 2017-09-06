@@ -22,28 +22,30 @@ const SearchInput = (props) => {
 //Component for single recipe found
 const RecipeFound = (props) => {
 
-    var text = (props.element.recipe.status !== "selected") ? "Select..." : "Seleted";
+    var text = (props.element.recipe.status !== "selected") ? "SELECT" : "SELECTED";
     var isSelected = props.element.recipe.status === "selected";
     var style = (props.element.recipe.status !== "selected") ? "green" : "red";
     var btnStyle = {
         backgroundColor: `${style}
     `};
     return (
-        <li className="menu-recipe">
-            <img src={props.element.recipe.image} alt={props.element.recipe.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')} />
-            <h3 className="recipe-name">
-                {props.element.recipe.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')}
 
-            </h3>
+        <div className="col-md-3 col-xs-12">
+            <ul className="menu-recipe" style={{ backgroundImage: `url(${props.element.recipe.image})` }}>
+                <button className='btn btn-primary menu-recipe-button' style={btnStyle} key={props.index} disabled={isSelected} value={props.index} onClick={function () { return props.onRecipeSelected(props.index, props.element.recipe) }} >{text}</button>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <div className="recipe-name-gradient">
+                    <br></br>
+                    <h5 className="recipe-name">
+                        {props.element.recipe.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')}
 
-            <button style={btnStyle} key={props.index} disabled={isSelected} value={props.index} onClick={function () { return props.onRecipeSelected(props.index, props.element.recipe) }} >{text}</button>
-        </li>
-
-
-
-
-
-
+                    </h5>
+                </div>
+            </ul>
+        </div>
     )
 }
 
@@ -75,20 +77,28 @@ const RecipesFound = (props) => {
     )
 }
 
+// background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
+//     background: -o-linear-gradient( rgba(0,0,0,0), rgba(255,0,0,1)); /* For Opera 11.1 to 12.0 */
+//     background: -moz-linear-gradient( rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
+//     background: linear-gradient( rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
+
 //Component for single selected recipe
 const SelectedRecipe = props => {
     return (
-        <div className = "col-md-3 col-xs-12">
-            <li className="menu-recipe" style={{backgroundImage:`url(${props.element.image})`}}>
-                <button className = "btn btn-danger menu-recipe-button" key={props.index} value={props.index} onClick={function () { return props.onRecipeDeselected(props.index, props.element.recipe) }} ><img style = {{width:'30px'}} src = {garbage}/></button>
+        <div className="col-md-3 col-xs-12">
+            <ul className="menu-recipe" style={{ backgroundImage: `url(${props.element.image})` }}>
+                <button className="btn btn-danger menu-recipe-button" key={props.index} value={props.index} onClick={function () { return props.onRecipeDeselected(props.index, props.element.recipe) }} ><img style={{ width: '30px' }} src={garbage} /></button>
                 <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
-                <h5 className="recipe-name bodyText">
-                    {props.element.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')}
-                </h5>
-            </li>
+                <div className="recipe-name-gradient">
+                    <br></br>
+                    <h5 className="recipe-name">
+                        {props.element.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')}
+                    </h5>
+                </div>
+            </ul>
         </div>
     )
 }
@@ -97,7 +107,7 @@ const SelectedRecipe = props => {
 const SelectedRecipes = (props) => {
     //As props.recipesSelected is a map object and not an array, map method can not be used here directly. Instead, Object.keys() returns an array of the keys, which can then be used to map stuff  
     return (
-        <div className = "row">
+        <div className="row">
             <ul >
                 {Object.keys(props.recipesSelected).map(function (key, index) {
                     return <SelectedRecipe element={props.recipesSelected[key]} index={index} key={index} onRecipeDeselected={props.onRecipeDeselected} />
@@ -154,8 +164,6 @@ class ChooseMyMeal extends React.Component {
     //api writes response here. Update state
     onSearchResponse = (response) => {
         //console.log(response);
-
-
         this.setState({ recipesFound: response });
     }
 
@@ -253,8 +261,8 @@ class ChooseMyMeal extends React.Component {
                             <div className='card-block'>
                                 <h1 className="card-title titleH1">SEARCH FOR RECIPES</h1>
                                 <div className='bodyText'>
-                                <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton={this.onClickSearchButton} />
-                                <RecipesFound recipesFound={this.state.recipesFound} recipesSelected={this.state.recipesSelected} onRecipeSelected={this.onRecipeSelected} />
+                                    <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton={this.onClickSearchButton} />
+                                    <RecipesFound recipesFound={this.state.recipesFound} recipesSelected={this.state.recipesSelected} onRecipeSelected={this.onRecipeSelected} />
                                 </div>
                             </div>
                         </div>
@@ -266,16 +274,12 @@ class ChooseMyMeal extends React.Component {
                             <div className='card-block'>
                                 <h1 className="card-title titleH1">CHOSEN RECIPES</h1>
                                 <div className='bodyText'>
-                                <SelectedRecipes aling="right" recipesSelected={this.state.recipesSelected} onRecipeDeselected={this.onRecipeDeselected} />
+                                    <SelectedRecipes aling="right" recipesSelected={this.state.recipesSelected} onRecipeDeselected={this.onRecipeDeselected} />
                                 </div>
                             </div>
                         </div>
                     </Tab>
                 </Tabs>
-
-
-
-
             </div>
         )
     }
