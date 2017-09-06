@@ -13,28 +13,10 @@ import CanNotIm from './../icons/cannot.png';
 
 //gets user info and jsx
 const UserInfo = (props) => {
-    console.log('name :'+props.owner)
     return (
-        <div>
-
-            <div className='row profileInfo'>
-                <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h3> User Name: {props.username}</h3>
-                </div>
-            </div>
-            <div className='row profileInfo'>
-                <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h5> Email: {props.userEmail}</h5>
-                </div>
-            </div>
-            <div className='row profileInfo'>
-                <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h5> Tutor: {props.tutorName}</h5>
-                </div>
-            </div>
-            
+        <div className='row profileInfo'>
+            <h3>{props.username}</h3>
         </div>
-
     )
 }
 //loads image for profile
@@ -52,20 +34,31 @@ const LoadProfileIm = (props) => {
 //reassembles image and user info
 const PersonalInfo = ({ profileIMG, username, userEmail }) => {
     return (
-        <div className='container userPhoto'>
-            <div className='row'>
-                <div className='col-md-3 col-md-offset-1 col-xs-12'>
-                    <LoadProfileIm profileIMG={profileIMG} />
-                </div>
-                <div className='col-md-6 col-md-offset-1 col-xs-12 personalcontainer'>
+        <div className='card userPhoto'>
+                <LoadProfileIm profileIMG={profileIMG} />
+                <div className='personalcontainer'>
                     <UserInfo username={username} userEmail={userEmail}/>
                 </div>
-            </div>
         </div>
-
-
     )
 }
+// const PersonalInfo = ({ profileIMG, username, userEmail }) => {
+//     return (
+//         <div className='card userPhoto'>
+//             <div className='row'>
+//                 <div className='col-md-3 col-md-offset-1 col-xs-12'>
+//                     <LoadProfileIm profileIMG={profileIMG} />
+//                 </div>
+//                 <div className='col-md-6 col-md-offset-1 col-xs-12 personalcontainer'>
+//                     <UserInfo username={username} userEmail={userEmail}/>
+//                 </div>
+//             </div>
+//         </div>
+
+
+//     )
+// }
+
 //creates buttons for i dont like etc
 const CreateButtons = (props) => {
     return (
