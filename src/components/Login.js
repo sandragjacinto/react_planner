@@ -126,12 +126,12 @@ class Login extends React.Component {
           </div>
 
         </section>
-        <section className='explainApp'>
+        <section>
          <a href='#explainSection'>
             <img className='arrowIm' alt='loginIm' src={arrow} />
         </a>
          
-          <h1 className='explainApph1' id='explainSection'>THE MEAL PLANNER</h1>
+          <h1 className='titleH1 explainApp' id='explainSection'>THE MEAL PLANNER</h1>
           <div className='row explainAppbodysection'>
             <div className='col-md-5 col-md-offset-1 explainAppbody'>
               <h2>CHOOSE YOUR MEALS</h2>
@@ -227,7 +227,7 @@ class Login extends React.Component {
           </div>
         </section>
         <section className='explainApp'>
-          <h1 className='explainApph1'>To start planning click on CHOOSE MY MEAL</h1>
+          <h1 className='titleH1'>To start planning click on CHOOSE MY MEAL</h1>
         </section>
       </div>
     )

@@ -126,7 +126,7 @@ class Profile extends React.Component {
     render() {
         return (
             <div style={{ textAlign: "center" }}>
-                <div className="row">
+                <div className="row firstElement">
                
                     <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
 
