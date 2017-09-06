@@ -30,7 +30,7 @@ const ButtonsDays = ({mealPlan, onClickDayButton})=>
                 //console.log("DATE KEY:", mapKey, "DATE", mealPlan[mapKey].toDateString());
                 var mealPlanSingleDay = mealPlan[date];
                 var isSomethingScheduled = "recipes" in mealPlanSingleDay && mealPlanSingleDay["recipes"].length > 0;
-                var colorStyle = isSomethingScheduled ? "btn btn-primary" : "btn btn-primary";
+                var colorStyle = isSomethingScheduled ? "btn btn-warning" : "btn btn-primary";
                 var classN =  `${colorStyle}`
                 return (
                     <button
@@ -199,6 +199,7 @@ class MealPlanning extends React.Component
                 style = {this.state.messagePopupStyle}
             />
         </div>
+        <hr />
         </div>)
     }
 }
