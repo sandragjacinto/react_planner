@@ -38,7 +38,7 @@ const RecipeFound = (props) => {
                 <br></br>
                 <div className="recipe-name-gradient">
                     <br></br>
-                    <br></br>
+                    
                     <br></br>
                     <h5 className="recipe-name">
                         {props.element.recipe.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')}
@@ -94,7 +94,6 @@ const SelectedRecipe = props => {
                 <br></br>
                 <br></br>
                 <div className="recipe-name-gradient">
-                    <br></br>
                     <br></br>
                     <br></br>
                     <h5 className="recipe-name">
@@ -257,7 +256,8 @@ class ChooseMyMeal extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='row'>
+                <div className='col-md-10 col-md-offset-1'>
                 <Tabs defaultActiveKey={1} className="firstElement choosenmeal-tab">
                     <Tab eventKey={1} title="SEARCH FOR RECIPES">
                         <div className='card'>
@@ -283,6 +283,7 @@ class ChooseMyMeal extends React.Component {
                         </div>
                     </Tab>
                 </Tabs>
+            </div>
             </div>
         )
     }
