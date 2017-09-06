@@ -156,7 +156,7 @@ a.menuButton:hover{
 }
 
 .profileInfo{
-  text-align: left;
+  text-align: center;
 }
 .profilebutton{
   max-height: 100px;
@@ -250,3 +250,8 @@ a.menuButton:hover{
   padding: 0;
 }
 
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 100%;
+    border-radius: 5px;
+}
