@@ -36,6 +36,13 @@
   color:black;
 }
 
+.btn-warning{
+  background-color: #F18830;
+  border: #F18830;
+  font-family: 'Oswald';
+  color:black;
+}
+
 .lateralMenu{
   overflow: hidden;
   position: fixed; /* Set the navbar to fixed position */
