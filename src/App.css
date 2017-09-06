@@ -25,6 +25,13 @@
   max-width: 100px;
 }
 
+.btn-primary{
+  background-color: #B1EAF1;
+  border: #B1EAF1;
+  font-family: 'Oswald';
+  color:black;
+}
+
 .lateralMenu{
   text-align: center;
   background: #F18830;
@@ -43,7 +50,8 @@ a.menuButton{
   border-bottom:0px;
   border-radius: 0.1rem;
   display: inline-block;
-  font-size: 10px;
+  font-size: 12px;
+  font-family: 'Oswald';
 }
 a.menuButton:hover{
   color: #F15C34;
@@ -53,7 +61,53 @@ a.menuButton:hover{
 .loginSection{
   background: #F18830; 
   color: white;
+  font-family: 'Cabin Sketch';
   height: 400px;
+}
+
+.bodyTextlogin{
+  font-family: 'Cabin Sketch';
+}
+
+.explainApph1{
+  font-family: 'Cabin Sketch';
+}
+
+.explainAppbody{
+  font-family: 'Oswald';
+}
+
+.planMeal{
+  background-color: #B1EAF1;
+  padding-top: 50px;
+}
+
+.explainAppbodysection{
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.explainAppbodyp{
+  text-align: justify;
+}
+
+.loginIm{
+  width: 80%;
+}
+.listIm{
+  width: 50%;
+}
+
+.scheduleIm{
+  width: 80%;
+}
+.cartIm{
+  width: 40%;
+}
+
+.arrowIm{
+  margin-top: -20px;
+  width: 4%;
 }
 
 .homepageButton:hover{
@@ -64,13 +118,7 @@ a.menuButton:hover{
 .menuImgRight{
   margin-left: -50px;
 }
-.hp{
-  opacity: 0.5;
-}
-.hp:hover{
-  background: #CEF2E8;
-  opacity: 0.5;
-}
+
 
 .button-clicked {
   background: red;

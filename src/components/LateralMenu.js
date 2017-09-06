@@ -12,7 +12,6 @@ const LateralMenu = (props) => (
         <Link to = '/homepage' className='btn btn-default btn-md menuButton'>HOME PAGE</Link>
         <Link to= '/profile' className='btn btn-default btn-md menuButton'>PROFILE</Link>
         <Link to= '/choosemymeal' className='btn btn-default btn-md menuButton'>CHOOSE MY MEAL</Link>
-        <Link to= '/cookmymeal' className='btn btn-default btn-md menuButton'>COOK MY MEAL</Link>
         <Link to= '/grocerylist' className='btn btn-default btn-md menuButton'>GROCERY LIST</Link>
         <Link to= '/mealplanning' className='btn btn-default btn-md menuButton'>MEAL PLANNING</Link>
     
