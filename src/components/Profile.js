@@ -24,12 +24,12 @@ const UserInfo = (props) => {
             </div>
             <div className='row profileInfo'>
                 <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h4> Email: {props.userEmail}</h4>
+                    <h5> Email: {props.userEmail}</h5>
                 </div>
             </div>
             <div className='row profileInfo'>
                 <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h4> Tutor: {props.tutorName}</h4>
+                    <h5> Tutor: {props.tutorName}</h5>
                 </div>
             </div>
             
@@ -57,11 +57,8 @@ const PersonalInfo = ({ profileIMG, username, userEmail }) => {
                 <div className='col-md-3 col-md-offset-1 col-xs-12'>
                     <LoadProfileIm profileIMG={profileIMG} />
                 </div>
-                <div className='col-md-5 col-xs-12 personalcontainer'>
+                <div className='col-md-6 col-md-offset-1 col-xs-12 personalcontainer'>
                     <UserInfo username={username} userEmail={userEmail}/>
-                </div>
-                <div className='col-md-1 col-xs-12' style={{textAlign:'center'}}>
-                    <img className=' mapPic' alt='mapPic' src={'http://www.mq.edu.au/__data/assets/image/0010/183556/Campus-Map.png'} />
                 </div>
             </div>
         </div>
