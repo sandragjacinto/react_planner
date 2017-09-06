@@ -124,7 +124,7 @@ class GroceryList extends React.Component {
 
         return (
             <div style={{ textAlign: "center" }}>
-                <div className="row">
+                <div className="row firstElement">
                     <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
                         <h2>Grocerie List</h2>
                         {this.state.grocerieList.map((item, index) => {

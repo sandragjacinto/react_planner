@@ -119,7 +119,7 @@ componentWillMount()
 
     render() {
         return (
-            <div className='card'>
+            <div className='card firstElement'>
                 <div className='card-block'>
                     <h1 className="card-title">I Don't Like</h1>
                     <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />

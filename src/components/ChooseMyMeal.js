@@ -108,9 +108,7 @@ class ChooseMyMeal extends React.Component {
         this.state = {
             searchWord: "",
             recipesFound:[],
-            recipesSelected:{},
-            
-            
+            recipesSelected:{},   
         }
     }
 
@@ -137,6 +135,16 @@ class ChooseMyMeal extends React.Component {
                 console.error(error);
             })
     }
+
+    //trying to put the number of chosen recipes
+    getTabName() {
+        var sizeString = this.state.recipesSelected;
+        var count = 0;
+        for(var i in sizeString)
+                count++;
+        var textTab = "Choosen recipes " + count;
+        return textTab
+      }
 
     //api writes response here. Update state
     onSearchResponse = (response) => {
@@ -208,7 +216,7 @@ class ChooseMyMeal extends React.Component {
         
         if(maplist1[(lis[index])] != undefined){
            maplist1[(lis[index])].status = "unselected"; 
-           console.log("changing the nstateeeeeeeeeeeeeeeeeeeeeeeee");
+           
         };
         delete maplist[(lis[index])];
         
@@ -237,7 +245,7 @@ class ChooseMyMeal extends React.Component {
     render() {
         return (
             <div>
- <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+ <Tabs defaultActiveKey={1} className="firstElement choosenmeal-tab">
     <Tab eventKey={1} title="Select your recipes">
             <div className='card'>
                 <div className='card-block'>
@@ -250,7 +258,7 @@ class ChooseMyMeal extends React.Component {
 
 
     </Tab>
-    <Tab eventKey={2} title="Choosen recieps">
+    <Tab eventKey={2} title={this.getTabName()}>
      <div className='card'>
                 <div className='card-block'>
                     <h1 className="card-title">Chosen Recipes </h1>

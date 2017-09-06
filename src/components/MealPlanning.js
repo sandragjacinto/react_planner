@@ -164,7 +164,8 @@ class MealPlanning extends React.Component
 
     render()
     {
-        return(<div>
+        return(
+        <div className='firstElement'>
             <h2>Meal Planning</h2>
 
             {
