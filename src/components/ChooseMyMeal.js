@@ -247,14 +247,14 @@ class ChooseMyMeal extends React.Component {
 
     render() {
         return (
-            <div className='row backgroundTest' style={{minHeight:'1000px'}}>
-                <div className='col-md-10 col-md-offset-1'>
-                    <Tabs defaultActiveKey={1} className="firstElement choosenmeal-tab" style={{backgroundColor:'white'}}>
+            <div className='row firstElement backgroundTest' >
+                <div className='col-md-10 col-md-offset-1 '>
+                    <Tabs defaultActiveKey={1} className=" choosenmeal-tab whiteBackground">
 
                         <Tab className='no-padding' eventKey={1} title="SEARCH FOR RECIPES">
-                            <div className='card no-padding'>
-                                <div className='card-block no-padding'>
-                                    <h1 className="card-title titleH1 no-padding">SEARCH FOR RECIPES</h1>
+                            <div className=' no-padding'>
+                                <div className=' no-padding'>
+                                    <h1 className=" titleH1 no-padding">SEARCH FOR RECIPES</h1>
                                     <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton={this.onClickSearchButton} />
                                     <div className='bodyText'>
                                         <RecipesFound recipesFound={this.state.recipesFound} recipesSelected={this.state.recipesSelected} onRecipeSelected={this.onRecipeSelected} />
@@ -264,9 +264,9 @@ class ChooseMyMeal extends React.Component {
                         </Tab>
 
                         <Tab className='no-padding' eventKey={2} title={this.getTabName()}>
-                            <div className='card no-padding'>
-                                <div className='card-block no-padding'>
-                                    <h1 className="card-title titleH1 no-padding">CHOSEN RECIPES</h1>
+                            <div className=' no-padding'>
+                                <div className='no-padding'>
+                                    <h1 className="titleH1 no-padding">CHOSEN RECIPES</h1>
                                     <div className='bodyText'>
                                         <SelectedRecipes aling="right" recipesSelected={this.state.recipesSelected} onRecipeDeselected={this.onRecipeDeselected} />
                                     </div>

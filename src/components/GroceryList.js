@@ -125,9 +125,9 @@ class GroceryList extends React.Component {
 
         return (
             <div style={{ textAlign: "center" }}>
-                <div className="row firstElement backgroundTest" style={{minHeight:'1000px'}}>
-                    <div className="col-md-8 col-md-offset-2 col-xs-12">
-                        <h1 className='titleH1'>Grocerie List</h1>
+                <div className="row firstElement backgroundTest" >
+                    <div className="col-md-8 col-md-offset-2 col-xs-12 whiteBackground" >
+                        <h1 className='titleH1' >Grocerie List</h1>
                         {this.state.grocerieList.map((item, index) => {
                             return (
                                 <div className=' row list-group-item bodyText' style={{textAlign:'left', minHeight:'100px'}}>
