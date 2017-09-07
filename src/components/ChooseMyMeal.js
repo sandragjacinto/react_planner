@@ -100,8 +100,8 @@ const SelectedRecipe = props => {
 const SelectedRecipes = (props) => {
     //As props.recipesSelected is a map object and not an array, map method can not be used here directly. Instead, Object.keys() returns an array of the keys, which can then be used to map stuff  
     return (
+        
         <div className="row no-padding">
-           
                 {Object.keys(props.recipesSelected).map(function (key, index) {
                     return <SelectedRecipe element={props.recipesSelected[key]} index={index} key={index} onRecipeDeselected={props.onRecipeDeselected} />
                 })}
@@ -248,7 +248,7 @@ class ChooseMyMeal extends React.Component {
     render() {
         return (
             <div className='row firstElement backgroundTest' >
-                <div className='col-md-10 col-md-offset-1 '>
+                <div className='col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1'>
                     <Tabs defaultActiveKey={1} className=" choosenmeal-tab whiteBackground">
 
                         <Tab className='no-padding' eventKey={1} title="SEARCH FOR RECIPES">

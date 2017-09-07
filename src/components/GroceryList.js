@@ -37,7 +37,7 @@ class GroceryList extends React.Component {
             grocerieList: [],
             newtemp: [],
         }
-       
+
         const storeRef = base.database().ref(getUserLoginData().uid);
         storeRef.child('recipesInfo').child('recipesSelected').once('value', (snapshot) => {
             const data = snapshot.val() || {};
@@ -47,7 +47,7 @@ class GroceryList extends React.Component {
                     //var ll = tempList.length
                     //console.log(tempList.length)
                     for (var ing in tempList) {
-                      //  var tempNouns = wordpos.getNouns(tempList[ing]);
+                        //  var tempNouns = wordpos.getNouns(tempList[ing]);
                         var grocerieLists = this.state.tempgrocerieList.push(tempList[ing])
 
                     }//
@@ -66,12 +66,12 @@ class GroceryList extends React.Component {
                 storeRef.update({
                     grocerieList: this.state.grocerieList
                 })
-    
+
             });
-            
+
         });
 
-        
+
 
     }
 
@@ -100,54 +100,86 @@ class GroceryList extends React.Component {
 
         });
     }
-    
+
     componentDidMount() {
         console.log('fetch0')
         return fetch('http://localhost:3000/grocerylist')
         console.log('fetch1')
-          .then((response) => response.json())
-          .then((responseJson) => {
-              console.log('fetch')
-           // let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-            //this.setState({
-             // isLoading: false,
-              //dataSource: ds.cloneWithRows(responseJson.movies),
-            //}, function() {
-              // do something with new state
-           // });
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-      }
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log('fetch')
+                // let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+                //this.setState({
+                // isLoading: false,
+                //dataSource: ds.cloneWithRows(responseJson.movies),
+                //}, function() {
+                // do something with new state
+                // });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 
-    render() {
 
-        return (
-            <div style={{ textAlign: "center" }}>
-                <div className="row firstElement backgroundTest" >
-                    <div className="col-md-8 col-md-offset-2 col-xs-12 whiteBackground" >
-                        <h1 className='titleH1' >Grocerie List</h1>
-                        {this.state.grocerieList.map((item, index) => {
-                            return (
-                                <div className=' row list-group-item bodyText' style={{textAlign:'left', minHeight:'100px'}}>
-                                    <br></br>
-                                    <div className='col-md-9 col-xs-9'>
-                                        <h4 key={index}>
-                                            {item}
-                                        </h4>
-                                    </div>
-                                    <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
-                                    <button key={index} className="btn btn-danger" value={index} type="button" onClick={this.onClickDelIngredient}><img style={{ width: '25px' }} src={garbage} /></button>
-                                    </div>
+
+//     return(
+//         <div className=' row list-group-item bodyText' style={{ textAlign: 'left', minHeight: '100px' }}>
+//     <br></br>
+//     <div className='col-md-9 col-xs-9'>
+//         <h4 key={index}>
+//             {item}
+//         </h4>
+//     </div>
+//     <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
+//         <button key={index} className="btn btn-danger" value={index} type="button" onClick={this.onClickDelIngredient}><img style={{ width: '25px' }} src={garbage} /></button>
+//     </div>
+// </div>
+//     )
+// :
+// null
+
+render() {
+console.log('gocerie list', this.state.grocerieList.length)
+    return (
+        <div style={{ textAlign: "center" }}>
+            <div className="row firstElement backgroundTest" >
+                <div className="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 whiteBackground" >
+                    <h1 className='titleH1' >Grocerie List</h1>
+                    {
+                        this.state.grocerieList.length > 0 ?
+                        (
+                            <div>
+                                {this.state.grocerieList.map((item, index) => {
+                                    return (
+                                        <div className=' row list-group-item bodyText' style={{ textAlign: 'left', minHeight: '100px' }}>
+                                            <br></br>
+                                            <div className='col-md-9 col-xs-9'>
+                                                <h4 key={index}>
+                                                    {item}
+                                                </h4>
+                                            </div>
+                                            <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
+                                                <button key={index} className="btn btn-danger" value={index} type="button" onClick={this.onClickDelIngredient}><img style={{ width: '25px' }} src={garbage} /></button>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
                                 </div>
-                            )
-                        }
-                        )}
+                                )
+
+                            :
+                            <div>
+                            <br></br>
+                            <br></br>
+                                <h3 className='titleH1 errorMessage' >OOPS! YOU HAVEN'T CHOSEN ANY MEAL YET ...</h3>
+                                </div>
+                                }
+
                     </div>
                 </div>
             </div>
-        )
+                )
     }
 
 }

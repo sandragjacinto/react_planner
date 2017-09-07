@@ -100,9 +100,10 @@ class Login extends React.Component {
 
   renderLogin() {
     return (
-      <div>
+      <div className='backgroundTest'>
         <section className='loginSection'>
           <div className='row'>
+            <br></br>
             <br></br>
             <br></br>
             <br></br>
@@ -131,8 +132,8 @@ class Login extends React.Component {
             <img className='arrowIm' alt='loginIm' src={arrow} />
         </a>
          
-          <h1 className='titleH1 explainApp' id='explainSection'>THE MEAL PLANNER</h1>
-          <div className='row explainAppbodysection'>
+          <h1 className='titleH1login explainApp' id='explainSection'>THE MEAL PLANNER</h1>
+          <div className='row explainAppbodysection' style={{backgroundColor:'white', marginBottom:'100px'}}>
             <div className='col-md-5 col-md-offset-1 explainAppbody'>
               <h2>CHOOSE YOUR MEALS</h2>
 
@@ -140,7 +141,7 @@ class Login extends React.Component {
               <p className='explainAppbodyp'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pharetra est ex, ut vehicula justo porttitor eget. Nulla eleifend dolor ut neque ultricies ornare. Aliquam maximus, neque et dapibus feugiat, mauris odio vulputate odio, nec sagittis magna ante eu dui. Vivamus suscipit nulla lacus, congue sollicitudin turpis condimentum vel. Sed at orci augue. Nulla iaculis, justo vitae bibendum rutrum, quam massa aliquam eros, sit amet interdum libero ex vel lacus. In vulputate libero a interdum pharetra. Mauris viverra bibendum tristique.</p>
             </div>
             <div className='col-md-5'>
-              <br></br>
+              
               <img className='listIm' alt='list' src={list} />
             </div>
           </div>
@@ -164,7 +165,7 @@ class Login extends React.Component {
               <p className='explainAppbodyp'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque pharetra est ex, ut vehicula justo porttitor eget. Nulla eleifend dolor ut neque ultricies ornare. Aliquam maximus, neque et dapibus feugiat, mauris odio vulputate odio, nec sagittis magna ante eu dui. Vivamus suscipit nulla lacus, congue sollicitudin turpis condimentum vel. Sed at orci augue. Nulla iaculis, justo vitae bibendum rutrum, quam massa aliquam eros, sit amet interdum libero ex vel lacus. In vulputate libero a interdum pharetra. Mauris viverra bibendum tristique.</p>
             </div>
             <div className='col-md-5'>
-              <br></br>
+              
               <img className='cartIm' alt='list' src={cart} />
             </div>
           </div>

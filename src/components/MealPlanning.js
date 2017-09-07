@@ -157,7 +157,7 @@ class MealPlanning extends React.Component {
         return (
             <div className='firstElement backgroundTest'>
                 <div className='row'>
-                <div className='col-md-10 col-md-offset-1 col-xs-10 col xs-offset-1 whiteBackground'>
+                <div className='col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 whiteBackground'>
                 <h1 className='titleH1'>MEAL PLANNING</h1>
                 <div className='row boddyText'>
                     {
