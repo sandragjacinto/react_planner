@@ -5,13 +5,14 @@ import React from 'react';
 import base from '../base';
 import ChooseMyMeal from './ChooseMyMeal.js';
 import { getUserLoginData } from './DataUser';
+import garbage from './../icons/whiteTrash.png'
 
 const GroceryListItems = (props) => {
     <div className='row'>
-        <div className="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2 ingredientsList">
+        <div className="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2 ingredientsList no-padding">
             {props.grocerieList.map((groceryItem, index) => {
                 return (
-                    <div className='row list-group-item '>
+                    <div className='row list-group-item no-padding'>
                         <div className='col-md-9 col-xs-9'>
                             <h4 key={index}>
                                 {groceryItem}
@@ -124,19 +125,20 @@ class GroceryList extends React.Component {
 
         return (
             <div style={{ textAlign: "center" }}>
-                <div className="row firstElement">
-                    <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
+                <div className="row firstElement backgroundTest" style={{minHeight:'1000px'}}>
+                    <div className="col-md-8 col-md-offset-2 col-xs-12">
                         <h1 className='titleH1'>Grocerie List</h1>
                         {this.state.grocerieList.map((item, index) => {
                             return (
-                                <div className='row list-group-item bodyText'>
+                                <div className=' row list-group-item bodyText' style={{textAlign:'left', minHeight:'100px'}}>
+                                    <br></br>
                                     <div className='col-md-9 col-xs-9'>
                                         <h4 key={index}>
                                             {item}
                                         </h4>
                                     </div>
                                     <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
-                                    <button key={index} className="btn btn-danger" value={index} type="button" onClick={this.onClickDelIngredient}>x</button>
+                                    <button key={index} className="btn btn-danger" value={index} type="button" onClick={this.onClickDelIngredient}><img style={{ width: '25px' }} src={garbage} /></button>
                                     </div>
                                 </div>
                             )

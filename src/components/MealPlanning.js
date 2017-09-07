@@ -153,7 +153,7 @@ class MealPlanning extends React.Component {
 
     render() {
         return (
-            <div className='firstElement'>
+            <div className='firstElement backgroundTest' style={{minHeight:'1000px'}}>
                 <h1 className='titleH1'>MEAL PLANNING</h1>
                 <div className='boddyText'>
                     {
@@ -188,7 +188,7 @@ class MealPlanning extends React.Component {
                         style={this.state.messagePopupStyle}
                     />
                 </div>
-                <hr />
+                
             </div>)
     }
 }

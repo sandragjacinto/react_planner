@@ -104,6 +104,8 @@ a.menuButton:hover{
 
 .titleH1{
   font-family: 'Cabin Sketch';
+  width: 100%;
+  background-color: white;
 }
 
 .explainApp{
@@ -263,4 +265,11 @@ a.menuButton:hover{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 100%;
     border-radius: 5px;
+}
+
+
+.backgroundTest{
+  background-image: url('./icons/backg1.jpg');
+  background-size: 100%;
+  background-attachment: fixed;
 }

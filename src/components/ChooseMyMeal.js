@@ -31,14 +31,14 @@ const RecipeFound = (props) => {
 
         <div className="col-md-4 col-xs-12 no-padding">
             <ul className="menu-recipe" style={{ backgroundImage: `url(${props.element.recipe.image})` }}>
-                <button className={btnStyle}  key={props.index} disabled={isSelected} value={props.index} onClick={function () { return props.onRecipeSelected(props.index, props.element.recipe) }} >{text}</button>
+                <button className={btnStyle} key={props.index} disabled={isSelected} value={props.index} onClick={function () { return props.onRecipeSelected(props.index, props.element.recipe) }} >{text}</button>
                 <br></br>
                 <br></br>
                 <br></br>
                 <br></br>
                 <div className="recipe-name-gradient">
                     <br></br>
-                    
+
                     <br></br>
                     <h5 className="recipe-name">
                         {props.element.recipe.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')}
@@ -55,33 +55,24 @@ const RecipeFound = (props) => {
 const RecipesFound = (props) => {
 
     return (
-        <ul>
+        <div>
             {
-
                 props.recipesFound.map(function (element, index) {
-
-
-
                     //find in selected recipes i f there's any reicpe named like this
                     Object.keys(props.recipesSelected).forEach(function (recipeUid) {
-
                         if (recipeUid === element.recipe.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '')) {
-
                             element.recipe.status = "selected";
-
                         }
                     });
-
-                    { return <RecipeFound isSelected={props.recipesFound} recipesSelected={props.recipesSelected} element={element} index={index} key={index} onRecipeSelected={props.onRecipeSelected} /> }
+                    {
+                        return (
+                            <RecipeFound isSelected={props.recipesFound} recipesSelected={props.recipesSelected} element={element} index={index} key={index} onRecipeSelected={props.onRecipeSelected} />
+                        )
+                    }
                 })}
-        </ul>
+        </div>
     )
 }
-
-// background: -webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,1)); /* For Safari 5.1 to 6.0 */
-//     background: -o-linear-gradient( rgba(0,0,0,0), rgba(255,0,0,1)); /* For Opera 11.1 to 12.0 */
-//     background: -moz-linear-gradient( rgba(0,0,0,0), rgba(0,0,0,1)); /* For Firefox 3.6 to 15 */
-//     background: linear-gradient( rgba(0,0,0,0), rgba(0,0,0,1)); /* Standard syntax (must be last) */
 
 //Component for single selected recipe
 const SelectedRecipe = props => {
@@ -110,11 +101,11 @@ const SelectedRecipes = (props) => {
     //As props.recipesSelected is a map object and not an array, map method can not be used here directly. Instead, Object.keys() returns an array of the keys, which can then be used to map stuff  
     return (
         <div className="row no-padding">
-            <ul >
+           
                 {Object.keys(props.recipesSelected).map(function (key, index) {
                     return <SelectedRecipe element={props.recipesSelected[key]} index={index} key={index} onRecipeDeselected={props.onRecipeDeselected} />
                 })}
-            </ul>
+           
         </div>
     )
 }
@@ -256,34 +247,35 @@ class ChooseMyMeal extends React.Component {
 
     render() {
         return (
-            <div className='row'>
+            <div className='row backgroundTest' style={{minHeight:'1000px'}}>
                 <div className='col-md-10 col-md-offset-1'>
-                <Tabs defaultActiveKey={1} className="firstElement choosenmeal-tab">
-                    <Tab className='no-padding' eventKey={1} title="SEARCH FOR RECIPES">
-                        <div className='card no-padding'>
-                            <div className='card-block no-padding'>
-                                <h1 className="card-title titleH1 no-padding">SEARCH FOR RECIPES</h1>
-                                <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton={this.onClickSearchButton} />
-                                <div className='bodyText'>
-                                    <RecipesFound recipesFound={this.state.recipesFound} recipesSelected={this.state.recipesSelected} onRecipeSelected={this.onRecipeSelected} />    
+                    <Tabs defaultActiveKey={1} className="firstElement choosenmeal-tab" style={{backgroundColor:'white'}}>
+
+                        <Tab className='no-padding' eventKey={1} title="SEARCH FOR RECIPES">
+                            <div className='card no-padding'>
+                                <div className='card-block no-padding'>
+                                    <h1 className="card-title titleH1 no-padding">SEARCH FOR RECIPES</h1>
+                                    <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton={this.onClickSearchButton} />
+                                    <div className='bodyText'>
+                                        <RecipesFound recipesFound={this.state.recipesFound} recipesSelected={this.state.recipesSelected} onRecipeSelected={this.onRecipeSelected} />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Tab>
 
-
-                    </Tab>
-                    <Tab className='no-padding' eventKey={2} title={this.getTabName()}>
-                        <div className='card no-padding'>
-                            <div className='card-block no-padding'>
-                                <h1 className="card-title titleH1 no-padding">CHOSEN RECIPES</h1>
-                                <div className='bodyText'>
-                                    <SelectedRecipes aling="right" recipesSelected={this.state.recipesSelected} onRecipeDeselected={this.onRecipeDeselected} />
+                        <Tab className='no-padding' eventKey={2} title={this.getTabName()}>
+                            <div className='card no-padding'>
+                                <div className='card-block no-padding'>
+                                    <h1 className="card-title titleH1 no-padding">CHOSEN RECIPES</h1>
+                                    <div className='bodyText'>
+                                        <SelectedRecipes aling="right" recipesSelected={this.state.recipesSelected} onRecipeDeselected={this.onRecipeDeselected} />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </Tab>
-                </Tabs>
-            </div>
+                        </Tab>
+
+                    </Tabs>
+                </div>
             </div>
         )
     }
