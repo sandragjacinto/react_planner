@@ -14,7 +14,7 @@ import CanNotIm from './../icons/cannot.png';
 //gets user info and jsx
 const UserInfo = (props) => {
     return (
-        <div className='row profileInfo'>
+        <div className='row'>
             <h3>{props.username}</h3>
         </div>
     )
@@ -34,37 +34,19 @@ const LoadProfileIm = (props) => {
 //reassembles image and user info
 const PersonalInfo = ({ profileIMG, username, userEmail }) => {
     return (
-        <div className='card userPhoto'>
-                <LoadProfileIm profileIMG={profileIMG} />
-                <div className='personalcontainer'>
-                    <UserInfo username={username} userEmail={userEmail}/>
-                </div>
+        <div className='card userPhoto text-center'>
+            <LoadProfileIm profileIMG={profileIMG} />
+            <UserInfo username={username}/>
         </div>
     )
 }
-// const PersonalInfo = ({ profileIMG, username, userEmail }) => {
-//     return (
-//         <div className='card userPhoto'>
-//             <div className='row'>
-//                 <div className='col-md-3 col-md-offset-1 col-xs-12'>
-//                     <LoadProfileIm profileIMG={profileIMG} />
-//                 </div>
-//                 <div className='col-md-6 col-md-offset-1 col-xs-12 personalcontainer'>
-//                     <UserInfo username={username} userEmail={userEmail}/>
-//                 </div>
-//             </div>
-//         </div>
-
-
-//     )
-// }
 
 //creates buttons for i dont like etc
 const CreateButtons = (props) => {
     return (
         <div className='row'>
             <div className='col-md-11 col-md-offset-1'>
-                <div className='jumbotron chooseIngredientsProfile'>
+                <div className='jumbotron'>
                     <div className='row'>
 
                         <div className='col-md-3 col-xs-3'>
@@ -100,37 +82,32 @@ class Profile extends React.Component {
     }
 
     componentWillMount()
-  {
-      const storeRef = base.database().ref(getUserLoginData().uid);
-       storeRef.once('value',(snapshot) => {
-            const data = snapshot.val() || {};
-            if (data) {
-                this.setState({
-                    owner:  data.owner,
-                   picture : data.picture,
-                   userEmail : data.email
-                })
-            }
-            console.log(this.state.picture)
-        });
-  }
+    {
+        const storeRef = base.database().ref(getUserLoginData().uid);
+        storeRef.once('value',(snapshot) => {
+                const data = snapshot.val() || {};
+                if (data) {
+                    this.setState({
+                        owner:  data.owner,
+                    picture : data.picture,
+                    userEmail : data.email
+                    })
+                }
+                console.log(this.state.picture)
+            });
+    }
 
 
     render() {
         return (
             <div style={{ textAlign: "center" }}>
                 <div className="row firstElement">
-               
-                    <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
-
+                    <div style={{ paddingTop: '30px', }}>
                         <PersonalInfo profileIMG={this.state.picture} username={this.state.owner} userEmail={this.state.userEmail} />
-
                         <CreateButtons />
-
                         <div className='container'>
                             <h3> App Settings </h3>
                         </div>
-
                     </div>
 
                 </div>

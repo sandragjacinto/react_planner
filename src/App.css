@@ -163,9 +163,6 @@ a.menuButton:hover{
   background: red;
 }
 
-.profileInfo{
-  text-align: center;
-}
 .profilebutton{
   max-height: 100px;
   max-width: 100px;
@@ -263,8 +260,10 @@ a.menuButton:hover{
 
 .card{
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 100%;
+    width: 80%;
     border-radius: 5px;
+    margin: 0 auto;
+    float: center;
 }
 
 
