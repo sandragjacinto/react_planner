@@ -6,9 +6,6 @@ import { setUserData } from './DataUser';
 import { Link } from 'react-router-dom'
 import { Modal } from 'react-bootstrap';
 
-
-
-
 const IngredientInput = (props) => {
     return (
         <div className="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 input-group inputIngredient">
@@ -20,18 +17,18 @@ const IngredientInput = (props) => {
     )
 }
 
-const IgredientListComp = (props) => (
+export const IngredientListComp = (props) => (
     <div className='row'>
-        <div className="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2 ingredientsList">
+        <div className="col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2 ingredientsList">
             {props.listDontLike.map((ing, index) => {
                 return (
                     <div className='row list-group-item '>
-                        <div className='col-md-9 col-xs-9'>
+                        <div className = 'col-md-9 col-xs-9'>
                             <h4 key={index}>
                                 {ing}
                             </h4>
                         </div>
-                        <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
+                        <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2'>
                             <button key={index} className="btn btn-danger" value={index} type="button" onClick={props.onClickDelIngredient}>x</button>
                         </div>
                     </div>
@@ -50,7 +47,7 @@ const SaveButton = (props) => (
     </div>
 )
 
-class DontLike extends React.Component {
+export class DontLike extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -141,7 +138,7 @@ class DontLike extends React.Component {
             
             <Modal.Body>
                 <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
-                <IgredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
+                <IngredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
                 <SaveButton />
             </Modal.Body>
             

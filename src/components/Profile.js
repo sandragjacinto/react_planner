@@ -4,13 +4,11 @@ import base from '../base';
 import {isUserLogged} from './DataUser';
 import {getUserLoginData} from './DataUser';
 import {setUserData} from './DataUser';
-import DontLike from './DontLike.js';
+import {IngredientListComp, DontLike} from './DontLike.js';
 import DontLikeIm from './../icons/dontlike.png';
 import LikeIm from './../icons/like.png';
 import AlergicIm from './../icons/alergic.png';
 import CanNotIm from './../icons/cannot.png';
-
-
 
 //gets user info and jsx
 const UserInfo = (props) => {
@@ -42,45 +40,18 @@ const PersonalInfo = ({ profileIMG, username, userEmail }) => {
     )
 }
 
-const DontLikeIngredients = () => {
+const DontLikeIngredients = (props) => {
+    console.log("Profile DontLikeIngredients props.listDontLike:", props.listDontLike)
     return (
         <div className = 'card card-inverse card-success mb-3 text-center'>
             <div className = 'card-header'>
                 Allergies  
             </div>
             <div className = 'card-block'>
-                <p className = 'card-text'>Some allergies here</p>
+                <IngredientListComp listDontLike={props.listDontLike} onClickDelIngredient={function(){}}/>
             </div>
         </div>
     );
-}
-
-//creates buttons for i dont like etc
-const CreateButtons = (props) => {
-    return (
-        <div className='row'>
-            <div className='col-md-11 col-md-offset-1'>
-                <div className='jumbotron'>
-                    <div className='row'>
-
-                        <div className='col-md-3 col-xs-3'>
-                            <Link to={'/dontlike'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={DontLikeIm} alt="logo" /></Link>
-                        </div>
-                        <div className='col-md-3 col-xs-3'>
-                            <Link to={'/favmeals'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={LikeIm} alt="logo" /></Link>
-                        </div>
-                        <div className='col-md-3 col-xs-3'>
-                            <Link to={'/allergic'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={AlergicIm} alt="logo" /></Link>
-                        </div>
-                        <div className='col-md-3 col-xs-3'>
-                            <Link to={'/canteat'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={CanNotIm} alt="logo" /></Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    )
 }
 
 class Profile extends React.Component {
@@ -90,7 +61,8 @@ class Profile extends React.Component {
             owner: '',
             picture: '',
             userEmail: '',
-            isDontLikePopupShown: false
+            isDontLikePopupShown: false,
+            listDontLike:[]
         } 
     }
 
@@ -107,6 +79,15 @@ class Profile extends React.Component {
                     })
                 }
                 console.log(this.state.picture)
+            });
+
+        storeRef.child('restricitons').once('value', (snapshot) => {
+                const data = snapshot.val() || {};
+                if (data.dontlike) {
+                    this.setState({
+                    listDontLike : data.dontlike
+                    })
+                }
             });
     }
 
@@ -126,9 +107,8 @@ class Profile extends React.Component {
                 <div className="row firstElement">
                     <div style={{ paddingTop: '30px', }}>
                         <PersonalInfo profileIMG={this.state.picture} username={this.state.owner} userEmail={this.state.userEmail} />
-                        <CreateButtons />
-                        <DontLikeIngredients />
-                        <DontLike isShown = {this.state.isDontLikePopupShown} onClose = {this.state.onClosePopup}/>
+                        <DontLikeIngredients listDontLike = {this.state.listDontLike}/>
+                        <DontLike isShown = {this.state.isDontLikePopupShown} onClose = {this.onClosePopup}/>
                         <button onClick = {this.onEditDontLikeButton}>TEST Edit Dont Like Shit</button>
 
                     </div>
