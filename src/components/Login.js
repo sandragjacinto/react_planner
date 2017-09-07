@@ -115,8 +115,8 @@ class Login extends React.Component {
               <br></br>
               <div >
                 <h2>LOGIN TO START YOUR ADVENTURE</h2>
-                <button className='btn btn-primary'
-                  onClick={() => this.authenticate('facebook')}>LogIn </button>
+                <button className='btn btn-primary btn-login'
+                  onClick={() => this.authenticate('facebook')}>Login </button>
 
               </div>
               <br></br>
@@ -192,7 +192,7 @@ class Login extends React.Component {
 
   render() {
     //console.log("display name:" + getUserLoginData().displayName);
-    const logout = <button className='btn btn-primary' onClick={() => this.logout()}>Log Out!</button>;
+    const logout = <button className='btn btn-primary btn-login' onClick={() => this.logout()}>Log Out!</button>;
     // Check if they are log in...
     if (this.state.isUserLogged == false) {
       //if(!isUserLogged()) {

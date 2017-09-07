@@ -39,6 +39,12 @@
   padding-left: 10px;
 }
 
+.btn-login{
+  padding:10px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
 .btn-warning{
   background-color: #F18830;
   border: #F18830;
@@ -211,10 +217,13 @@ a.menuButton:hover{
   clear: both;
   overflow: hidden;
   background-size: 100%;
-  height: 400px;
+  height: 300px;
 }
 
-
+.choosenmeal-tab{
+  padding-left: 0px !important;
+  margin-left: 0px !important;
+}
 
 .menu-recipe-button{
   margin:0px;

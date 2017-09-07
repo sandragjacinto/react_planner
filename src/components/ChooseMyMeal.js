@@ -72,7 +72,7 @@ const RecipesFound = (props) => {
                         }
                     });
 
-                    { return (<RecipeFound isSelected={props.recipesFound} recipesSelected={props.recipesSelected} element={element} index={index} key={index} onRecipeSelected={props.onRecipeSelected} />) }
+                    { return <RecipeFound isSelected={props.recipesFound} recipesSelected={props.recipesSelected} element={element} index={index} key={index} onRecipeSelected={props.onRecipeSelected} /> }
                 })}
         </ul>
     )
@@ -259,23 +259,23 @@ class ChooseMyMeal extends React.Component {
             <div className='row'>
                 <div className='col-md-10 col-md-offset-1'>
                 <Tabs defaultActiveKey={1} className="firstElement choosenmeal-tab">
-                    <Tab eventKey={1} title="SEARCH FOR RECIPES">
-                        <div className='card'>
-                            <div className='card-block'>
-                                <h1 className="card-title titleH1">SEARCH FOR RECIPES</h1>
+                    <Tab className='no-padding' eventKey={1} title="SEARCH FOR RECIPES">
+                        <div className='card no-padding'>
+                            <div className='card-block no-padding'>
+                                <h1 className="card-title titleH1 no-padding">SEARCH FOR RECIPES</h1>
+                                <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton={this.onClickSearchButton} />
                                 <div className='bodyText'>
-                                    <SearchInput onChangeSearchInput={this.onChangeSearchInput} onClickSearchButton={this.onClickSearchButton} />
-                                    <RecipesFound recipesFound={this.state.recipesFound} recipesSelected={this.state.recipesSelected} onRecipeSelected={this.onRecipeSelected} />
+                                    <RecipesFound recipesFound={this.state.recipesFound} recipesSelected={this.state.recipesSelected} onRecipeSelected={this.onRecipeSelected} />    
                                 </div>
                             </div>
                         </div>
 
 
                     </Tab>
-                    <Tab eventKey={2} title={this.getTabName()}>
-                        <div className='card'>
-                            <div className='card-block'>
-                                <h1 className="card-title titleH1">CHOSEN RECIPES</h1>
+                    <Tab className='no-padding' eventKey={2} title={this.getTabName()}>
+                        <div className='card no-padding'>
+                            <div className='card-block no-padding'>
+                                <h1 className="card-title titleH1 no-padding">CHOSEN RECIPES</h1>
                                 <div className='bodyText'>
                                     <SelectedRecipes aling="right" recipesSelected={this.state.recipesSelected} onRecipeDeselected={this.onRecipeDeselected} />
                                 </div>
