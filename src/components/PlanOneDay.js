@@ -57,7 +57,8 @@ class PlanOneDayClass extends React.Component {
   render() {
     //console.log("planoneday render " + this.props.mealPlanSingleDay + this.props.dateToPlan);
     var scope = this;
-    var dateToPlan = new Date(this.props.dateToPlan);
+    var dateToPlan = new Date(Number(this.props.dateToPlan));
+    console.log("planoneday render date:", this.props.dateToPlan, ",string date:", dateToPlan.toDateString() );
     return (
       <div className="static-modal bodyText">
 
@@ -66,7 +67,7 @@ class PlanOneDayClass extends React.Component {
             <Modal.Title className='titleH1' style={{textAlign:'center'}}>SCHEDULE FOR {dateToPlan.toDateString()}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h4 className="bodyText" style={{textAlign:'center'}}>CHOSE RECIPES TO BE SCHEULED : </h4>
+            <h4 className="bodyText" style={{textAlign:'center'}}>CHOSE RECIPES TO BE SCHEDULED : </h4>
             <RecipesToSchedule recipes={this.props.recipesAvailableForSchedule} mealPlanSingleDay={this.props.mealPlanSingleDay} onRecipeScheduled={this.onRecipeScheduled} />
             <hr />
             <ScheduledRecipes mealPlanSingleDay={this.props.mealPlanSingleDay} onRecipeUnscheduled={this.onRecipeUnscheduled} recipesAvailableForSchedule={this.props.recipesAvailableForSchedule} />
@@ -113,7 +114,12 @@ const RecipesToSchedule = (props) => {
       </ul>
     );
   }
-
+  else
+  {
+    return(
+      <h3 className='titleH1 errorMessage' >OOPS! YOU HAVEN'T CHOSEN ANY MEAL YET ...</h3>
+    );
+  }
 }
 
 const ScheduledRecipes = ({ mealPlanSingleDay, onRecipeUnscheduled, recipesAvailableForSchedule }) => {
@@ -132,7 +138,7 @@ const ScheduledRecipes = ({ mealPlanSingleDay, onRecipeUnscheduled, recipesAvail
             </div>
           )
           :
-          <h4 className="bodyText" style={{textAlign:'center'}}>NO RECIPES SCHEDULED YET : </h4>
+          <h4 className="bodyText" style={{textAlign:'center'}}>NO RECIPES SCHEDULED YET</h4>
       }
     </div>
   );

@@ -4,37 +4,18 @@ import base from '../base';
 import {isUserLogged} from './DataUser';
 import {getUserLoginData} from './DataUser';
 import {setUserData} from './DataUser';
+import {IngredientListComp, DontLike} from './DontLike.js';
 import DontLikeIm from './../icons/dontlike.png';
 import LikeIm from './../icons/like.png';
 import AlergicIm from './../icons/alergic.png';
 import CanNotIm from './../icons/cannot.png';
 
-
-
 //gets user info and jsx
 const UserInfo = (props) => {
-    console.log('name :'+props.owner)
     return (
-        <div>
-
-            <div className='row profileInfo'>
-                <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h3> User Name: {props.username}</h3>
-                </div>
-            </div>
-            <div className='row profileInfo'>
-                <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h5> Email: {props.userEmail}</h5>
-                </div>
-            </div>
-            <div className='row profileInfo'>
-                <div className='col-md-9 col-md-offset-0 col-xs-7 col-xs-offset-3' >
-                    <h5> Tutor: {props.tutorName}</h5>
-                </div>
-            </div>
-            
+        <div className='row'>
+            <h3>{props.username}</h3>
         </div>
-
     )
 }
 //loads image for profile
@@ -52,46 +33,25 @@ const LoadProfileIm = (props) => {
 //reassembles image and user info
 const PersonalInfo = ({ profileIMG, username, userEmail }) => {
     return (
-        <div className='container userPhoto'>
-            <div className='row'>
-                <div className='col-md-3 col-md-offset-1 col-xs-12'>
-                    <LoadProfileIm profileIMG={profileIMG} />
-                </div>
-                <div className='col-md-6 col-md-offset-1 col-xs-12 personalcontainer'>
-                    <UserInfo username={username} userEmail={userEmail}/>
-                </div>
-            </div>
+        <div className='card userPhoto text-center'>
+            <LoadProfileIm profileIMG={profileIMG} />
+            <UserInfo username={username}/>
         </div>
-
-
     )
 }
-//creates buttons for i dont like etc
-const CreateButtons = (props) => {
-    return (
-        <div className='row'>
-            <div className='col-md-11 col-md-offset-1'>
-                <div className='jumbotron chooseIngredientsProfile'>
-                    <div className='row'>
 
-                        <div className='col-md-3 col-xs-3'>
-                            <Link to={'/dontlike'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={DontLikeIm} alt="logo" /></Link>
-                        </div>
-                        <div className='col-md-3 col-xs-3'>
-                            <Link to={'/favmeals'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={LikeIm} alt="logo" /></Link>
-                        </div>
-                        <div className='col-md-3 col-xs-3'>
-                            <Link to={'/allergic'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={AlergicIm} alt="logo" /></Link>
-                        </div>
-                        <div className='col-md-3 col-xs-3'>
-                            <Link to={'/canteat'} style={{ color: 'white' }}><img className='img-circle profilebutton' src={CanNotIm} alt="logo" /></Link>
-                        </div>
-                    </div>
-                </div>
+const DontLikeIngredients = (props) => {
+    console.log("Profile DontLikeIngredients props.listDontLike:", props.listDontLike)
+    return (
+        <div className = 'card card-inverse card-success mb-3 text-center'>
+            <div className = 'card-header'>
+                Allergies  
+            </div>
+            <div className = 'card-block'>
+                <IngredientListComp listDontLike={props.listDontLike} onClickDelIngredient={function(){}}/>
             </div>
         </div>
-
-    )
+    );
 }
 
 class Profile extends React.Component {
@@ -101,42 +61,55 @@ class Profile extends React.Component {
             owner: '',
             picture: '',
             userEmail: '',
-            tutorName: 'Pedro Pena'
-        }
-        
+            isDontLikePopupShown: false,
+            listDontLike:[]
+        } 
     }
 
     componentWillMount()
-  {
-      const storeRef = base.database().ref(getUserLoginData().uid);
-       storeRef.once('value',(snapshot) => {
-            const data = snapshot.val() || {};
-            if (data) {
-                this.setState({
-                    owner:  data.owner,
-                   picture : data.picture,
-                   userEmail : data.email
-                })
-            }
-            console.log(this.state.picture)
-        });
-  }
+    {
+        const storeRef = base.database().ref(getUserLoginData().uid);
+        storeRef.once('value',(snapshot) => {
+                const data = snapshot.val() || {};
+                if (data) {
+                    this.setState({
+                        owner:  data.owner,
+                    picture : data.picture,
+                    userEmail : data.email
+                    })
+                }
+                console.log(this.state.picture)
+            });
 
+        storeRef.child('restricitons').once('value', (snapshot) => {
+                const data = snapshot.val() || {};
+                if (data.dontlike) {
+                    this.setState({
+                    listDontLike : data.dontlike
+                    })
+                }
+            });
+    }
+
+    onEditDontLikeButton = () =>
+    {
+        this.setState({isDontLikePopupShown:true});
+    }
+
+    onClosePopup = () =>
+    {
+        this.setState({isDontLikePopupShown:false});
+    }
 
     render() {
         return (
             <div style={{ textAlign: "center" }}>
                 <div className="row firstElement">
-               
-                    <div className="col-md-11 col-xs-12" style={{ paddingTop: '30px', }}>
-
+                    <div style={{ paddingTop: '30px', }}>
                         <PersonalInfo profileIMG={this.state.picture} username={this.state.owner} userEmail={this.state.userEmail} />
-
-                        <CreateButtons />
-
-                        <div className='container'>
-                            <h3> App Settings </h3>
-                        </div>
+                        <DontLikeIngredients listDontLike = {this.state.listDontLike}/>
+                        <DontLike isShown = {this.state.isDontLikePopupShown} onClose = {this.onClosePopup}/>
+                        <button onClick = {this.onEditDontLikeButton}>TEST Edit Dont Like Shit</button>
 
                     </div>
 
