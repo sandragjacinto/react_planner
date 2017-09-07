@@ -52,6 +52,11 @@
   color:black;
 }
 
+.planning-btn{
+  padding:40px;
+  margin:5px;
+}
+
 .lateralMenu{
   overflow: hidden;
   position: fixed; /* Set the navbar to fixed position */
@@ -268,3 +273,16 @@ a.menuButton:hover{
     background-color: blue;
 }
 
+
+.backgroundTest{
+  background-image: url('./icons/backg1.jpg');
+  background-size: 100%;
+  background-attachment: fixed;
+  min-height: 650px;
+}
+
+.whiteBackground{
+  background-color: white;
+  margin-top: 100px;
+  min-height: 200px;
+}
