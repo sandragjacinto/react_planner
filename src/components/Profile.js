@@ -4,6 +4,7 @@ import base from '../base';
 import {isUserLogged} from './DataUser';
 import {getUserLoginData} from './DataUser';
 import {setUserData} from './DataUser';
+import DontLike from './DontLike.js';
 import DontLikeIm from './../icons/dontlike.png';
 import LikeIm from './../icons/like.png';
 import AlergicIm from './../icons/alergic.png';
@@ -41,6 +42,19 @@ const PersonalInfo = ({ profileIMG, username, userEmail }) => {
     )
 }
 
+const DontLikeIngredients = () => {
+    return (
+        <div className = 'card card-inverse card-success mb-3 text-center'>
+            <div className = 'card-header'>
+                Allergies  
+            </div>
+            <div className = 'card-block'>
+                <p className = 'card-text'>Some allergies here</p>
+            </div>
+        </div>
+    );
+}
+
 //creates buttons for i dont like etc
 const CreateButtons = (props) => {
     return (
@@ -76,9 +90,8 @@ class Profile extends React.Component {
             owner: '',
             picture: '',
             userEmail: '',
-            tutorName: 'Pedro Pena'
-        }
-        
+            isDontLikePopupShown: false
+        } 
     }
 
     componentWillMount()
@@ -97,6 +110,15 @@ class Profile extends React.Component {
             });
     }
 
+    onEditDontLikeButton = () =>
+    {
+        this.setState({isDontLikePopupShown:true});
+    }
+
+    onClosePopup = () =>
+    {
+        this.setState({isDontLikePopupShown:false});
+    }
 
     render() {
         return (
@@ -105,9 +127,10 @@ class Profile extends React.Component {
                     <div style={{ paddingTop: '30px', }}>
                         <PersonalInfo profileIMG={this.state.picture} username={this.state.owner} userEmail={this.state.userEmail} />
                         <CreateButtons />
-                        <div className='container'>
-                            <h3> App Settings </h3>
-                        </div>
+                        <DontLikeIngredients />
+                        <DontLike isShown = {this.state.isDontLikePopupShown} onClose = {this.state.onClosePopup}/>
+                        <button onClick = {this.onEditDontLikeButton}>TEST Edit Dont Like Shit</button>
+
                     </div>
 
                 </div>

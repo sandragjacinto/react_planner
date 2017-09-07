@@ -263,3 +263,8 @@ a.menuButton:hover{
     margin: 0 auto;
     float: center;
 }
+
+.card-header{
+    background-color: blue;
+}
+

@@ -4,7 +4,7 @@ import base from '../base';
 import { getUserLoginData } from './DataUser';
 import { setUserData } from './DataUser';
 import { Link } from 'react-router-dom'
-
+import { Modal } from 'react-bootstrap';
 
 
 
@@ -104,29 +104,61 @@ class DontLike extends React.Component {
         });
     }
     
-componentWillMount()
-{
-        const storeRef = base.database().ref(getUserLoginData().uid);
-        storeRef.child('restricitons').once('value', (snapshot) => {
-            const data = snapshot.val() || {};
-            if (data.dontlike) {
-                this.setState({
-                   listDontLike : data.dontlike
-                })
-            }
-        });
-}
+    componentWillMount()
+    {
+            const storeRef = base.database().ref(getUserLoginData().uid);
+            storeRef.child('restricitons').once('value', (snapshot) => {
+                const data = snapshot.val() || {};
+                if (data.dontlike) {
+                    this.setState({
+                    listDontLike : data.dontlike
+                    })
+                }
+            });
+    }
 
     render() {
+        var scope = this;
         return (
-            <div className='card firstElement'>
-                <div className='card-block'>
-                    <h1 className="card-title">I Don't Like</h1>
-                    <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
-                    <IgredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
-                    <SaveButton />
-                </div>
-            </div>
+            // <div className='card firstElement'>
+            //     <div className='card-block'>
+            //         <h1 className="card-title">I Don't Like</h1>
+            //         <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
+            //         <IgredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
+            //         <SaveButton />
+            //     </div>
+            // </div>
+
+
+
+        <div className="static-modal bodyText">
+
+            <Modal show={this.props.isShown} onHide={function () { scope.props.onClose() }}>
+            
+            <Modal.Header closeButton>
+                <Modal.Title className='titleH1' style={{textAlign:'center'}}>EDIT INGREDIENTS</Modal.Title>
+            </Modal.Header>
+            
+            <Modal.Body>
+                <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
+                <IgredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
+                <SaveButton />
+            </Modal.Body>
+            
+            <Modal.Footer>
+                {<button className='btn btn-success bodyText' onClick={() => {
+                this.props.onClose();
+                }
+                }>Close</button>}
+            </Modal.Footer>
+            
+            </Modal>
+
+        </div>
+
+
+
+
         )
     }
 }
