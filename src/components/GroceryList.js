@@ -6,6 +6,10 @@ import base from '../base';
 import ChooseMyMeal from './ChooseMyMeal.js';
 import { getUserLoginData } from './DataUser';
 import garbage from './../icons/whiteTrash.png'
+import cart from './../icons/cart.png';
+import OnLineShopping from './OnLineShopping.js';
+
+
 
 const GroceryListItems = (props) => {
     <div className='row'>
@@ -121,23 +125,15 @@ class GroceryList extends React.Component {
             });
     }
 
+    onEditDontLikeButton = () =>
+    {
+        this.setState({isDontLikePopupShown:true});
+    }
 
-
-//     return(
-//         <div className=' row list-group-item bodyText' style={{ textAlign: 'left', minHeight: '100px' }}>
-//     <br></br>
-//     <div className='col-md-9 col-xs-9'>
-//         <h4 key={index}>
-//             {item}
-//         </h4>
-//     </div>
-//     <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
-//         <button key={index} className="btn btn-danger" value={index} type="button" onClick={this.onClickDelIngredient}><img style={{ width: '25px' }} src={garbage} /></button>
-//     </div>
-// </div>
-//     )
-// :
-// null
+    onClosePopup = () =>
+    {
+        this.setState({isDontLikePopupShown:false});
+    }
 
 render() {
 console.log('gocerie list', this.state.grocerieList.length)
@@ -145,7 +141,15 @@ console.log('gocerie list', this.state.grocerieList.length)
         <div style={{ textAlign: "center" }}>
             <div className="row firstElement backgroundTest" >
                 <div className="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 whiteBackground" >
+                    <div className="row">
+                        <div className='col-md-8 col-md-offset-2'>
                     <h1 className='titleH1' >Grocerie List</h1>
+                        </div>
+                        <div className='col-md-1 col-md-offset-1'>
+                        <br></br>
+                        <button className="btn btn-default"  type="button" onClick = {this.onEditDontLikeButton}><img style={{ width: '25px' }} src={cart} /></button>
+                            </div>
+                    </div>
                     {
                         this.state.grocerieList.length > 0 ?
                         (
@@ -175,7 +179,7 @@ console.log('gocerie list', this.state.grocerieList.length)
                                 <h3 className='titleH1 errorMessage' >OOPS! YOU HAVEN'T CHOSEN ANY MEAL YET ...</h3>
                                 </div>
                                 }
-
+                                <OnLineShopping isShown = {this.state.isDontLikePopupShown} onClose = {this.onClosePopup}/>
                     </div>
                 </div>
             </div>
