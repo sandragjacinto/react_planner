@@ -280,8 +280,9 @@ a.menuButton:hover{
 
 .card-header{
     background-color: blue;
+    font-size: 200%;
+    color: white;
 }
-
 
 .backgroundTest{
   background-image: url('./icons/backg1.jpg');
