@@ -5,13 +5,15 @@ import { getUserLoginData } from './DataUser';
 import { setUserData } from './DataUser';
 import { Link } from 'react-router-dom'
 import { Modal } from 'react-bootstrap';
+import mail from './../icons/mailSent2.png';
+
 
 
 
 
 export class OnLineShopping extends React.Component {
 
-    
+
 
     render() {
         var scope = this;
@@ -19,29 +21,28 @@ export class OnLineShopping extends React.Component {
 
 
 
-        <div className="static-modal bodyText">
+            <div className="static-modal bodyText">
 
-            <Modal show={this.props.isShown} onHide={function () { scope.props.onClose() }}>
-            
-            <Modal.Header closeButton>
-                <Modal.Title className='titleH1' style={{textAlign:'center'}}>DONE</Modal.Title>
-            </Modal.Header>
-            
-            <Modal.Body>
-                <p className='bodyText'>YOUR GROCERY LIST HAS BEEN SENT ! </p>
+                <Modal show={this.props.isShown} onHide={function () { scope.props.onClose() }}>
+                    <div className='backgroundPopUp' >
 
-            </Modal.Body>
-            
-            <Modal.Footer>
-                {<button className='btn btn-success bodyText' onClick={() => {
-                this.props.onClose();
-                }
-                }>Close</button>}
-            </Modal.Footer>
-            
-            </Modal>
+                        <div  style={{ backgroundColor: 'white', margin: '15px', marginBottom: '10px', marginTop: '10px' }}>
+                            <Modal.Header closeButton>
+                                <Modal.Title className='titleH1' style={{ textAlign: 'center' }}><h1>ORDER SENT</h1></Modal.Title>
+                            </Modal.Header>
 
-        </div>
+                            <Modal.Body style={{textAlign:'center'}}>
+                                <p className='bodyText' style={{fontSize:'12pt'}}>YOUR GROCERY LIST HAS BEEN SENT ! </p>
+                                <br></br>
+                                <img style={{ width: '20%' }} src={mail} />
+                            </Modal.Body>
+
+
+                        </div>
+                    </div>
+                </Modal>
+
+            </div>
 
 
 
