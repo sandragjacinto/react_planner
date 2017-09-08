@@ -11,27 +11,7 @@ import OnLineShopping from './OnLineShopping.js';
 
 
 
-const GroceryListItems = (props) => {
-    <div className='row'>
-        <div className="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2 ingredientsList no-padding">
-            {props.grocerieList.map((groceryItem, index) => {
-                return (
-                    <div className='row list-group-item no-padding'>
-                        <div className='col-md-9 col-xs-9'>
-                            <h4 key={index}>
-                                {groceryItem}
-                            </h4>
-                        </div>
-                        <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
-                            <button key={index} className="btn btn-danger" value={index} type="button" onClick={props.onClickDelIngredient}>x</button>
-                        </div>
-                    </div>
-                )
-            })
-            }
-        </div>
-    </div>
-}
+
 
 class GroceryList extends React.Component {
     constructor(props) {
@@ -141,9 +121,9 @@ console.log('gocerie list', this.state.grocerieList.length)
         <div style={{ textAlign: "center" }}>
             <div className="row firstElement backgroundTest" >
                 <div className="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 whiteBackground" >
-                    <div className="row">
-                        <div className='col-md-8 col-md-offset-2'>
-                    <h1 className='titleH1' >Grocerie List</h1>
+                    <div className="row ">
+                        <div className='col-md-4 col-md-offset-4'>
+                    <h1 className='titleH1' >GROCERY LIST</h1>
                         </div>
                         <div className='col-md-1 col-md-offset-1'>
                         <br></br>
@@ -156,16 +136,20 @@ console.log('gocerie list', this.state.grocerieList.length)
                             <div>
                                 {this.state.grocerieList.map((item, index) => {
                                     return (
-                                        <div className=' row list-group-item bodyText' style={{ textAlign: 'left', minHeight: '100px' }}>
+                                        <div className='row'>
+                                        <div className='col-md-8 col-md-offset-2 list-group-item bodyText groceryItem' style={{ textAlign: 'left', minHeight: '100px', marginBottom:'20px' }}>
+                                            <div className='row '>
                                             <br></br>
-                                            <div className='col-md-9 col-xs-9'>
+                                            <div className='col-md-8 col-md-offset-1 col-xs-8 col-xs-offset-1'>
                                                 <h4 key={index}>
-                                                    {item}
+                                                    {item.toUpperCase()}
                                                 </h4>
                                             </div>
-                                            <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
+                                            <div className='col-md-1 col-md-offset-1 col-xs-1 col-xs-offset-1' >
                                                 <button key={index} className="btn btn-danger" value={index} type="button" onClick={this.onClickDelIngredient}><img style={{ width: '25px' }} src={garbage} /></button>
                                             </div>
+                                            </div>
+                                        </div>
                                         </div>
                                     )
                                 })}
