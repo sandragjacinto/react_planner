@@ -14,9 +14,7 @@ import editIcon from './../icons/edit.png';
 //gets user info and jsx
 const UserInfo = (props) => {
     return (
-        <div className='row'>
-            <h3>{props.username}</h3>
-        </div>
+            <h1 className='titleH1'>{props.username}</h1>
     )
 }
 //loads image for profile
@@ -34,11 +32,13 @@ const LoadProfileIm = (props) => {
 //reassembles image and user info
 const PersonalInfo = ({ profileIMG, username, userEmail }) => {
     return (
-        <div className='card userPhoto text-center'>
+        <div className='card userPhoto text-center whiteBackground'>
             <div className = 'card-header'>
                 <LoadProfileIm profileIMG={profileIMG} />
             </div>
+            <div  >
             <UserInfo username={username}/>
+            </div>
         </div>
     )
 }
@@ -46,13 +46,15 @@ const PersonalInfo = ({ profileIMG, username, userEmail }) => {
 const DontLikeIngredients = (props) => {
     console.log("Profile DontLikeIngredients props.listDontLike:", props.listDontLike)
     return (
-        <div className = 'card card-inverse card-success mb-3 text-center'>
+        <div className='row'>
+            <div className='col-md-10 col-md-offset-1 col-xs-10 col col-xs-offset-1'>
+        <div className = 'card card-inverse card-success mb-3 text-center' style={{backgroundColor:'white'}}>
             <div className = 'card-header'>
                 I dont't like
                 <div className = 'btn-toolbar pull-right'>
                     <div className = 'btn-group'>
                         <div>
-                            <button className = 'btn btn-primary menu-recipe-button' onClick = {props.onClick}><img style = {{width : '20px'}} src = {editIcon}></img></button>                  
+                            <img onClick = {props.onClick}  style = {{width : '30px', marginBottom:'5px', marginRight:'10px'}} src = {editIcon}></img>
                         </div>
                     </div>
                 </div>
@@ -62,6 +64,8 @@ const DontLikeIngredients = (props) => {
             <div className = 'card-block'>
                 <IngredientListComp listDontLike={props.listDontLike} onClickDelIngredient={function(){}}/>
             </div>
+            </div>
+        </div>
         </div>
     );
 }
@@ -125,7 +129,7 @@ class Profile extends React.Component {
         return (
             <div style={{ textAlign: "center" }} className = 'backgroundTest'>
                 <div className="row firstElement">
-                    <div style={{ paddingTop: '30px', }}>
+                    <div >
                         <PersonalInfo profileIMG={this.state.picture} username={this.state.owner} userEmail={this.state.userEmail} />
                         <br></br>
                         <DontLikeIngredients listDontLike = {this.state.listDontLike} onClick = {this.onEditDontLikeButton}/>
