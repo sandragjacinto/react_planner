@@ -45,7 +45,7 @@ const DontLikeIngredients = (props) => {
     return (
         <div className = 'card card-inverse card-success mb-3 text-center'>
             <div className = 'card-header'>
-                Allergies  
+                I dont't like  
             </div>
             <div className = 'card-block'>
                 <IngredientListComp listDontLike={props.listDontLike} onClickDelIngredient={function(){}}/>
@@ -68,6 +68,7 @@ class Profile extends React.Component {
 
     componentWillMount()
     {
+        console.log("Profile componentWillMount");
         const storeRef = base.database().ref(getUserLoginData().uid);
         storeRef.once('value',(snapshot) => {
                 const data = snapshot.val() || {};
@@ -81,14 +82,20 @@ class Profile extends React.Component {
                 console.log(this.state.picture)
             });
 
+        this.updateRestrictionsData();
+    }
+
+    updateRestrictionsData = () =>    
+    {
+        const storeRef = base.database().ref(getUserLoginData().uid);
         storeRef.child('restricitons').once('value', (snapshot) => {
-                const data = snapshot.val() || {};
-                if (data.dontlike) {
-                    this.setState({
-                    listDontLike : data.dontlike
-                    })
-                }
-            });
+            const data = snapshot.val() || {};
+            if (data.dontlike) {
+                this.setState({
+                listDontLike : data.dontlike
+                })
+            }
+        });
     }
 
     onEditDontLikeButton = () =>
@@ -99,6 +106,7 @@ class Profile extends React.Component {
     onClosePopup = () =>
     {
         this.setState({isDontLikePopupShown:false});
+        this.updateRestrictionsData();
     }
 
     render() {
