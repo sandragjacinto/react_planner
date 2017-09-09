@@ -117,6 +117,7 @@ class ChooseMyMeal extends React.Component {
             searchWord: "",
             recipesFound: [],
             recipesSelected: {},
+            dontLike:[],
         }
     }
 
@@ -163,6 +164,7 @@ class ChooseMyMeal extends React.Component {
        })
        var dontlike = this.state.dontLike;
       console.log(dontlike); 
+      console.log(response);
      
 var ingredientsf = response.filter(function(recipe) {
           return !recipe.recipe.ingredients.map(function(ingredientes){
@@ -201,8 +203,8 @@ var ingredientsf = response.filter(function(recipe) {
 
 }, false);;
           })
-
-        this.setState({ recipesFound: response });
+console.log(ingredientsf)
+        this.setState({ recipesFound: ingredientsf });
     }
 
     //Once a recipe is selected, state will be updated
@@ -250,6 +252,16 @@ var ingredientsf = response.filter(function(recipe) {
             if (data.recipesSelected) {
                 this.setState({
                     recipesSelected: data.recipesSelected
+
+                })
+            }
+        });
+        storeRef.child('restricitons').once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            if (data.dontlike) {
+                this.setState({
+                    dontLike: data.dontlike
+                    
                 })
             }
         });
