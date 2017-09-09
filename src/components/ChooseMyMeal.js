@@ -150,14 +150,42 @@ class ChooseMyMeal extends React.Component {
      
 var ingredientsf = response.filter(function(recipe) {
           return recipe.recipe.ingredients.map(function(ingredientes){
-             console.log(ingredientes.text);
-             return ingredientes.text.indexOf(dontlike.map(function(dontlike){
-               console.log(dontlike);
-               return dontlike;
+             
+             return dontlike.map(function(dontlike){
+                
+                return ingredientes.text.indexOf(dontlike);
 
-          }));
+             }).reduce(function (previous, current) {
+    
+   if(current > -1){
+    
+
+    return  true
+   }else{
+    
+    return previous
+
+   }
+
+}, false);;
+               
+               
+
+          }).reduce(function (previous, current) {
+  
+   if(current === true){
+    
+    
+    return true
+   }else{
+    
+    return previous
+
+   }
+
+}, false);;
           })
-       })
+       
 
        console.log(ingredientsf);
 
