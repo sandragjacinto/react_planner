@@ -149,7 +149,7 @@ class ChooseMyMeal extends React.Component {
       console.log(dontlike); 
      
 var ingredientsf = response.filter(function(recipe) {
-          return recipe.recipe.ingredients.map(function(ingredientes){
+          return !recipe.recipe.ingredients.map(function(ingredientes){
              
              return dontlike.map(function(dontlike){
                 
