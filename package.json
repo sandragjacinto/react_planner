@@ -3,21 +3,29 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "express": "^4.15.4",
+    "fs": "0.0.1-security",
     "moment": "^2.18.1",
+    "morgan": "^1.8.2",
+    "node-wordnet": "^0.1.12",
     "re-base": "^2.2.0",
     "react": "^15.6.1",
     "react-addons-shallow-compare": "^15.6.0",
     "react-bootstrap": "^0.31.2",
     "react-dates": "^12.3.0",
     "react-dom": "^15.6.1",
+    "react-nlp": "0.0.3",
     "react-router": "^2.4.0",
     "react-router-dom": "^4.1.2",
-    "react-scripts": "1.0.10"
+    "react-scripts": "1.0.10",
+    "webpack-require": "0.0.16",
+    "wndb-with-exceptions": "^3.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy": "http://localhost:9000"
 }

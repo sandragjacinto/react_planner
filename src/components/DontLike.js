@@ -4,10 +4,7 @@ import base from '../base';
 import { getUserLoginData } from './DataUser';
 import { setUserData } from './DataUser';
 import { Link } from 'react-router-dom'
-
-
-
-
+import { Modal } from 'react-bootstrap';
 
 const IngredientInput = (props) => {
     return (
@@ -20,18 +17,18 @@ const IngredientInput = (props) => {
     )
 }
 
-const IgredientListComp = (props) => (
+export const IngredientListComp = (props) => (
     <div className='row'>
-        <div className="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2 ingredientsList">
+        <div className="col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2 ingredientsList">
             {props.listDontLike.map((ing, index) => {
                 return (
                     <div className='row list-group-item '>
-                        <div className='col-md-9 col-xs-9'>
+                        <div className = 'col-md-9 col-xs-9'>
                             <h4 key={index}>
                                 {ing}
                             </h4>
                         </div>
-                        <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
+                        <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2'>
                             <button key={index} className="btn btn-danger" value={index} type="button" onClick={props.onClickDelIngredient}>x</button>
                         </div>
                     </div>
@@ -50,7 +47,7 @@ const SaveButton = (props) => (
     </div>
 )
 
-class DontLike extends React.Component {
+export class DontLike extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -104,29 +101,61 @@ class DontLike extends React.Component {
         });
     }
     
-componentWillMount()
-{
-        const storeRef = base.database().ref(getUserLoginData().uid);
-        storeRef.child('restricitons').once('value', (snapshot) => {
-            const data = snapshot.val() || {};
-            if (data.dontlike) {
-                this.setState({
-                   listDontLike : data.dontlike
-                })
-            }
-        });
-}
+    componentWillMount()
+    {
+            const storeRef = base.database().ref(getUserLoginData().uid);
+            storeRef.child('restricitons').once('value', (snapshot) => {
+                const data = snapshot.val() || {};
+                if (data.dontlike) {
+                    this.setState({
+                    listDontLike : data.dontlike
+                    })
+                }
+            });
+    }
 
     render() {
+        var scope = this;
         return (
-            <div className='card'>
-                <div className='card-block'>
-                    <h1 className="card-title">I Don't Like</h1>
-                    <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
-                    <IgredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
-                    <SaveButton />
-                </div>
-            </div>
+            // <div className='card firstElement'>
+            //     <div className='card-block'>
+            //         <h1 className="card-title">I Don't Like</h1>
+            //         <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
+            //         <IgredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
+            //         <SaveButton />
+            //     </div>
+            // </div>
+
+
+
+        <div className="static-modal bodyText">
+
+            <Modal show={this.props.isShown} onHide={function () { scope.props.onClose() }}>
+            
+            <Modal.Header closeButton>
+                <Modal.Title className='titleH1' style={{textAlign:'center'}}>EDIT INGREDIENTS</Modal.Title>
+            </Modal.Header>
+            
+            <Modal.Body>
+                <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
+                <IngredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
+                <SaveButton />
+            </Modal.Body>
+            
+            <Modal.Footer>
+                {<button className='btn btn-success bodyText' onClick={() => {
+                this.props.onClose();
+                }
+                }>Close</button>}
+            </Modal.Footer>
+            
+            </Modal>
+
+        </div>
+
+
+
+
         )
     }
 }
