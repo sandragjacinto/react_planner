@@ -49,6 +49,7 @@ const DontLikeIngredients = (props) => {
         <div className='row'>
             <div className='col-md-10 col-md-offset-1 col-xs-10 col col-xs-offset-1'>
         <div className = 'card card-inverse card-success mb-3 text-center' style={{backgroundColor:'white'}}>
+            
             <div className = 'card-header'>
                 I dont't like
                 <div className = 'btn-toolbar pull-right'>
@@ -64,7 +65,7 @@ const DontLikeIngredients = (props) => {
             <div className = 'card-block'>
                 <IngredientListComp listDontLike={props.listDontLike} onClickDelIngredient={function(){}}/>
             </div>
-            </div>
+        </div>
         </div>
         </div>
     );
