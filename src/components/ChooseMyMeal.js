@@ -117,6 +117,7 @@ class ChooseMyMeal extends React.Component {
             searchWord: "",
             recipesFound: [],
             recipesSelected: {},
+            dontLike:[],
         }
     }
 
@@ -157,7 +158,53 @@ class ChooseMyMeal extends React.Component {
     //api writes response here. Update state
     onSearchResponse = (response) => {
         //console.log(response);
-        this.setState({ recipesFound: response });
+        
+       var ingredients = response.map(function(recipe) {
+          return recipe.recipe.ingredients;
+       })
+       var dontlike = this.state.dontLike;
+      console.log(dontlike); 
+      console.log(response);
+     
+var ingredientsf = response.filter(function(recipe) {
+          return !recipe.recipe.ingredients.map(function(ingredientes){
+             
+             return dontlike.map(function(dontlike){
+                
+                return ingredientes.text.indexOf(dontlike);
+
+             }).reduce(function (previous, current) {
+    
+   if(current > -1){
+    
+
+    return  true
+   }else{
+    
+    return previous
+
+   }
+
+}, false);;
+               
+               
+
+          }).reduce(function (previous, current) {
+  
+   if(current === true){
+    
+    
+    return true
+   }else{
+    
+    return previous
+
+   }
+
+}, false);;
+          })
+console.log(ingredientsf)
+        this.setState({ recipesFound: ingredientsf });
     }
 
     //Once a recipe is selected, state will be updated
@@ -205,6 +252,16 @@ class ChooseMyMeal extends React.Component {
             if (data.recipesSelected) {
                 this.setState({
                     recipesSelected: data.recipesSelected
+
+                })
+            }
+        });
+        storeRef.child('restricitons').once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            if (data.dontlike) {
+                this.setState({
+                    dontLike: data.dontlike
+                    
                 })
             }
         });
