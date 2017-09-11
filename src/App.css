@@ -68,7 +68,8 @@
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
   text-align: center;
-  background: #F18830;
+  background-image: url('./icons/food.png');
+  background-repeat: repeat;
   font-size: 10px;
     margin-right: 10px;
     margin-left: 10px;
@@ -83,7 +84,8 @@
 a.menuButton{
   
   text-align: center;
-  background: #F18830;  
+  background-image: url('./icons/food.png');
+  background-repeat: repeat;
   color:white;
   padding-bottom: 20px;
   padding-top: 20px;
@@ -102,7 +104,8 @@ a.menuButton:hover{
 
 .loginSection{
   padding-top:40px;
-  background: #F18830; 
+  background-image: url('./icons/food.png');
+  background-repeat: repeat;
   color: white;
   font-family: 'Cabin Sketch';
   height: 500px;
@@ -292,8 +295,8 @@ a.menuButton:hover{
 }
 
 .backgroundTest{
-  background-image: url('./icons/backg1.jpg');
-  background-size: 100%;
+ background-image: url('./icons/wormz.png');
+  background-repeat: repeat;
   background-attachment: fixed;
   min-height: 650px;
 }
@@ -319,4 +322,9 @@ a.menuButton:hover{
   padding: 20px; 
   width: 200px;
   height: 200px; 
+}
+
+.list-group-item{ 
+  background-image: url('./icons/polaroid.png');
+  background-repeat: repeat;
 }

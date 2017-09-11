@@ -4,10 +4,7 @@ import base from '../base';
 import { getUserLoginData } from './DataUser';
 import { setUserData } from './DataUser';
 import { Link } from 'react-router-dom'
-
-
-
-
+import { Modal } from 'react-bootstrap';
 
 const IngredientInput = (props) => {
     return (
@@ -20,18 +17,18 @@ const IngredientInput = (props) => {
     )
 }
 
-const IgredientListComp = (props) => (
+export const AIngredientListComp = (props) => (
     <div className='row'>
-        <div className="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2 ingredientsList">
-            {props.listAllergic.map((ing, index) => {
+        <div className="col-md-10 col-md-offset-1 col-xs-8 col-xs-offset-2 ingredientsList">
+            {props.listDontLike.map((ing, index) => {
                 return (
-                    <div className='row list-group-item '>
-                        <div className='col-md-9 col-xs-9'>
+                    <div className='row list-group-item bodyText'>
+                        <div className = 'col-md-9 col-xs-9'>
                             <h4 key={index}>
                                 {ing}
                             </h4>
                         </div>
-                        <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2' >
+                        <div className='col-md-1 col-md-offset-2 col-xs-1 col-xs-offset-2'>
                             <button key={index} className="btn btn-danger" value={index} type="button" onClick={props.onClickDelIngredient}>x</button>
                         </div>
                     </div>
@@ -50,46 +47,46 @@ const SaveButton = (props) => (
     </div>
 )
 
-class Allergic extends React.Component {
+export class ADontLike extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newIngredientAllergic: '',
-            listAllergic: [],
+            newIngredientDontLike: '',
+            listDontLike: [],
             ItemIndex: '',
-            listDelAllergic: '',
-            allergic: [],
+            listDelDontLike: '',
+            dontlike: [],
         }
     }
 
     onChangIngrdientInput = (e) => {
-        this.setState({ newIngredientAllergic: e.target.value });
-        //    console.log(this.state.newIngredientAllergic);
+        this.setState({ newIngredientDontLike: e.target.value });
+        //    console.log(this.state.newIngredientDontLike);
     }
 
     onClickAddIngredient = () => {
 
-        var listAllergic = this.state.listAllergic.concat(this.state.newIngredientAllergic)
+        var listDontLike = this.state.listDontLike.concat(this.state.newIngredientDontLike)
         this.setState({
-            listAllergic: listAllergic
+            listDontLike: listDontLike
         });
-        this.newallergichandler();
-        //      console.log(this.state.listAllergic)
+        this.newdontLikehandler();
+        //      console.log(this.state.listDontLike)
     }
 
     onClickDelIngredient = (reactKey) => {
-        var lis = this.state.listAllergic;
-        lis = this.state.listAllergic.filter((it, indexitem) => {
+        var lis = this.state.listDontLike;
+        lis = this.state.listDontLike.filter((it, indexitem) => {
             return indexitem !== Number(reactKey.target.value);
         });
         this.setState({
-            listAllergic: lis
+            listDontLike: lis
         })
-        this.newallergichandler();
+        this.newdontLikehandler();
         console.log(lis)
     }
 
-    newallergichandler() {
+    newdontLikehandler() {
         //grab the user  info 
         const storeRef = base.database().ref(getUserLoginData().uid);
         console.log('test ' + storeRef)
@@ -98,37 +95,59 @@ class Allergic extends React.Component {
             const data = snapshot.val() || {};
             //Add some data to the user...
             storeRef.child('restricitons').update({
-                allergic: this.state.listAllergic
+                dontlike: this.state.listDontLike
             })
 
         });
     }
-componentWillMount()
-{
-        const storeRef = base.database().ref(getUserLoginData().uid);
-        storeRef.child('restricitons').once('value', (snapshot) => {
-            const data = snapshot.val() || {};
-            console.log(data)
-            if (data.allergic) {
-                this.setState({
-                   listAllergic : data.allergic
-                })
-            }
-        });
-}
+    
+    componentWillMount()
+    {
+            const storeRef = base.database().ref(getUserLoginData().uid);
+            storeRef.child('restricitons').once('value', (snapshot) => {
+                const data = snapshot.val() || {};
+                if (data.dontlike) {
+                    this.setState({
+                    listDontLike : data.dontlike
+                    })
+                }
+            });
+    }
 
     render() {
+        var scope = this;
         return (
-            <div className='card firstElement'>
-                <div className='card-block'>
-                    <h1 className="card-title">My Allergies</h1>
-                    <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
-                    <IgredientListComp listAllergic={this.state.listAllergic} onClickDelIngredient={this.onClickDelIngredient} />
-                    <SaveButton />
-                </div>
-            </div>
+          
+        <div className="static-modal bodyText">
+
+            <Modal show={this.props.isShown} onHide={function () { scope.props.onClose() }}>
+            
+            <Modal.Header closeButton>
+                <Modal.Title className='titleH1' style={{textAlign:'center'}}>EDIT INGREDIENTS</Modal.Title>
+            </Modal.Header>
+            
+            <Modal.Body>
+                <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
+                <AIngredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
+                <SaveButton />
+            </Modal.Body>
+            
+            <Modal.Footer>
+                {<button className='btn btn-success bodyText' onClick={() => {
+                this.props.onClose();
+                }
+                }>Close</button>}
+            </Modal.Footer>
+            
+            </Modal>
+
+        </div>
+
+
+
+
         )
     }
 }
 
-export default Allergic;
+export default ADontLike;

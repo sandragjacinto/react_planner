@@ -17,11 +17,11 @@ const IngredientInput = (props) => {
     )
 }
 
-export const IngredientListComp = (props) => (
+export const AllIngredientListComp = (props) => (
     <div className='row'>
         <div className="col-md-10 col-md-offset-1 col-xs-8 col-xs-offset-2 ingredientsList">
-            {props.listDontLike.map((ing, index) => {
-                return (
+        {props.listAllergic.map((ing, index) => {
+            return (
                     <div className='row list-group-item bodyText'>
                         <div className = 'col-md-9 col-xs-9'>
                             <h4 key={index}>
@@ -47,46 +47,45 @@ const SaveButton = (props) => (
     </div>
 )
 
-export class DontLike extends React.Component {
+export class Allergic extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newIngredientDontLike: '',
-            listDontLike: [],
+            newIngredientAllergic: '',
+            listAllergic: [],
             ItemIndex: '',
-            listDelDontLike: '',
-            dontlike: [],
+            listDelAllergic: '',
+            allergic: [],
         }
     }
 
     onChangIngrdientInput = (e) => {
-        this.setState({ newIngredientDontLike: e.target.value });
-        //    console.log(this.state.newIngredientDontLike);
+        this.setState({ newIngredientAllergic: e.target.value });
     }
 
     onClickAddIngredient = () => {
 
-        var listDontLike = this.state.listDontLike.concat(this.state.newIngredientDontLike)
+        var listAllergic = this.state.listAllergic.concat(this.state.newIngredientAllergic)
         this.setState({
-            listDontLike: listDontLike
+            listAllergic: listAllergic
         });
-        this.newdontLikehandler();
-        //      console.log(this.state.listDontLike)
+        this.newallergichandler();
+        //      console.log(this.state.listAllergic)
     }
 
     onClickDelIngredient = (reactKey) => {
-        var lis = this.state.listDontLike;
-        lis = this.state.listDontLike.filter((it, indexitem) => {
+        var lis = this.state.listAllergic;
+        lis = this.state.listAllergic.filter((it, indexitem) => {
             return indexitem !== Number(reactKey.target.value);
         });
         this.setState({
-            listDontLike: lis
+            listAllergic: lis
         })
-        this.newdontLikehandler();
+        this.newallergichandler();
         console.log(lis)
     }
 
-    newdontLikehandler() {
+    newallergichandler() {
         //grab the user  info 
         const storeRef = base.database().ref(getUserLoginData().uid);
         console.log('test ' + storeRef)
@@ -95,7 +94,7 @@ export class DontLike extends React.Component {
             const data = snapshot.val() || {};
             //Add some data to the user...
             storeRef.child('restricitons').update({
-                dontlike: this.state.listDontLike
+                allergic: this.state.listAllergic
             })
 
         });
@@ -103,21 +102,23 @@ export class DontLike extends React.Component {
     
     componentWillMount()
     {
-            const storeRef = base.database().ref(getUserLoginData().uid);
-            storeRef.child('restricitons').once('value', (snapshot) => {
-                const data = snapshot.val() || {};
-                if (data.dontlike) {
-                    this.setState({
-                    listDontLike : data.dontlike
-                    })
-                }
-            });
+        const storeRef = base.database().ref(getUserLoginData().uid);
+        storeRef.child('restricitons').once('value', (snapshot) => {
+            const data = snapshot.val() || {};
+            console.log(data)
+            if (data.allergic) {
+                this.setState({
+                   listAllergic : data.allergic
+                })
+            }
+        });
     }
 
     render() {
         var scope = this;
         return (
           
+
         <div className="static-modal bodyText">
 
             <Modal show={this.props.isShown} onHide={function () { scope.props.onClose() }}>
@@ -128,7 +129,7 @@ export class DontLike extends React.Component {
             
             <Modal.Body>
                 <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
-                <IngredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
+                <AllIngredientListComp listAllergic={this.state.listAllergic} onClickDelIngredient={this.onClickDelIngredient} />
                 <SaveButton />
             </Modal.Body>
             
@@ -150,4 +151,4 @@ export class DontLike extends React.Component {
     }
 }
 
-export default DontLike;
+export default Allergic;
