@@ -19,10 +19,10 @@ const IngredientInput = (props) => {
 
 export const IngredientListComp = (props) => (
     <div className='row'>
-        <div className="col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2 ingredientsList">
+        <div className="col-md-10 col-md-offset-1 col-xs-8 col-xs-offset-2 ingredientsList">
             {props.listDontLike.map((ing, index) => {
                 return (
-                    <div className='row list-group-item '>
+                    <div className='row list-group-item bodyText'>
                         <div className = 'col-md-9 col-xs-9'>
                             <h4 key={index}>
                                 {ing}
@@ -117,17 +117,7 @@ export class DontLike extends React.Component {
     render() {
         var scope = this;
         return (
-            // <div className='card firstElement'>
-            //     <div className='card-block'>
-            //         <h1 className="card-title">I Don't Like</h1>
-            //         <IngredientInput onChangIngrdientInput={this.onChangIngrdientInput} onClickAddIngredient={this.onClickAddIngredient} />
-            //         <IgredientListComp listDontLike={this.state.listDontLike} onClickDelIngredient={this.onClickDelIngredient} />
-            //         <SaveButton />
-            //     </div>
-            // </div>
-
-
-
+          
         <div className="static-modal bodyText">
 
             <Modal show={this.props.isShown} onHide={function () { scope.props.onClose() }}>

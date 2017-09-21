@@ -68,7 +68,8 @@
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
   text-align: center;
-  background: #F18830;
+  background-image: url('./icons/food.png');
+  background-repeat: repeat;
   font-size: 10px;
     margin-right: 10px;
     margin-left: 10px;
@@ -83,7 +84,8 @@
 a.menuButton{
   
   text-align: center;
-  background: #F18830;  
+  background-image: url('./icons/food.png');
+  background-repeat: repeat;
   color:white;
   padding-bottom: 20px;
   padding-top: 20px;
@@ -102,7 +104,8 @@ a.menuButton:hover{
 
 .loginSection{
   padding-top:40px;
-  background: #F18830; 
+  background-image: url('./icons/food.png');
+  background-repeat: repeat;
   color: white;
   font-family: 'Cabin Sketch';
   height: 500px;
@@ -198,7 +201,10 @@ a.menuButton:hover{
 }
 
 .profilePic{
-  max-height: 166px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin: 20px;
 }
 
 .mapPic{
@@ -283,20 +289,42 @@ a.menuButton:hover{
 }
 
 .card-header{
-    background-color: blue;
+    background-color: #16546c;
     font-size: 200%;
     color: white;
 }
 
 .backgroundTest{
-  background-image: url('./icons/backg1.jpg');
-  background-size: 100%;
+ background-image: url('./icons/wormz.png');
+  background-repeat: repeat;
   background-attachment: fixed;
   min-height: 650px;
 }
 
 .whiteBackground{
   background-color: white;
-  margin-top: 100px;
+  margin-top: 50px;
   min-height: 200px;
+}
+
+
+.backgroundPopUp{
+  
+  background-image: url('./icons/backg1.jpg');
+  background-size: 100%;
+  background-attachment: fixed;
+  
+}
+
+.popUpround{
+  border-radius: 150px 150px 150px 150px;
+  background: #73AD21;
+  padding: 20px; 
+  width: 200px;
+  height: 200px; 
+}
+
+.list-group-item{ 
+  background-image: url('./icons/polaroid.png');
+  background-repeat: repeat;
 }

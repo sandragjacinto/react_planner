@@ -306,9 +306,9 @@ console.log(ingredientsf)
         return (
             <div className='row firstElement backgroundTest' >
                 <div className='col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1'>
-                    <Tabs defaultActiveKey={1} className=" choosenmeal-tab whiteBackground">
+                    <Tabs defaultActiveKey={1} className=" choosenmeal-tab whiteBackground bodyText">
 
-                        <Tab className='no-padding' eventKey={1} title="SEARCH FOR RECIPES">
+                        <Tab className='no-padding ' eventKey={1} title="SEARCH FOR RECIPES">
                             <div className=' no-padding'>
                                 <div className=' no-padding'>
                                     <h1 className=" titleH1 no-padding">SEARCH FOR RECIPES</h1>

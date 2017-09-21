@@ -17,9 +17,11 @@
     "react-nlp": "0.0.3",
     "react-router": "^2.4.0",
     "react-router-dom": "^4.1.2",
-    "react-scripts": "1.0.10",
-    "webpack-require": "0.0.16",
     "wndb-with-exceptions": "^3.0.2"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.10",
+    "webpack-require": "0.0.16"    
   },
   "scripts": {
     "start": "react-scripts start",
