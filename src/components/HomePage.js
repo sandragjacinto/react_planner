@@ -1,30 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Login from './Login';
+import { isUserLogged } from './DataUser.js';
 
 
-/*const SearchInput =  (props ) => {
-    return  (
-            <input type='text' onChange={this.props.onChangeSearchInput} placeholder='Recipe Name'> </input>
-    )
-}*/
 
-//SearchButton
-
-//SearchResultList
-
-//AcceptButton
+class HomePage extends React.Component {
 
 
-class HomePage extends React.Component  {
-   
-
-    render()
-    {
-        return  (
+    render() {
+        return (
             <div>
-                <h2>Home Page</h2>
-            </div> 
+                <Login />
+            </div>
+
+
         )
     }
-} 
+}
 
 export default HomePage;
