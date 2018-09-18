@@ -7,16 +7,6 @@
   height: 80px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
 
 .img-responsive{
   padding: 15px;
@@ -39,11 +29,7 @@
   padding-left: 10px;
 }
 
-.btn-login{
-  padding:10px;
-  padding-left: 30px;
-  padding-right: 30px;
-}
+
 
 .btn-default{
   border-width: 0px;
@@ -62,33 +48,27 @@
 }
 
 .lateralMenu{
-  overflow: hidden;
+  width: 100vw;
+  display:flex;
+  justify-content:center;
   position: fixed; /* Set the navbar to fixed position */
   z-index:1000;
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
   text-align: center;
   background-image: url('./icons/food.png');
   background-repeat: repeat;
-  font-size: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
 }
 
 .menuButton{
-  
   margin-right: 10px;
   margin-left: 10px;
 }
 
 a.menuButton{
-  
   text-align: center;
   background-image: url('./icons/food.png');
   background-repeat: repeat;
   color:white;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  
   border-right: 0px;
   border-left: 0px;
   border-bottom:0px;
@@ -101,20 +81,6 @@ a.menuButton:hover{
   color: #31E6F1;
   background: #F18830;
 }
-
-.loginSection{
-  padding-top:40px;
-  background-image: url('./icons/food.png');
-  background-repeat: repeat;
-  color: white;
-  font-family: 'Cabin Sketch';
-  height: 500px;
-  margin:0;
-  top:0;
-  left:0;
-  width: 100%;
-}
-
 .errorMessage{
   font-family: 'Cabin Sketch';
   color:#F15C34;
@@ -130,42 +96,12 @@ a.menuButton:hover{
   
 }
 
-
-.explainAppbody{
-  font-family: 'Oswald';
-}
-
-.planMeal{
-  background-color: #B1EAF1;
-  padding-top: 50px;
-}
-
-.explainAppbodysection{
-  padding-top: 50px;
-  padding-bottom: 50px;
-}
-
-.explainAppbodyp{
-  text-align: justify;
-}
-
-.loginIm{
-  width: 80%;
-}
 .listIm{
   width: 50%;
 }
 
 .scheduleIm{
   width: 80%;
-}
-.cartIm{
-  width: 40%;
-}
-
-.arrowIm{
-  margin-top: -20px;
-  width: 4%;
 }
 
 .homepageButton:hover{
@@ -292,13 +228,6 @@ a.menuButton:hover{
     background-color: #16546c;
     font-size: 200%;
     color: white;
-}
-
-.backgroundTest{
- background-image: url('./icons/wormz.png');
-  background-repeat: repeat;
-  background-attachment: fixed;
-  min-height: 650px;
 }
 
 .whiteBackground{

@@ -4,3 +4,8 @@ body {
   font-family: sans-serif;
 }
 
+.index-container{
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}

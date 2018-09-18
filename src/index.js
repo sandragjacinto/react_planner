@@ -8,7 +8,7 @@ import CookMyMeal from './components/CookMyMeal';
 import Profile from './components/Profile';
 import GroceryList from './components/GroceryList';
 import MealPlanning from './components/MealPlanning';
-import HomePage from './components/HomePage';
+import Login from './components/login/Login';
 import DontLike from './components/DontLike';
 import Allergic from './components/Allergic';
 import CantEat from './components/CantEat';
@@ -27,14 +27,13 @@ const router = (
 
     <Router>
         <App>
-            <div>
-                <div className='row'>
-                    <div >
+                <div className='index-container'>
+                    <div className="app-menu">
                         <LateralMenu />
                     </div>
-                    <div className="appBody col-md-12 col-xs-12">
-                        <Route exact path="/" component={HomePage}></Route>
-                        <Route exact path="/homepage" component={HomePage}></Route>
+                    <div className="appBody">
+                        <Route exact path="/" component={Login}></Route>
+                        <Route exact path="/homepage" component={Login}></Route>
                         <Route path="/choosemymeal" component={ChooseMyMeal}></Route>
                         <Route path="/cookmymeal" component={CookMyMeal} ></Route>
                         <Route path="/profile" component={Profile} ></Route>
@@ -47,7 +46,6 @@ const router = (
 
                     </div>
                 </div>
-            </div>
         </App>
     </Router>
 )

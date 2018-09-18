@@ -1,0 +1,110 @@
+.arrowIm{
+    margin-top: -20px;
+    width: 4%;
+  }
+
+.backgroundTest{
+  width: 100vw;
+    background-image: url('./../../icons/wormz.png');
+     background-repeat: repeat;
+     background-attachment: fixed;
+     min-height: 650px;
+   }
+
+   .loginSection{
+    background-image: url('./../../icons/food.png');
+    background-repeat: repeat;
+    color: white;
+    font-family: 'Cabin Sketch';
+    height: 500px;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 500px;
+  }
+
+  .loginIm{
+    max-width: 50%;
+    max-height: 50%;
+  }
+  .fade-in{
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s; /* Firefox < 16 */
+    -ms-animation: fadein 2s; /* Internet Explorer */
+      -o-animation: fadein 2s; /* Opera < 12.1 */
+        animation: fadein 2s;
+  }
+  
+  .btn-login{
+    padding:10px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .titleH1login {
+    font-family: 'Cabin Sketch';
+    font-size: 80px;
+    
+  }
+  .login-body{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .explainAppbody{
+    font-family: 'Oswald';
+  }
+
+  .explainAppbodysection{
+    display:flex;
+    justify-content: space-around;
+    padding: 50px;
+  }
+  .img-login{
+    height:25%;
+    width: 25%;
+  }
+  .explainAppbodyp{
+    text-align: justify;
+  }
+
+  .planMeal{
+    
+  }
+
+ 
+
+  @keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeout {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

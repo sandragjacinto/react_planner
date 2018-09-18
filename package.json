@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "react-scripts": "1.0.10",
-    "webpack-require": "0.0.16"    
+    "webpack-require": "0.0.16"
   },
   "scripts": {
     "start": "react-scripts start",
