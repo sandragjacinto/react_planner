@@ -1,8 +1,6 @@
 import React from 'react';
-import Profile from './Profile.js'
 import base from '../base';
 import { getUserLoginData } from './DataUser';
-import { setUserData } from './DataUser';
 import { Link } from 'react-router-dom'
 import { Modal } from 'react-bootstrap';
 
@@ -61,7 +59,6 @@ export class DontLike extends React.Component {
 
     onChangIngrdientInput = (e) => {
         this.setState({ newIngredientDontLike: e.target.value });
-        //    console.log(this.state.newIngredientDontLike);
     }
 
     onClickAddIngredient = () => {
@@ -71,7 +68,6 @@ export class DontLike extends React.Component {
             listDontLike: listDontLike
         });
         this.newdontLikehandler();
-        //      console.log(this.state.listDontLike)
     }
 
     onClickDelIngredient = (reactKey) => {
@@ -83,13 +79,11 @@ export class DontLike extends React.Component {
             listDontLike: lis
         })
         this.newdontLikehandler();
-        console.log(lis)
     }
 
     newdontLikehandler() {
         //grab the user  info 
         const storeRef = base.database().ref(getUserLoginData().uid);
-        console.log('test ' + storeRef)
         // query the firebase
         storeRef.once('value', (snapshot) => {
             const data = snapshot.val() || {};

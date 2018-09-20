@@ -1,5 +1,4 @@
 import React from 'react';
-import LateralMenu from './LateralMenu.js'
 
 
 

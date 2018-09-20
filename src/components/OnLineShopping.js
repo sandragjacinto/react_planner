@@ -19,8 +19,6 @@ export class OnLineShopping extends React.Component {
         var scope = this;
         return (
 
-
-
             <div className="static-modal bodyText">
 
                 <Modal show={this.props.isShown} onHide={function () { scope.props.onClose() }}>
@@ -28,7 +26,9 @@ export class OnLineShopping extends React.Component {
 
                         <div  style={{ backgroundColor: 'white', margin: '15px', marginBottom: '10px', marginTop: '10px' }}>
                             <Modal.Header closeButton>
-                                <Modal.Title className='titleH1' style={{ textAlign: 'center' }}><h1>ORDER SENT</h1></Modal.Title>
+                                <Modal.Title className='titleH1' style={{ textAlign: 'center' }}>
+                                ORDER SENT
+                                </Modal.Title>
                             </Modal.Header>
 
                             <Modal.Body style={{textAlign:'center'}}>

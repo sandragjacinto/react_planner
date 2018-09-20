@@ -1,8 +1,6 @@
 import React from 'react';
-import Profile from './Profile.js'
 import base from '../base';
 import { getUserLoginData } from './DataUser';
-import { setUserData } from './DataUser';
 import { Link } from 'react-router-dom'
 
 
@@ -65,7 +63,6 @@ class FavouriteMeals extends React.Component {
 
     onChangIngrdientInput = (e) => {
         this.setState({ newFavouriteMeals: e.target.value });
-        //    console.log(this.state.newFavouriteMeals);
     }
 
     onClickAddIngredient = () => {
@@ -75,7 +72,6 @@ class FavouriteMeals extends React.Component {
             listFavoutiteMeals: listFavoutiteMeals
         });
         this.newFavouriteMealshandler();
-        //      console.log(this.state.listFavoutiteMeals)
     }
 
     onClickDelIngredient = (reactKey) => {
@@ -87,17 +83,14 @@ class FavouriteMeals extends React.Component {
             listFavoutiteMeals: lis
         })
         this.newFavouriteMealshandler();
-        console.log(lis)
     }
 
     newFavouriteMealshandler() {
         //grab the user  info 
         const storeRef = base.database().ref(getUserLoginData().uid);
-        console.log('test ' + storeRef)
         // query the firebase
         storeRef.once('value', (snapshot) => {
             const data = snapshot.val() || {};
-            console.log(data)
             //Add some data to the user...
             storeRef.child('restricitons').update({
                 favouriteMeals: this.state.listFavoutiteMeals

@@ -70,7 +70,6 @@ export class Allergic extends React.Component {
             listAllergic: listAllergic
         });
         this.newallergichandler();
-        //      console.log(this.state.listAllergic)
     }
 
     onClickDelIngredient = (reactKey) => {

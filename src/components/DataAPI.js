@@ -18,7 +18,6 @@ export function searchForRecipes(keyword) {
         })
         .then(function (data) {
             recipesFound[keyword] = data.hits;
-            console.log (data.hits)
             return recipesFound[keyword];
         })
         .catch(function(error){

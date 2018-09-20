@@ -2,11 +2,8 @@
 import React from 'react';
 import base from '../base';
 import { searchForRecipes } from './DataAPI';
-import { isUserLogged } from './DataUser';
 import { getUserLoginData } from './DataUser';
-import { Link } from 'react-router-dom'
-import { Tabs, Tab } from 'react-bootstrap'
-import garbage from './../icons/whiteTrash.png'
+import garbage from './../icons/whiteTrash.png';
 
 //User enters keyword here
 const SearchInput = (props) => {
@@ -64,11 +61,11 @@ const RecipesFound = (props) => {
                             element.recipe.status = "selected";
                         }
                     });
-                    {
-                        return (
-                            <RecipeFound isSelected={props.recipesFound} recipesSelected={props.recipesSelected} element={element} index={index} key={index} onRecipeSelected={props.onRecipeSelected} />
-                        )
-                    }
+                    
+                    return ( 
+                        <RecipeFound isSelected={props.recipesFound} recipesSelected={props.recipesSelected} element={element} index={index} key={index} onRecipeSelected={props.onRecipeSelected} />
+                    )
+                    
                 })}
         </div>
     )
@@ -79,7 +76,9 @@ const SelectedRecipe = props => {
     return (
         <div className="col-md-4 col-xs-12 no-padding">
             <ul className="menu-recipe" style={{ backgroundImage: `url(${props.element.image})` }}>
-                <button className="btn btn-danger menu-recipe-button" key={props.index} value={props.index} onClick={function () { return props.onRecipeDeselected(props.index, props.element.recipe) }} ><img style={{ width: '35px' }} src={garbage} /></button>
+                <button className="btn btn-danger menu-recipe-button" key={props.index} value={props.index} onClick={function () { return props.onRecipeDeselected(props.index, props.element.recipe) }} >
+                <img style={{ width: '35px' }} src={garbage} alt="delete button"/>
+                </button>
                 <br></br>
                 <br></br>
                 <br></br>
@@ -123,7 +122,7 @@ class ChooseMyMeal extends React.Component {
 
     onChangeSearchInput = (e) => {
 
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             this.setState({ searchWord: e.target.value });
             this.setState({ recipesFound: [] });
             this.onClickSearchButton()
@@ -148,23 +147,19 @@ class ChooseMyMeal extends React.Component {
     //trying to put the number of chosen recipes
     getTabName() {
         var sizeString = this.state.recipesSelected;
-        var count = 0;
-        for (var i in sizeString)
-            count++;
-        var textTab = "CHOSEN RECIPES " + count;
+        for (var i = 0; i < sizeString; i++)
+        var textTab = `CHOSEN RECIPES ${i}`;
         return textTab
     }
 
     //api writes response here. Update state
     onSearchResponse = (response) => {
-        //console.log(response);
         
-       var ingredients = response.map(function(recipe) {
+       response.map(function(recipe) {
           return recipe.recipe.ingredients;
        })
        var dontlike = this.state.dontLike;
-      console.log(dontlike); 
-      console.log(response);
+     
      
 var ingredientsf = response.filter(function(recipe) {
           return !recipe.recipe.ingredients.map(function(ingredientes){
@@ -203,7 +198,6 @@ var ingredientsf = response.filter(function(recipe) {
 
 }, false);;
           })
-console.log(ingredientsf)
         this.setState({ recipesFound: ingredientsf });
     }
 
@@ -219,7 +213,6 @@ console.log(ingredientsf)
         var recipesSelected = this.state.recipesSelected;
         var recipesFound = this.state.recipesFound;
         var recipeUid = recipeData.uri.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '');
-        //console.log(this.state.recipesSelected)
         if (!(recipeUid in recipesSelected)) {
             recipeData.label = recipeData.label.replace(/[^- ':",(ñ)a-zA-Z0-9]/g, '');
             recipeData.status = "selected";
@@ -275,7 +268,7 @@ console.log(ingredientsf)
         maplist = this.state.recipesSelected;
         maplist1 = this.state.recipesFound;
 
-        if (maplist1[(lis[index])] != undefined) {
+        if (maplist1[(lis[index])] !== undefined) {
             maplist1[(lis[index])].status = "unselected";
 
         };
@@ -289,26 +282,16 @@ console.log(ingredientsf)
             this.setState({ recipesFound: maplist1 });
         }
         this.info2databasehandler();
-        /*        {
-                    this.setState({recipesSelected : new Map()});
-                }
         
-                //recipeData will be added to the map. Key will be the recipe name
-                var recipesSelected = this.state.recipesSelected;
-                if(!(recipeData.label in recipesSelected))
-                {
-                    recipesSelected[recipeData.label] = recipeData;
-                    this.setState({recipesSelected :recipesSelected});
-                }*/
     }
 
     render() {
         return (
             <div className='row firstElement backgroundTest' >
                 <div className='col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1'>
-                    <Tabs defaultActiveKey={1} className=" choosenmeal-tab whiteBackground bodyText">
+                    <section defaultActiveKey={1} className=" choosenmeal-tab whiteBackground bodyText">
 
-                        <Tab className='no-padding ' eventKey={1} title="SEARCH FOR RECIPES">
+                        <div className='no-padding ' eventKey={1} title="SEARCH FOR RECIPES">
                             <div className=' no-padding'>
                                 <div className=' no-padding'>
                                     <h1 className=" titleH1 no-padding">SEARCH FOR RECIPES</h1>
@@ -318,9 +301,9 @@ console.log(ingredientsf)
                                     </div>
                                 </div>
                             </div>
-                        </Tab>
+                        </div>
 
-                        <Tab className='no-padding' eventKey={2} title={this.getTabName()}>
+                        <div className='no-padding' eventKey={2} title={this.getTabName()}>
                             <div className=' no-padding'>
                                 <div className='no-padding'>
                                     <h1 className="titleH1 no-padding">CHOSEN RECIPES</h1>
@@ -329,9 +312,9 @@ console.log(ingredientsf)
                                     </div>
                                 </div>
                             </div>
-                        </Tab>
+                        </div>
 
-                    </Tabs>
+                    </section>
                 </div>
             </div>
         )

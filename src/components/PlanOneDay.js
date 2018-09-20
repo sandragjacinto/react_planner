@@ -18,7 +18,6 @@ class PlanOneDayClass extends React.Component {
 
     if(!(keyRecipes in mealPlanSingleDay) || !(keyQuantity in mealPlanSingleDay))
     {
-      //console.log("onRecipeScheduled creating fields. mealPlanSingleDay:", mealPlanSingleDay);
 
       mealPlanSingleDay[keyRecipes] = [];
       mealPlanSingleDay[keyQuantity] = {};
@@ -55,10 +54,8 @@ class PlanOneDayClass extends React.Component {
   }
 
   render() {
-    //console.log("planoneday render " + this.props.mealPlanSingleDay + this.props.dateToPlan);
     var scope = this;
     var dateToPlan = new Date(Number(this.props.dateToPlan));
-    console.log("planoneday render date:", this.props.dateToPlan, ",string date:", dateToPlan.toDateString() );
     return (
       <div className="static-modal bodyText">
 
@@ -105,7 +102,7 @@ const RecipeToSchedule = (props) => {
 
 const RecipesToSchedule = (props) => {
 
-  if (props.recipes != undefined) {
+  if (props.recipes !== undefined) {
     return (
       <ul>
         {Object.keys(props.recipes).map(function (recipeUid) {

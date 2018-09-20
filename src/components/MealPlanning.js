@@ -1,5 +1,5 @@
 import React from 'react';
-import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
+import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import PlanOneDayClass from './PlanOneDay.js';
 import { getFromDatabase, writeDB } from './Database';
@@ -12,21 +12,17 @@ import DialogMessage from './DialogMessage';
 //d.If user clicks a date button, onClickDayButton will set state.modalPlanOneDayIsShown , which controls popup visibility
 
 const ButtonsDays = ({ mealPlan, onClickDayButton }) => {
-    //console.log("ButtonsDays mealPlan:" + mealPlan + " mealPlan keys:" + Object.keys(mealPlan));
     var mealPlanDates = Object.keys(mealPlan);
     // var today = new Date();
     // var isOldSchedule = today > mealPlanDates[mealPlanDates.length - 1];
     // if( mealPlanDates.length > 0 && isOldSchedule)
     // {
-    //     //TODO - reset schedule if it's already passed
-    //     //return null;
+    //TODO - reset schedule if it's already passed
     // }
 
-    //console.log("Today:", today.toDateString());
     return (
         <div>
             {mealPlanDates.map(function (date) {
-                //console.log("DATE KEY:", mapKey, "DATE", mealPlan[mapKey].toDateString());
                 var mealPlanSingleDay = mealPlan[date];
                 var isSomethingScheduled = "recipes" in mealPlanSingleDay && mealPlanSingleDay["recipes"].length > 0;
                 var colorStyle = isSomethingScheduled ? "btn btn-warning planning-btn" : "btn btn-primary planning-btn";
@@ -86,7 +82,6 @@ class MealPlanning extends React.Component {
                     this.contentCanBeDisplayed = true;
                 }
                 else {
-                    console.log("componentDidMount response undefined");
                     this.messagePopupIsShown = true;
                     this.messagePopupContent = "First select favorite recipes";
                     this.contentCanBeDisplayed = false;
@@ -97,7 +92,7 @@ class MealPlanning extends React.Component {
         {
             let dbPath = ["mealPlan"];
             getFromDatabase(dbPath, (response) => {
-                if (response != undefined && Object.keys(response).length > 0) {
+                if (response !== undefined && Object.keys(response).length > 0) {
                     this.setState({ mealPlan: response });
                 }
                 else {
@@ -111,8 +106,8 @@ class MealPlanning extends React.Component {
 
     //Callback for DateRangePicker component. Will loop between start/end date. Will fill a map with dates as key, and content will be recipes for the day
     onStartEndDateChange = (props) => {
-        var startDate = props.startDate != null ? props.startDate : this.state.startDate;
-        var endDate = props.endDate != null ? props.endDate : this.state.endDate;
+        var startDate = props.startDate !== null ? props.startDate : this.state.startDate;
+        var endDate = props.endDate !== null ? props.endDate : this.state.endDate;
 
         this.setState({
             startDate: startDate,
@@ -125,7 +120,6 @@ class MealPlanning extends React.Component {
 
         var mealPlan = new Map();
         for (var d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-            //console.log(`Looping d:${d}, d string:${d.toDateString()}}`);
             mealPlan[Number(d)] = {
                 dateString: d.toDateString(),
                 recipes: []

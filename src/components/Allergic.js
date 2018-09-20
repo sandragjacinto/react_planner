@@ -1,8 +1,6 @@
 import React from 'react';
-import Profile from './Profile.js'
 import base from '../base';
 import { getUserLoginData } from './DataUser';
-import { setUserData } from './DataUser';
 import { Link } from 'react-router-dom'
 import { Modal } from 'react-bootstrap';
 
@@ -61,7 +59,6 @@ export class ADontLike extends React.Component {
 
     onChangIngrdientInput = (e) => {
         this.setState({ newIngredientDontLike: e.target.value });
-        //    console.log(this.state.newIngredientDontLike);
     }
 
     onClickAddIngredient = () => {

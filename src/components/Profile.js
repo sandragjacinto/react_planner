@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
 import base from '../base';
-import { isUserLogged } from './DataUser';
 import { getUserLoginData } from './DataUser';
-import { setUserData } from './DataUser';
 import { IngredientListComp, DontLike } from './DontLike.js';
 
 import editIcon from './../icons/edit.png';
@@ -41,7 +38,6 @@ const PersonalInfo = ({ profileIMG, username, userEmail }) => {
 }
 
 const DontLikeIngredients = (props) => {
-    console.log("Profile DontLikeIngredients props.listDontLike:", props.listDontLike)
     return (
 
         <div className='card  text-center' style={{ backgroundColor: 'white' }}>
@@ -51,7 +47,7 @@ const DontLikeIngredients = (props) => {
                 <div className='btn-toolbar pull-right'>
                     <div className='btn-group'>
                         <div>
-                            <img onClick={props.onClick} style={{ width: '30px', marginBottom: '5px', marginRight: '10px' }} src={editIcon}></img>
+                            <img onClick={props.onClick} style={{ width: '30px', marginBottom: '5px', marginRight: '10px' }} src={editIcon} alt="don't like icon"></img>
                         </div>
                     </div>
                 </div>
@@ -78,13 +74,10 @@ class Profile extends React.Component {
             userEmail: '',
             isDontLikePopupShown: false,
             listDontLike: [],
-            isAllerLikePopupShown : false,
-            listDontLike: []
-        }
+            isAllerLikePopupShown : false        }
     }
 
     componentWillMount() {
-        console.log("Profile componentWillMount");
         const storeRef = base.database().ref(getUserLoginData().uid);
         storeRef.once('value', (snapshot) => {
             const data = snapshot.val() || {};
@@ -95,7 +88,6 @@ class Profile extends React.Component {
                     userEmail: data.email
                 })
             }
-            console.log(this.state.picture)
         });
 
         this.updateRestrictionsData();

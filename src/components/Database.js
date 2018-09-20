@@ -40,13 +40,12 @@ export function getFromDatabase(dbPath, onResponse)
     // }
     
     const storeRef = base.database().ref(getUserLoginData().uid);
-    console.log("Database login:", getUserLoginData().uid);
 
     if(dbPath.length == 1)
     {
         storeRef.child(dbPath[0]).once('value', (snapshot) => {
         const data = snapshot.val();
-        if (data != undefined) {
+        if (data !== undefined) {
             onResponse(data);
         }
         else
@@ -58,7 +57,6 @@ export function getFromDatabase(dbPath, onResponse)
     }
     else if(dbPath.length == 2)
     {
-        //console.log("dbPath[0]:" + dbPath[0] + " dbPath[1]:" + dbPath[1]);
         storeRef.child(dbPath[0]).once('value', (snapshot) => {
         const data = snapshot.val();
         if (data && dbPath[1] in data) {

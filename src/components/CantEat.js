@@ -1,8 +1,6 @@
 import React from 'react';
-import Profile from './Profile.js'
 import base from '../base';
 import { getUserLoginData } from './DataUser';
-import { setUserData } from './DataUser';
 import { Link } from 'react-router-dom'
 
 
@@ -64,7 +62,6 @@ class CantEat extends React.Component {
 
     onChangIngrdientInput = (e) => {
         this.setState({ newIngredientCantEat: e.target.value });
-        //    console.log(this.state.newIngredientCantEat);
     }
 
     onClickAddIngredient = () => {
@@ -74,7 +71,6 @@ class CantEat extends React.Component {
             listCantEat: listCantEat
         });
         this.newcanteathandler();
-        //      console.log(this.state.listCantEat)
     }
 
     onClickDelIngredient = (reactKey) => {
@@ -86,13 +82,11 @@ class CantEat extends React.Component {
             listCantEat: lis
         })
         this.newcanteathandler();
-        console.log(lis)
     }
 
     newcanteathandler() {
         //grab the user  info 
         const storeRef = base.database().ref(getUserLoginData().uid);
-        console.log('test ' + storeRef)
         // query the firebase
         storeRef.once('value', (snapshot) => {
             const data = snapshot.val() || {};

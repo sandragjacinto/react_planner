@@ -3,7 +3,6 @@
 
 import React from 'react';
 import base from '../base';
-import ChooseMyMeal from './ChooseMyMeal.js';
 import { getUserLoginData } from './DataUser';
 import garbage from './../icons/whiteTrash.png'
 import cart from './../icons/cart.png';
@@ -28,17 +27,14 @@ class GroceryList extends React.Component {
             if (data) {
                 for (var i in data) {
                     var tempList = data[i].ingredientLines;
-                    //var ll = tempList.length
-                    //console.log(tempList.length)
+                    
                     for (var ing in tempList) {
-                        //  var tempNouns = wordpos.getNouns(tempList[ing]);
-                        var grocerieLists = this.state.tempgrocerieList.push(tempList[ing])
+                        this.state.tempgrocerieList.push(tempList[ing])
 
                     }//
 
                 }
             }
-            //console.log (this.state.tempgrocerieList)
             this.setState({
                 grocerieList: this.state.tempgrocerieList,
             })
@@ -60,15 +56,14 @@ class GroceryList extends React.Component {
     }
 
     onClickDelIngredient = (reactKey) => {
-        var lis = this.state.grocerieList;
-        lis = this.state.grocerieList.filter((it, indexitem) => {
+        var list = this.state.grocerieList;
+        list = this.state.grocerieList.filter((it, indexitem) => {
             return indexitem !== Number(reactKey.target.value);
         });
         this.setState({
-            grocerieList: lis
+            grocerieList: list
         })
         this.newIngredientListhandler();
-        console.log(lis)
     }
 
     newIngredientListhandler() {
@@ -86,19 +81,10 @@ class GroceryList extends React.Component {
     }
 
     componentDidMount() {
-        console.log('fetch0')
         return fetch('http://localhost:3000/grocerylist')
-        console.log('fetch1')
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log('fetch')
-                // let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-                //this.setState({
-                // isLoading: false,
-                //dataSource: ds.cloneWithRows(responseJson.movies),
-                //}, function() {
-                // do something with new state
-                // });
+                console.log('fetch')   
             })
             .catch((error) => {
                 console.error(error);
@@ -116,7 +102,6 @@ class GroceryList extends React.Component {
     }
 
 render() {
-console.log('gocerie list', this.state.grocerieList.length)
     return (
         <div style={{ textAlign: "center" }}>
             <div className="row firstElement backgroundTest" >
@@ -127,7 +112,8 @@ console.log('gocerie list', this.state.grocerieList.length)
                         </div>
                         <div className='col-md-1 col-md-offset-1'>
                         <br></br>
-                        <button className="btn btn-default"  type="button" onClick = {this.onEditDontLikeButton}><img style={{ width: '25px' }} src={cart} /></button>
+                        <button className="btn btn-default"  type="button" onClick = {this.onEditDontLikeButton}>
+                        <img style={{ width: '25px' }} src={cart} alt="cart icon" /></button>
                             </div>
                     </div>
                     {
@@ -136,17 +122,18 @@ console.log('gocerie list', this.state.grocerieList.length)
                             <div>
                                 {this.state.grocerieList.map((item, index) => {
                                     return (
-                                        <div className='row'>
+                                        <div className='row' key={index}>
                                         <div className='col-md-8 col-md-offset-2 list-group-item bodyText groceryItem' style={{ textAlign: 'left', minHeight: '100px', marginBottom:'20px' }}>
                                             <div className='row '>
                                             <br></br>
                                             <div className='col-md-8 col-md-offset-1 col-xs-8 col-xs-offset-1'>
-                                                <h4 key={index}>
+                                                <h4 >
                                                     {item.toUpperCase()}
                                                 </h4>
                                             </div>
                                             <div className='col-md-1 col-md-offset-1 col-xs-1 col-xs-offset-1' >
-                                                <button key={index} className="btn btn-danger" value={index} type="button" onClick={this.onClickDelIngredient}><img style={{ width: '25px' }} src={garbage} /></button>
+                                                <button className="btn btn-danger" value={index} type="button" onClick={this.onClickDelIngredient}>
+                                                <img style={{ width: '25px' }} src={garbage} alt="garbage icon"/></button>
                                             </div>
                                             </div>
                                         </div>
